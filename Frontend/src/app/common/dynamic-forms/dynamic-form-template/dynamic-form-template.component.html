@@ -1,0 +1,35 @@
+<form [formGroup]="form" class="form-group full-width">
+  <label [attr.for]="childFormData.key"> {{ childFormData.label }}</label>
+  <div [ngSwitch]="childFormData.controlType">
+    <input class="form-control" [type]="childFormData.type" [id]="childFormData.key" *ngSwitchCase="'textbox'"
+      [formControlName]="childFormData.key" />
+    <!--
+     <select
+      class="form-control"
+      id=""
+      [id]="childFormData.key"
+      *ngSwitchCase="'dropdown'"
+      [formControlName]="childFormData.key"
+    >
+      <option *ngFor="let opt of childFormData.options" [value]="opt.key">
+        {{ opt.value }}
+      </option>
+    </select>
+   -->
+    <mat-form-field appearance="fill" *ngSwitchCase="'dropdown'">
+      <mat-select [formControlName]="childFormData.key" [compareWith]="objectComparisonFunction">
+        <mat-option>
+          <ngx-mat-select-search [formControl]="filterCtrl" placeholderLabel="Find {{childFormData.key}}...">
+          </ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let data of childFormData?.options" [value]="data.key">
+          {{data.value}}
+        </mat-option>
+        <!-- <mat-option *ngFor="let data of childFormData.options" [value]="opt.key">{{opt.value}}</mat-option> -->
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- <div class="errorMessage" *ngIf="!isValid">{{childFormData.label}} is required</div> -->
+</form>
+
+

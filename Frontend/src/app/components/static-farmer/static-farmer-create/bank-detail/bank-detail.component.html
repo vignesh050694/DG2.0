@@ -1,0 +1,56 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">Bank Information</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+<form [formGroup]="bankInformationForm">
+  <div class="modal-body">
+    <div class="row">
+    <div class=" col-lg-6">
+        <app-multi-select #accTypeMultiSelect isMultiSelect="false" [options]="accTypes" label="Account Type"
+        [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedAccType"></app-multi-select>
+      </div>
+
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Account Number</mat-label>
+          <input matInput type="text" name="accNo" formControlName="accNo">
+          <mat-error *ngIf="basic.accNo.hasError('required')">Please enter account number</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Bank Name</mat-label>
+          <input matInput type="text" name="bankName" formControlName="bankName">
+          <mat-error *ngIf="basic.bankName.hasError('required')">Please enter bank name</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Branch Details</mat-label>
+          <input matInput type="text" name="bankBranch" formControlName="bankBranch">
+          <mat-error *ngIf="basic.bankBranch.hasError('required')">Please enter branch details</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>IFSC/Sort Code *</mat-label>
+          <input matInput type="text" name="ifscCode" formControlName="ifscCode">
+          <mat-error *ngIf="basic.ifscCode.hasError('required')">Please enter IFSC/Sort Code</mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="form-group text-right mb-0">
+      <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+        Add
+      </button>
+      <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>

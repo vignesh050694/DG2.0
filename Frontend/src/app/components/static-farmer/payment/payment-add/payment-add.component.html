@@ -1,0 +1,141 @@
+<!-- <section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st">Payment</a></li>
+        <li class="breadcrumb-item"><a class="st" href="farmer/payment">Payment</a></li>
+        <li class="breadcrumb-item"><a class="st" href="farmer/payment/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<br /> -->
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-md-12" style="padding: 20px 20px 20px 20px;">
+    <form [formGroup]="paymentForm">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="m-ttl"><b>Payment Information</b></h4>
+          </div>
+          <div class="col-6">
+            <app-multi-select #catalogueMultiSelect isMultiSelect="false" [options]="catalogues" label="Payment Mode"
+              [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedMode">
+            </app-multi-select>
+          </div>
+          <div class="col-6">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Date</mat-label>
+              <input matInput [matDatepicker]="fromPicker" formControlName="dateStr" />
+              <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromPicker></mat-datepicker>
+              <mat-error *ngIf="basic.date.hasError('required')">Date Required</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+
+        <div class="row" *ngIf="selectedMode?.id !=6">
+          <div class="col-12">
+            <h4 class="m-ttl"><b>Mobile User</b></h4>
+          </div>
+          <!--
+      <div class="col-12" style="padding: 20px 20px 20px 20px;">
+        <h4 class="m-ttl">Mobile User</h4> -->
+
+          <div class="col-6">
+            <app-multi-select #mobileUserMultiSelect isMultiSelect="false" [options]="mobileUsers"
+              label="Mobile User Name" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedMobileUser">
+
+            </app-multi-select>
+          </div>
+
+          <div class="col-6">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Balance</mat-label>
+              <input matInput type="text" [value]="selectedMobileUser?.balance" name="balance" formControlName="balance"
+                readonly="true">
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+          <div class="col-12">
+            <h4 class="m-ttl"><b>Farmer</b></h4>
+          </div>
+          <!-- <h4 style="padding: 20px 20px 20px 20px;" class="m-ttl">Farmer</h4> -->
+          <div class="col-6">
+            <app-multi-select #talukMultiSelect isMultiSelect="false" [options]="taluk" label="Taluk"
+              [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedTaluk"></app-multi-select>
+          </div>
+          <div class="col-6">
+            <app-multi-select #villageMultiSelect isMultiSelect="false" [options]="villages" label="Village"
+              [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedVillage"></app-multi-select>
+          </div>
+
+          <div class="col-6">
+            <app-multi-select #farmerMultiSelect isMultiSelect="false" [options]="farmers" label="Farmer"
+              [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedFarmer"
+              (dropDownValueChange)="getLoanDetailByFarmerId($event)"></app-multi-select>
+          </div>
+
+          <div class="col-6" *ngIf="selectedMode?.id !=6">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Balance</mat-label>
+              <input matInput type="text" name="amount" [value]="amount" formControlName="amount"
+                readonly="true">
+            </mat-form-field>
+          </div>
+
+          <!-- <div class="col-6" *ngIf="selectedMode?.id ==6">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Farmer Loan Amount</mat-label>
+              <input matInput type="text" name="farmerLoanAmount" [value]="farmerLoanAmount" formControlName="farmerLoanAmount"
+                readonly="true">
+            </mat-form-field>
+          </div> -->
+
+          <div class="col-6" *ngIf="selectedMode?.id ==6">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Farmer Loan Balance</mat-label>
+              <input matInput type="text" name="farmerLoanBalance" [value]="farmerLoanBalance" formControlName="farmerLoanBalance"
+                readonly="true">
+            </mat-form-field>
+          </div>
+
+          <div class="col-6">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Payment amount</mat-label>
+              <input matInput type="text" name="amount" formControlName="amount">
+            </mat-form-field>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <!-- </div> -->
+    </form>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <div class="form-group text-right mb-0">
+    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+      Submit
+    </button>
+    <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+      Cancel
+    </button>
+
+  </div>
+</div>

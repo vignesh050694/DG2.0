@@ -1,0 +1,24 @@
+<!-- <p>
+  farmer-map works!
+</p> -->
+
+
+<agm-map #agm [latitude]="farmerData?.latitude" [longitude]="farmerData?.longitude" [zoom]="zoom" [minZoom]="minZoom" [style]="style">
+ <agm-marker
+    (markerClick)="clickedMarker(infowindow)"
+    [latitude]="farmerData?.latitude"
+    [longitude]="farmerData?.longitude"
+   >
+  <agm-info-window #infowindow style="min-height: 90% !important;">
+    <strong>{{farmerData?.name}}</strong>
+  </agm-info-window>
+</agm-marker>
+
+ <agm-polygon  [strokeColor]="'blue'" [strokeWeight]="1" [paths]="polygon" *ngFor="let polygon of poligonsList">
+  <agm-info-window #infowindow style="min-height: 90% !important;">
+    <strong>{{farmerData?.farm?.name}}</strong>
+
+  </agm-info-window>
+</agm-polygon>
+</agm-map>
+

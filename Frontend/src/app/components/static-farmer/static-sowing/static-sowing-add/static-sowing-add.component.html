@@ -1,0 +1,103 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="sowingForm">
+  <div ylass="modal-body">
+    <div class="row">
+      <div class="col-3">
+          <app-multi-select #farmMultiSelect isMultiSelect="false" [options]="farms" label="Farm" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedfarm"></app-multi-select>
+      </div>
+      <div class="col-3">
+        <div class="common-box-inner">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Sowing Date</mat-label>
+            <input matInput [matDatepicker]="sowingDatePicker" formControlName="sowingDateStr">
+            <mat-datepicker-toggle matSuffix [for]="sowingDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #sowingDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+    </div>
+      <div class="col-3">
+        <div class="common-box-inner">
+          <app-multi-select #seasonMultiSelect isMultiSelect="false" [options]="seasons" label="Harvest Season"
+          [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedSeason"></app-multi-select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="common-box-inner">
+          <app-multi-select #cropCategoryMultiSelect isMultiSelect="false" [options]="cropCategories"
+            label="Crop Category" [isSubmit]="isSubmit" isRequired="false"
+            [(dropDownValue)]="selectedCropCategory"></app-multi-select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="common-box-inner">
+          <app-multi-select #cropMultiSelect isMultiSelect="false" [options]="crops" label="Crop Name"
+          [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedcrop" (dropDownValueChange)="changeVariety($event)" ></app-multi-select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="common-box-inner">
+          <app-multi-select #varietyMultiSelect isMultiSelect="false" [options]="varieties" label="Variety"
+          [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedvariety"></app-multi-select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="common-box-inner">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Cultivation Area (Ha)
+              <span class="text-danger"></span></mat-label>
+            <input matInput type="text" name="cultivationArea" formControlName="cultivationArea">
+          </mat-form-field>
+        </div>
+      </div>
+
+    <div class="col-3">
+      <div class="common-box-inner">
+        <app-multi-select #sowingTypeMultiSelect isMultiSelect="false" [options]="sowingTypes" label="Type"
+        [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedSowingType"></app-multi-select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="common-box-inner">
+        <app-multi-select #seedSourceMultiSelect isMultiSelect="false" [options]="seedSources" label="Seed Source"
+        [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedSeedSource"></app-multi-select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="common-box-inner">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Seed Quantity Used (Kg/acre)
+            <span class="text-danger"></span></mat-label>
+          <input matInput type="text" name="seedQuantityUsed" formControlName="seedQuantityUsed">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="common-box-inner">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Estimated Yield (maunds)
+            <span class="text-danger"></span></mat-label>
+          <input matInput type="text" name="estimatedYield" formControlName="estimatedYield">
+        </mat-form-field>
+      </div>
+    </div>
+    </div>
+</div>
+</form>
+
+<div class="modal-footer">
+  <div class="form-group text-right mb-0">
+    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+      Submit
+    </button>
+    <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+      Cancel
+    </button>
+
+  </div>
+</div>

@@ -1,0 +1,66 @@
+server:
+    port: 8000
+    servlet:
+        context-path: /master
+spring:
+    application:
+        name: master-service
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+    main:
+        allow-bean-definition-overriding: true
+    mvc:
+        pathmatch:
+            matching-strategy: ANT_PATH_MATCHER
+    flyway:
+        baseline-on-migrate: true
+springfox:
+    documentation:
+        auto-startup: false
+
+#keycloak:
+#    auth-server-url: http://49.204.125.107:8080
+#    bearer-only: true
+#    credentials:
+#        secret: UePJgwHujd5ENczDHfybJgHiRpy51hJx
+#    principal-attribute: preferred_username
+#    realm: datagreen
+#    resource: dg-server
+#    ssl-required: external
+#    use-resource-role-mappings: true
+#
+#keycloak-url:
+#    user: http://49.204.125.107:8080/auth/admin/realms/datagreen/users
+#
+#token:
+#    url: http://49.204.125.107:8080/realms/datagreen/protocol/openid-connect/token
+#
+#auth-server: http://49.204.125.107:8080/
+#authUser: realm_admin
+#authPassword: Realm123
+
+#keycloak:
+#    auth-server-url: http://103.108.220.162:8080/auth
+#    bearer-only: true
+#    credentials:
+#        secret: b72b03bb-9f50-4991-a31c-296091abfa19
+#    principal-attribute: preferred_username
+#    realm: egovernance
+#    resource: server
+#    ssl-required: none
+#    use-resource-role-mappings: true
+#
+#keycloak-url:
+#    user: http://103.108.220.162:8080/auth/admin/realms/egovernance/users
+#
+#token:
+#    url: http://103.108.220.162:8080/auth/realms/egovernance/protocol/openid-connect/token
+#
+#auth-server: http://103.108.220.162:8080/
+#authUser: realm_admin
+#authPassword: Realm123
+#openapi: 1.0.0
+#info:
+#    title: Traceability

@@ -1,0 +1,13 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">Image Preview</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+<div class="modal-body" style="text-align: center;" *ngIf="data">
+ <img style="object-fit: contain;width: 400px;height:200px;" [src]="sanitizeImageUrl(data)">
+</div>
+<div class="modal-body" style="text-align: center;" *ngIf="!data">
+  <p>No Image Selected !</p>
+ </div>
+

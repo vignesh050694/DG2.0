@@ -1,0 +1,206 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st">Inventory</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/distribution-to-farmer">Distribution to Farmer</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/distribution-to-farmer/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<br />
+
+<section class="pr-section">
+  <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-ttl">General Information</h4>
+      </div>
+    </div>
+
+    <form [formGroup]="distributionToFarmerForm">
+      <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="date" />
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="basic.date.hasError('required')">Date Required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-3" >
+          <div>
+            <app-multi-select #seasonMultiSelect isMultiSelect="false"  [options]="seasons" label="Season" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedSeason"></app-multi-select>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <p class="p">Stock From Mobile User or Warehouse?</p>
+          <div class="pr-custom-switch switcher col-3 inner-child">
+            <input type="checkbox" class="custom-control-input" id="test2" value="" checked (change)="changeStock()"
+              formControlName="stockType">
+            <label for="test2">
+              <span class="cir"><small></small></span>
+              <small>&nbsp;</small>
+            </label>
+          </div>
+        </div>
+
+        <ng-container *ngIf="distributionToFarmerForm?.value?.stockType == true">
+          <div class="col-3">
+              <app-multi-select #wareHouseMultiSelect isMultiSelect="false" [options]="warehouses" label="Warehouse" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedWarehouse" (dropDownValueChange)="onWarehouseChange($event)"></app-multi-select>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="distributionToFarmerForm?.value?.stockType == false">
+          <div class="col-3" >
+              <app-multi-select #mobileUserMultiSelect isMultiSelect="false" [options]="mobileUsers" label="Mobile User" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedMobileUser" (dropDownValueChange)="onMobileUserChange($event)"></app-multi-select>
+          </div>
+        </ng-container>
+        <div class="col-3">
+          <p class="p">Is Registered Farmer?</p>
+          <div class="pr-custom-switch switcher col-3 inner-child">
+            <input type="checkbox" class="custom-control-input" id="test3" value="" checked (change)="changeFarmer()"
+              formControlName="farmerType">
+            <label for="test3">
+              <span class="cir"><small></small></span>
+              <small>&nbsp;</small>
+            </label>
+          </div>
+        </div>
+        <ng-container *ngIf="distributionToFarmerForm?.value?.farmerType==true">
+          <div class="col-3" >
+            <app-multi-select #farmerMultiSelect isMultiSelect="false" [options]="farmers" label="Farmer" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedFarmer"></app-multi-select>
+        </div>
+          <div class="col-3" >
+            <app-multi-select #talukMultiSelect isMultiSelect="false" [options]="taluks" label="Taluk" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedTaluk"></app-multi-select>
+          </div>
+        </ng-container>
+        <div class="col-3">
+          <app-multi-select #villageMultiSelect isMultiSelect="false" [options]="villages" label="Village" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedVillage"></app-multi-select>
+        </div>
+        <ng-container  *ngIf="distributionToFarmerForm?.value?.farmerType==false">
+          <div class="col-3">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Farmer Name</mat-label>
+              <input matInput type="text" name="farmerName" formControlName="farmerName" />
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput type="text" name="mobileNumber" formControlName="mobileNumber" />
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<section class="pr-section add-training-selec-sec" style="margin-top: 1%;">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12" style="margin-bottom: 1%;">
+            <h4 class="m-ttl">Product Details</h4>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-2" >
+            <app-multi-select #categoryMultiSelect isMultiSelect="false" [options]="categories" label="Category" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="category" (dropDownValueChange)="getProductByCategory($event)"></app-multi-select>
+          </div>
+
+          <div class="col-2" >
+            <app-multi-select #subCategoryMultiSelect isMultiSelect="false" [options]="subCategories" label="Product" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="subCategory" (dropDownValueChange)="changeSubCategory($event)"></app-multi-select>
+          </div>
+          <div class="col-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Available Stock</mat-label>
+              <input matInput type="text" name="availableStock" [(ngModel)]="availableStocks" readonly="true">
+            </mat-form-field>
+          </div>
+
+          <div class="col-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Cost Price($)</mat-label>
+              <input matInput type="text" name="costPrice" [(ngModel)]="costPrice" (change)="setTotalPrice()">
+            </mat-form-field>
+          </div>
+
+          <div class="col-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Batch Number</mat-label>
+              <input matInput type="text" name="batchNo" [(ngModel)]="batchNo">
+            </mat-form-field>
+          </div>
+          <div class="col-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Distribution Stock</mat-label>
+              <input matInput type="text" name="stock" [(ngModel)]="distributingStock" (change)="setTotalPrice()">
+            </mat-form-field>
+            <div class="text-danger" *ngIf="(isAvailable)&&((distributingStock > availableStocks)||(distributingStock <= 0))" [ngClass]="{ 'is-invalid': isSubmit && isError }">
+              <sup>*</sup>Please Enter Value Between 1 and {{availableStocks}}
+            </div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Unit</mat-label>
+              <input matInput type="text" name="unit" [(ngModel)]="unit" readonly="true">
+            </mat-form-field>
+          </div>
+
+          <div class="col-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Total Price</mat-label>
+              <input matInput type="text" name="totalPrice" [(ngModel)]="totalPrice">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-3 row">
+            <div class="col-lg-2">
+              <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                (click)="addProductInformation()">+</button>
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-secondary bttn-add st" data-toggle="tooltip" data-placement="top" title="clear"
+                (click)="clear()"><span><p style="font-size: 15px;font-weight: bold;">x</p></span></button>
+            </div>
+          </div>
+        </div>
+        <!-- <div *ngIf="showDistrbutionToFarmerDetails">
+          <app-distribution-to-farmer-detail #distributionToFarmerDetail [data]="distributionToFarmerDetails"
+            (editRow)='edit($event)' (deleteRow)='deleteConfirm($event)'>
+          </app-distribution-to-farmer-detail>
+        </div> -->
+        <div [ngStyle]="{'display': showDistrbutionToFarmerDetails ? 'block' : 'none' }">
+          <app-distribution-to-farmer-detail
+          #distributionToFarmerDetail
+          [data]="distributionToFarmerDetails"
+          (editRow)="edit($event)"
+          (deleteRow)="deleteConfirm($event)"
+          >
+          </app-distribution-to-farmer-detail>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<br />
+<div class="col-3 align-self-center" style="margin-top: 1%; margin-bottom: 1%;">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

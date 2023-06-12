@@ -1,0 +1,238 @@
+<!-- <div class="modal-header no-header">
+  <h1 class="page-ttl">Farm Detail</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div> -->
+<!--
+<section class="">
+  <div class="row">
+      <div class="col align-self-center">
+          <h5 class="page-ttl">Farm Detail</h5>
+      </div>
+
+              <div class="media">
+                <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+                  <span aria-hidden="true">&times;</span>
+                </div>
+
+      </div>
+  </div>
+</section> -->
+<div class="modal-header">
+  <h1 class="format_bold" id="trainingDetailModalLabel"><b>Farm Detail</b></h1>
+  <div class="actn-wrap">
+    <button type="button" class="close bttn-close" data-dismiss="modal" aria-label="Close" (click)="close()">
+      <span aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Close">&times;</span>
+    </button>
+    <button class="btn bttn-primary bttn-edit st" data-toggle="tooltip" data-placement="top" title="Edit"
+      (click)="edit()">
+      <span><img class="img-abs st" src="assets/images/icons/edit-white-ico.png" alt="edit"> </span>
+    </button>
+    <span class="p p-14 btn_txt">Edit</span>
+    <button class="btn bttn-danger bttn-remove st" data-toggle="tooltip" data-placement="top" title="Remove"
+      (click)="deleteConfirm()">
+      <span><img class="img-abs st" src="assets/images/icons/delete-white-ico.png" alt="remove"></span>
+    </button>
+    <span class="p p-14 btn_txt">Delete</span>
+  </div>
+</div>
+
+
+
+<div class="modal-body">
+  <div>
+    <div class="row">
+      <div class="col-3" *ngIf="farm?.farmPhoto">
+        <p class="p"><b>Farm Photo</b></p>
+        <img alt="" [src]="farm?.farmPhotoUrl" style="width: 100%;height: 100px;object-fit: contain;">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="pr-dashed-table-wrap px-0 mb-0">
+          <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+            <div class="col-3">
+              <p class="p">Farmer Name</p>
+              <b class="sec_ttl wrap-word wrap-word">{{farm?.farmer?.name}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Farm Name</p>
+              <b class="sec_ttl wrap-word">{{farm?.name}}</b>
+            </div>
+            <!-- 
+            <div class="col-2 pr-4"  *ngIf="farm?.farmPhoto">
+              <div class="col-12 pr-4">
+                <div class="row">
+                  <div class="col-12" style="padding: 20px 0;">
+                    <h4 class="m-ttl">Farm Photo</h4>
+                  </div>
+                  <div class="col-12" style="padding: 0;">
+                    <img alt="" [src]="farm?.farmPhotoUrl" style="width:100 px;height: 100px;object-fit: contain;">
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-3">
+              <p class="p">Survey No</p>
+              <b class="sec_ttl wrap-word">{{farm?.surveyNo}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Proposed planting area (Ha)</p>
+              <b class="sec_ttl wrap-word">{{farm?.ppArea}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Land Owner Ship</p>
+              <b class="sec_ttl wrap-word">{{farm?.landOwnership?.name}}</b>
+            </div>
+
+
+
+            <div class="col-3">
+              <p class="p">Approach Road</p>
+              <b class="sec_ttl wrap-word">{{farm?.approachRoad?.name}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Farm Registration Number</p>
+              <b class="sec_ttl wrap-word">{{farm?.registrationNumber}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Land Topography</p>
+              <b class="sec_ttl wrap-word">{{farm?.topography?.name}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Land Gradient</p>
+              <b class="sec_ttl wrap-word">{{farm?.landGradient?.name}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">TotalLandHolding</p>
+              <b class="sec_ttl wrap-word">{{farm?.totalLandHolding}}</b>
+            </div>
+
+          </div>
+        </div>
+
+        <h2 class="format_bold" id="trainingDetailModalLabel"><b>Soil And Irrigation</b></h2>
+        <div class="pr-dashed-table-wrap px-0 mb-0">
+          <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+            <div class="col-3">
+              <p class="p">Fertility Status</p>
+              <b class="sec_ttl wrap-word">{{farm?.fertilityStatus?.name}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Irrigation Source</p>
+              <b class="sec_ttl wrap-word">{{farm?.irrigation?.name}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Irrigation Type</p>
+              <b class="sec_ttl wrap-word">{{farm?.irrigationType?.name}}</b>
+            </div>
+          </div>
+        </div>
+
+
+        <h2 class="format_bold" id="trainingDetailModalLabel"><b>Farm Labour</b></h2>
+        <div class="pr-dashed-table-wrap px-0 mb-0">
+          <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+
+            <div class="col-3">
+              <p class="p">Full-Time Workers Count</p>
+              <b class="sec_ttl wrap-word">{{farm?.fullTimeWorkers}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Part-Time Workers Count</p>
+              <b class="sec_ttl wrap-word">{{farm?.partTimeWorkers}}</b>
+            </div>
+
+
+            <div class="col-3">
+              <p class="p">Seasonal Workers Count</p>
+              <b class="sec_ttl wrap-word">{{farm?.seasonalWorkers}}</b>
+            </div>
+
+          </div>
+        </div>
+
+
+        <h2 class="format_bold" id="trainingDetailModalLabel"><b>Conversion Information</b></h2>
+        <div class="pr-dashed-table-wrap px-0 mb-0">
+          <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+            <div class="col-3">
+              <p class="p">Last Date</p>
+              <b class="sec_ttl wrap-word">{{farm?.conversionDateStr}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Conventional Lands</p>
+              <b class="sec_ttl wrap-word">{{farm?.conventionalLand}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Fallow/Pasture Land</p>
+              <b class="sec_ttl wrap-word">{{farm?.pastureLand}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Conventional Crops</p>
+              <b class="sec_ttl wrap-word">{{farm?.conventionalCrops}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Estimated Yield</p>
+              <b class="sec_ttl wrap-word">{{farm?.estimatedYield}}</b>
+            </div>
+          </div>
+        </div>
+
+
+        <h2 class="format_bold" id="trainingDetailModalLabel"><b>Conversion Status</b></h2>
+        <div class="pr-dashed-table-wrap px-0 mb-0">
+          <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+
+            <div class="col-3">
+              <p class="p">Certification Type</p>
+              <b class="sec_ttl wrap-word">{{farm?.farmCertificate?.name}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Current Conversion status</p>
+              <b class="sec_ttl wrap-word">{{farm?.conversionStatus?.name}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Conversion Date</p>
+              <b class="sec_ttl wrap-word">{{farm?.conversionDateStr}}</b>
+            </div>
+
+            <div class="col-3">
+              <p class="p">Name of Inspector</p>
+              <b class="sec_ttl wrap-word">{{farm?.nameOfInspector}}</b>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

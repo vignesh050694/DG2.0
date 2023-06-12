@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-12">
+    <mat-table mat-tabl #table [dataSource]="rows" matSort #sort="matSort" matSortActive="id" matSortDirection="asc">
+      <ng-container *ngFor="let column of definedColumns; let i = index" matColumnDef="{{displayedColumns[i]}}">
+        <mat-header-cell *matHeaderCellDef>
+          <h3><b>{{displayedColumns[i]| titleCasePipe}}</b></h3>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row">
+          <div *ngIf="row[column]?.name">
+            <p matTooltip="{{row[column]?.name}}">{{row[column]?.name}}</p>
+          </div>
+          <div *ngIf="!row[column]?.name">
+            <p matTooltip="{{row[column]}}">{{row[column]}}</p>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="noOfBags">
+        <mat-header-cell *matHeaderCellDef>
+          <h3><b>No Of Bags</b></h3>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row; let i = index">
+          <mat-form-field appearance="fill">
+            <mat-label>No Of Bags</mat-label>
+            <input matInput type="text" name="noOfBags" [(ngModel)]="productReceptionDetails[i].noOfBags">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="netWeight">
+        <mat-header-cell *matHeaderCellDef>
+          <h3><b>Net Weight</b></h3>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row; let i = index">
+          <mat-form-field appearance="fill">
+            <mat-label>Net Weight</mat-label>
+            <input matInput type="text" name="netWeight" [(ngModel)]="productReceptionDetails[i].netWeight">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>

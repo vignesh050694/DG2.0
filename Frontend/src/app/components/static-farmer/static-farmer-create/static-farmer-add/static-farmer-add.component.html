@@ -1,0 +1,1669 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <!-- <li class="breadcrumb-item"><a class="st">Farmer</a></li> -->
+        <li class="breadcrumb-item"><a class="st" (click)="cancel()">Farmer</a></li>
+        <li class="breadcrumb-item"><a class="st" href="farmer/static-farmer-create/add">{{title}}</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<section class="pr-section pr-title-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <h5 class="page-ttl">{{title}} Farmer</h5>
+    </div>
+    <div class="col-auto align-self-center">
+      <div class="add-farmer-user-blk">
+        <div class="media">
+          <!-- <div class="media-body st align-self-center">
+                      <p class="p p-16 text-dark1 fw-600">Stanely Mwiti</p>
+                  </div> -->
+          <!-- <div class="img-blk st br50 align-self-center">
+                      <img class="img-abs st" src="assets/images/icons/user-white-ico.png" alt="img">
+                  </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pr-section add-farmer-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <div class="custom-hr-list-wrap">
+        <div *ngIf="tabs.length > 0">
+          <ul class="nav list-group list-group-horizontal" id="addFarmerTabs" role="tablist">
+            <li (click)="tabChange(tab.key)" class="nav-item list-group-item {{tab?.class}}" id="{{tab.key}}"
+              *ngFor="let tab of tabs">
+              <a class="nav-link" id="othr-dtls-tab" data-toggle="tab" href="{{tab.key}}" role="tab"
+                aria-controls="othr-dtls" aria-selected="false">{{tab.value}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto align-self-center">
+      <button class="next-tab btn bttn-primary st mr-4" (click)="next(selectedTab)">Next</button>
+      <button class="next-tab btn bttn-primary st mr-4" (click)="cancel1(selectedTab)">Cancel</button>
+    </div>
+  </div>
+</section>
+
+<section class="pr-section add-farmer-section add-training-selec-sec">
+  <div class="row">
+    <div class="col-12">
+      <div class="registration-inner tab-content" id="registerTabContent">
+        <div [ngStyle]="selectedTab == 1 ? {'display':'block'} : {'display':'none'}" class="tab-pane fade show active"
+          id="frmr-dtls" role="tabpanel" aria-labelledby="frmr-dtls-tab">
+          <form [formGroup]="farmerForm">
+            <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+              <div class="row">
+                <div class="col-6 pr-4">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">Main Information</h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="common-box-inner">
+                        <app-multi-select #enrollmentPlaceMultiSelect isMultiSelect="false" [options]="enrollmentPlaces"
+                          label="Enrollment Place" [isSubmit]="isSubmit" isRequired="false"
+                          [(dropDownValue)]="selectedEnrollmentPlace"></app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-4 px-2">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Enrollment Date</mat-label>
+                        <input matInput [matDatepicker]="enrollemntdatePicker" formControlName="enrollmentDateStr">
+                        <mat-datepicker-toggle matSuffix [for]="enrollemntdatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #enrollemntdatePicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Farmer Code<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="farmerCode" formControlName="farmerCode">
+                        <mat-error *ngIf="basic.farmerCode.hasError('required')">Please enter farmerCode</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <hr class="hr-dashed mt-0">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Farmer Name<span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="name" formControlName="name">
+                          <mat-error *ngIf="basic.name.hasError('required')">Please enter name</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Father Name<span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="fatherName" formControlName="fatherName">
+                          <mat-error *ngIf="basic.fatherName.hasError('required')">Please enter fatherName</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Date of birth</mat-label>
+                          <input matInput [matDatepicker]="dobPicker" formControlName="dobStr">
+                          <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                          <mat-datepicker #dobPicker></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="row col-12">
+                        <p class="p p-14 fw-600 mb-2 col-3">Gender</p>
+                        <div class="cust-radio-bttn-wrap col-9">
+                          <div class="cust-radio-bttn">
+                            <input type="radio" id="control_01" name="gender" value="male" checked
+                              formControlName="gender">
+                            <label for="control_01">
+                              <span><img class="st" src="assets/images/icons/gender-male-ico-white.png"
+                                  alt="ico"></span>
+                            </label>
+                          </div>
+                          <div class="cust-radio-bttn">
+                            <input type="radio" id="control_02" name="gender" value="female" formControlName="gender">
+                            <label for="control_02">
+                              <span><img class="st" src="assets/images/icons/gender-female-ico-white.png"
+                                  alt="ico"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <hr class="hr-dashed mt-4">
+                    </div>
+                  </div>
+
+                    <div class="row">
+                <div class="col-12">
+                  <div class="pr-custcol-wrap">
+                    <div class="accordion pr-accordion1 transparent-accordion" id="accordionContactInfo">
+                      <div class="card st">
+                        <div class="card-header" id="headingOne">
+                          <h2 class="mb-0">
+                            <button class="btn btn-link btn-block st" type="button" data-toggle="collapse"
+                              data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              ADDRESS DETAILS
+                            </button>
+                          </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                          data-parent="#accordionContactInfo">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <mat-form-field appearance="fill" class="full-width">
+                                    <mat-label>Farmer Address<span class="text-danger"></span></mat-label>
+                                    <input matInput type="text" name="address" formControlName="address">
+                                    <mat-error *ngIf="basic.address.hasError('required')">Please enter Farmer
+                                      Address</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <mat-form-field appearance="fill" class="full-width">
+                                    <mat-label>Latitude<span class="text-danger"></span></mat-label>
+                                    <input matInput type="text" name="latitude" formControlName="latitude">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <mat-form-field appearance="fill" class="full-width">
+                                    <mat-label>Longitude<span class="text-danger"></span></mat-label>
+                                    <input matInput type="text" name="longitude" formControlName="longitude">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #countryMultiSelect isMultiSelect="false" [options]="countries"
+                                    label="Country" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedCountry"
+                                    (dropDownValueChange)='changeState($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #stateMultiSelect isMultiSelect="false" [options]="states"
+                                    label="State" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedState"
+                                    (dropDownValueChange)='changeDistrict($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #districtMultiSelect isMultiSelect="false" [options]="districts"
+                                    label="District" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedDistrict"
+                                    (dropDownValueChange)='changeTaluk($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #talukMultiSelect isMultiSelect="false" [options]="taluks"
+                                    label="Taluk" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedTaluk"
+                                    (dropDownValueChange)='changeVillage($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #villageMultiSelect isMultiSelect="false" [options]="villages"
+                                    label="Village" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedVillage"></app-multi-select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                  <!-- <div class="row">
+                    <div class="col-12">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Is certified farmer?</p>
+                        <div class="pr-custom-switch switcher mb-3">
+                          <input type="checkbox" class="custom-control-input"
+                            (click)="toggleCertifiedFarmer(this.farmerForm?.value?.isCertifiedFarmer)" id="swtch1"
+                            value="" checked formControlName="isCertifiedFarmer">
+                          <label for="swtch1">
+                            <span class="cir"><small></small></span>
+                            <small>&nbsp;</small>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" style="padding: 15px;" *ngIf="farmerForm?.value?.isCertifiedFarmer == true ">
+                      <div class="col-6">
+                        <div class="common-box-inner">
+                          <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>ICS Code<span class="text-danger"></span></mat-label>
+                            <input matInput type="text" name="icsCode" formControlName="icsCode">
+                            <mat-error *ngIf="basic.icsCode.hasError('required')">Please enter icsCode</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="common-box-inner">
+                          <app-multi-select #certificateTypeMultiSelect isMultiSelect="false"
+                            [options]="certificateTypes" label="Certificate Type" [isSubmit]="isSubmit"
+                            [isRequired]="false" [(dropDownValue)]="selectedCertificate">
+                          </app-multi-select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="common-box-inner">
+                          <app-multi-select #icsUnitNoMultiSelect isMultiSelect="false" [options]="icsUnitNos"
+                            label="Ics Unit No" [isSubmit]="isSubmit" [isRequired]="false"
+                            [(dropDownValue)]="selectedIcsUnitNo">
+                          </app-multi-select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="common-box-inner">
+                          <app-multi-select #icsTracenetsMultiSelect isMultiSelect="false" [options]="icsTracenets"
+                            label="ICS Tracenet Reg. No" [isSubmit]="isSubmit" [isRequired]="false"
+                            [(dropDownValue)]="selectedIcsTracenet">
+                          </app-multi-select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="common-box-inner">
+                          <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Farmer Code by ICS<span class="text-danger"></span></mat-label>
+                            <input matInput type="text" name="farmerCodeByIcs" formControlName="farmerCodeByIcs">
+                            <mat-error *ngIf="basic.farmerCodeByIcs.hasError('required')">Please enter farmerCodeByIcs
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="common-box-inner">
+                          <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Farmercode By Tracenet<span class="text-danger"></span></mat-label>
+                            <input matInput type="text" name="farmerCodeByTracenet"
+                              formControlName="farmerCodeByTracenet">
+                            <mat-error *ngIf="basic.farmerCodeByTracenet.hasError('required')">Please enter
+                              farmerCodeByTracenet</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="common-box-inner">
+                          <app-multi-select #yearOfIcsMultiSelect isMultiSelect="false" [options]="yearOfIcs"
+                            label="year Of Ics" [isSubmit]="isSubmit" [isRequired]="false"
+                            [(dropDownValue)]="selectedYearOfIcs">
+                          </app-multi-select>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <!-- <div class="row">
+                    <div class="col-12">
+                      <hr class="hr-dashed mt-1 mb-4">
+                    </div>
+                  </div> -->
+                  <!-- <div class="row">
+                    <div class="col-12">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Beneficiary in any Govt. Scheme?</p>
+                        <div class="pr-custom-switch switcher mb-3">
+                          <input type="checkbox" class="custom-control-input"
+                            (click)="toggleGovtScheme(this.farmerForm?.value?.isCertifiedFarmer)" id="swtch2" value=""
+                            checked formControlName="beneficiaryInAnyGovtScheme">
+                          <label for="swtch2">
+                            <span class="cir"><small></small></span>
+                            <small>&nbsp;</small>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row col-12" style="padding: 15px;"
+                      *ngIf="farmerForm?.value?.beneficiaryInAnyGovtScheme == true ">
+                      <div class="col-4">
+                        <div class="common-box-inner">
+                          <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Scheme name<span class="text-danger"></span></mat-label>
+                            <input matInput type="text" name="schemaName" formControlName="schemaName">
+                            <mat-error *ngIf="basic.schemaName.hasError('required')">Please enter scheme
+                              name</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-8">
+                        <div class="common-box-inner">
+                          <app-multi-select #departmentMultiSelect isMultiSelect="false" [options]="departments"
+                            label="Department" [isSubmit]="isSubmit" [isRequired]="false"
+                            [(dropDownValue)]="selectedDepartment">
+                          </app-multi-select>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="col-6 pl-4 border-left border-secondary">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">Personal Information</h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-auto">
+                      <div class="avatar-upload">
+                        <div class="avatar-edit">
+                          <!-- <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" /> -->
+                          <input id="imageUpload" type="file" ng2FileSelect [uploader]="uploader"
+                            (onFileSelected)="onFarmerImg($event)" accept="image/png,image/jpeg" />
+                          <label for="imageUpload"></label>
+                        </div>
+                        <div class="avatar-preview">
+                          <div id="imagePreview" style="background-image: url('{{imageurl?imageurl:defaultImgUrl}}')">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-5 align-self-center">
+                      <div class="common-box-inner mb-1">
+                        <div class="row">
+                          <div class="col-11">
+                            <input id="imageUploadTxt" class="st form-control pr-form-control mb-1" type="text"
+                              style="pointer-events: none;" placeholder=""
+                              [value]="selectedImage?.name ? selectedImage?.name : 'No file chosen' ">
+                          </div>
+                          <div class="col-1 pl-0 align-self-center">
+                            <a class="btn-action text-dark1 cursor-pointer imageUpload" *ngIf="imageurl"
+                              data-toggle="tooltip" data-placement="top" title="remove"><i class="far fa-trash-alt"
+                                (click)="deleteImg(popupKey.farmerImg)"></i></a>
+                          </div>
+                        </div>
+                        <small class="p p-12 pl-1">
+                          JPG, JPEG or PNG. Max size of 500K
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Mobile Number</mat-label>
+                          <input matInput type="text" name="mobileNumber" formControlName="mobileNumber">
+                          <mat-error *ngIf="basic.mobileNumber.hasError('required')">Please enter mobile
+                            number</mat-error>
+                          <mat-error *ngIf="basic.mobileNumber.hasError('pattern')">Invalid</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Email</mat-label>
+                          <input matInput type="text" name="emailId" formControlName="emailId">
+                          <mat-error *ngIf="basic.emailId.hasError('required')">Please enter email</mat-error>
+                          <mat-error *ngIf="basic.emailId.hasError('email')">Invalid</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #groupMultiSelect isMultiSelect="false" [options]="farmerGroups" label="Group"
+                          [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedGroup"></app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #fpoGroupMultiSelect isMultiSelect="false" [options]="fpoGroups" label="FPO/FG Group"
+                          [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedFpoGroup"></app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Phone Number</mat-label>
+                          <input matInput type="text" name="mobileNumber" formControlName="phoneNumber">
+                          <mat-error *ngIf="basic.phoneNumber.hasError('required')">Please enter phone
+                            number</mat-error>
+                          <mat-error *ngIf="basic.phoneNumber.hasError('pattern')">Invalid</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #idProofMultiSelect isMultiSelect="false" [options]="idProofs"
+                          label="Id Proof" [isSubmit]="isSubmit" [isRequired]="false"
+                          [(dropDownValue)]="selectedIdProof">
+                        </app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Proof No<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="proofNo" formControlName="proofNo">
+                        <!-- <mat-error *ngIf="detailbasic.idProof.hasError('required')">Proof No is required</mat-error> -->
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <div style="display: flex;justify-content: space-between;">
+                          <label for="idImage" style="font-size: small;" class="form-label">Id Proof Photo</label>
+                          <div style="display: flex;">
+                            <a><i class="far fa fa-eye" *ngIf="proofImgUrl"
+                                (click)="imagePreview(popupKey?.proofImg)"></i></a>&nbsp;&nbsp;&nbsp;
+                            <a><i class="far fa-trash-alt" *ngIf="proofImgUrl"
+                                (click)="deleteImg(popupKey?.proofImg)"></i></a>
+                          </div>
+                        </div>
+                        <input ng2FileSelect [uploader]="idImageUploader" (onFileSelected)="onIdImage($event)"
+                          accept="image/png,image/jpeg" class="form-control form-control-sm" type="file" id="idImage">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div style="display: flex;justify-content: space-between;">
+                        <label for="idImage" style="font-size: small;" class="form-label">Finger Print Photo</label>
+                        <div style="display: flex;">
+                          <a><i class="far fa fa-eye" *ngIf="printImgUrl"
+                              (click)="imagePreview(popupKey?.printImg)"></i></a>&nbsp;&nbsp;&nbsp;
+                          <a><i class="far fa-trash-alt" *ngIf="printImgUrl"
+                              (click)="deleteImg(popupKey?.printImg)"></i></a>
+                        </div>
+                      </div>
+                      <input ng2FileSelect [uploader]="fingerPrintUploader" (onFileSelected)="onFingerPrint($event)"
+                        accept="image/png,image/jpeg" class="form-control form-control-sm" type="file" id="printImage">
+                    </div>
+                    <div class="col-6">
+                      <app-multi-select #educationMultiSelect isMultiSelect="false" [options]="educations"
+                        label="Education" [isSubmit]="isSubmit" [isRequired]="false"
+                        [(dropDownValue)]="selectedEducation">
+                      </app-multi-select>
+                    </div>
+                    <div class="col-6">
+                      <app-multi-select #maritalStatusMultiSelect isMultiSelect="false" [options]="maritalStatus"
+                        label="Marital Status" [isSubmit]="isSubmit" [isRequired]="false"
+                        [(dropDownValue)]="selectedMaritalStatus">
+                      </app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner ">
+                      <p class="p p-14 fw-600 mb-3">Status</p>
+                      <div class="pr-custom-switch switcher mb-3">
+                        <input type="checkbox" class="custom-control-input" id="swtch10" value="" checked
+                          formControlName="isActive">
+                        <label for="swtch10">
+                          <span class="cir"><small></small></span>
+                          <small>&nbsp;</small>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <hr class="hr-dashed mt-1 mb-3">
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-12">
+                  <div class="pr-custcol-wrap">
+                    <div class="accordion pr-accordion1 transparent-accordion" id="accordionContactInfo">
+                      <div class="card st">
+                        <div class="card-header" id="headingOne">
+                          <h2 class="mb-0">
+                            <button class="btn btn-link btn-block st" type="button" data-toggle="collapse"
+                              data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              ADDRESS DETAILS
+                            </button>
+                          </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                          data-parent="#accordionContactInfo">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <mat-form-field appearance="fill" class="full-width">
+                                    <mat-label>Farmer Address<span class="text-danger"></span></mat-label>
+                                    <input matInput type="text" name="address" formControlName="address">
+                                    <mat-error *ngIf="basic.address.hasError('required')">Please enter Farmer
+                                      Address</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <mat-form-field appearance="fill" class="full-width">
+                                    <mat-label>Latitude<span class="text-danger"></span></mat-label>
+                                    <input matInput type="text" name="latitude" formControlName="latitude">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <mat-form-field appearance="fill" class="full-width">
+                                    <mat-label>Longitude<span class="text-danger"></span></mat-label>
+                                    <input matInput type="text" name="longitude" formControlName="longitude">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #countryMultiSelect isMultiSelect="false" [options]="countries"
+                                    label="Country" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedCountry"
+                                    (dropDownValueChange)='changeState($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #stateMultiSelect isMultiSelect="false" [options]="states"
+                                    label="State" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedState"
+                                    (dropDownValueChange)='changeDistrict($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #districtMultiSelect isMultiSelect="false" [options]="districts"
+                                    label="District" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedDistrict"
+                                    (dropDownValueChange)='changeTaluk($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #talukMultiSelect isMultiSelect="false" [options]="taluks"
+                                    label="Taluk" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedTaluk"
+                                    (dropDownValueChange)='changeVillage($event)'></app-multi-select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="common-box-inner">
+                                  <app-multi-select #villageMultiSelect isMultiSelect="false" [options]="villages"
+                                    label="Village" [isSubmit]="isSubmit" isRequired="true"
+                                    [(dropDownValue)]="selectedVillage"></app-multi-select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="common-box-inner">
+                    <p class="p p-14 fw-600 mb-3">Beneficiary in any Govt. Scheme?</p>
+                    <div class="pr-custom-switch switcher mb-3">
+                      <input type="checkbox" class="custom-control-input"
+                        (click)="toggleGovtScheme(this.farmerForm?.value?.isCertifiedFarmer)" id="swtch2" value=""
+                        checked formControlName="beneficiaryInAnyGovtScheme">
+                      <label for="swtch2">
+                        <span class="cir"><small></small></span>
+                        <small>&nbsp;</small>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-12" style="padding: 15px;"
+                  *ngIf="farmerForm?.value?.beneficiaryInAnyGovtScheme == true ">
+                  <div class="col-4">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Scheme name<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="schemaName" formControlName="schemaName">
+                        <mat-error *ngIf="basic.schemaName.hasError('required')">Please enter scheme
+                          name</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="common-box-inner">
+                      <app-multi-select #departmentMultiSelect isMultiSelect="false" [options]="departments"
+                        label="Department" [isSubmit]="isSubmit" [isRequired]="false"
+                        [(dropDownValue)]="selectedDepartment">
+                      </app-multi-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="common-box-inner">
+                    <p class="p p-14 fw-600 mb-3">Is certified farmer?</p>
+                    <div class="pr-custom-switch switcher mb-3">
+                      <input type="checkbox" class="custom-control-input"
+                        (click)="toggleCertifiedFarmer(this.farmerForm?.value?.isCertifiedFarmer)" id="swtch1"
+                        value="" checked formControlName="isCertifiedFarmer">
+                      <label for="swtch1">
+                        <span class="cir"><small></small></span>
+                        <small>&nbsp;</small>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="padding: 15px;" *ngIf="farmerForm?.value?.isCertifiedFarmer == true ">
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>ICS Code<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="icsCode" formControlName="icsCode">
+                        <mat-error *ngIf="basic.icsCode.hasError('required')">Please enter icsCode</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #certificateTypeMultiSelect isMultiSelect="false"
+                        [options]="certificateTypes" label="Certificate Type" [isSubmit]="isSubmit"
+                        [isRequired]="false" [(dropDownValue)]="selectedCertificate">
+                      </app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #icsUnitNoMultiSelect isMultiSelect="false" [options]="icsUnitNos"
+                        label="Ics Unit No" [isSubmit]="isSubmit" [isRequired]="false"
+                        [(dropDownValue)]="selectedIcsUnitNo">
+                      </app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #icsTracenetsMultiSelect isMultiSelect="false" [options]="icsTracenets"
+                        label="ICS Tracenet Reg. No" [isSubmit]="isSubmit" [isRequired]="false"
+                        [(dropDownValue)]="selectedIcsTracenet">
+                      </app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Farmer Code by ICS<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="farmerCodeByIcs" formControlName="farmerCodeByIcs">
+                        <mat-error *ngIf="basic.farmerCodeByIcs.hasError('required')">Please enter farmerCodeByIcs
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Farmercode By Tracenet<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="farmerCodeByTracenet"
+                          formControlName="farmerCodeByTracenet">
+                        <mat-error *ngIf="basic.farmerCodeByTracenet.hasError('required')">Please enter
+                          farmerCodeByTracenet</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #yearOfIcsMultiSelect isMultiSelect="false" [options]="yearOfIcs"
+                        label="year Of Ics" [isSubmit]="isSubmit" [isRequired]="false"
+                        [(dropDownValue)]="selectedYearOfIcs">
+                      </app-multi-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <div [ngStyle]="selectedTab == 2 && !id ? {'display':'block'} : {'display':'none'}"
+          class="tab-pane fade show active" id="frmr-dtls" role="tabpanel" aria-labelledby="frmr-dtls-tab">
+          <form [formGroup]="farmForm">
+            <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+              <div class="row">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">Farm Information</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Farm Name<span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="name" formControlName="name">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div style="display: flex;justify-content: space-between;">
+                    <label for="idImage" style="font-size: small; color: black;" class="form-label"><b>Farm Photo</b></label>
+                    <div style="display: flex;">
+                      <a><i class="far fa fa-eye" *ngIf="farmImgUrl"
+                          (click)="imagePreview(popupKey?.farmImg)"></i></a>&nbsp;&nbsp;&nbsp;
+                      <a><i class="far fa-trash-alt" *ngIf="farmImgUrl" (click)="deleteImg(popupKey?.farmImg)"></i></a>
+                    </div>
+                  </div>
+                  <input ng2FileSelect [uploader]="farmPhotoUploader" (onFileSelected)="onFarmPhoto($event)"
+                    accept="image/png,image/jpeg" class="form-control form-control-sm" type="file" id="farmImage">
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Survey No.<span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="surveyNo" formControlName="surveyNo">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Proposed planting area (Ha)<span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="ppArea" formControlName="ppArea">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #landOwnershipMultiSelect isMultiSelect="false" [options]="landOwnerships"
+                      label="Land Owner Ship" [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedLandOwnerShip"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <p class="p p-14 fw-600 mb-3">Is Address same as Farmer?</p>
+                    <div class="pr-custom-switch switcher mb-3">
+                      <input type="checkbox" class="custom-control-input" id="swtch3" value="" checked
+                        formControlName="isSameFarmer">
+                      <label for="swtch3">
+                        <span class="cir"><small></small></span>
+                        <small>&nbsp;</small>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3" *ngIf="!this.farmForm?.value?.isSameFarmer">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Farm Address<span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="farmAddress" formControlName="farmAddress">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3" *ngIf="this.farmForm?.value?.isSameFarmer">
+                  <div class="common-box-inner">
+                    <p><b>{{farmerForm.value.address}}</b></p>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #approachMultiSelect isMultiSelect="false" [options]="approachRoads"
+                      label="Approach Road" [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedApproach"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Farm Registration Number<span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="registrationNumber" formControlName="registrationNumber">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #topographyMultiSelect isMultiSelect="false" [options]="landTopographies"
+                      label="Land Topography" [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedTopography"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #gradientMultiSelect isMultiSelect="false" [options]="landGradients"
+                      label="Land Gradient" [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedGradient"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>totalLandHolding<span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="totalLandHolding" formControlName="totalLandHolding">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- <div class="col-3">
+                        <div class="common-box-inner">
+                            <p class="p p-14 fw-600 mb-3">Farm photo</p>
+                            <div class="row">
+                                <div class="col">
+                                    <input class="st form-control pr-form-control mb-1" type="text"
+                                        placeholder="" value="IMG1105253.JPG"></div>
+                                <div class="col-auto pl-0 align-self-center">
+                                    <a class="btn-action text-dark1 cursor-pointer" data-toggle="tooltip"
+                                        data-placement="top" title="remove"><i class="far fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                            <small class="p p-12 pl-1">
+                                JPG, JPEG or PNG. Max size of 500K
+                            </small>
+                        </div>
+                    </div> -->
+              </div>
+            </div>
+            <div class="add-training-selec-blk common-box box-shadow bg-white br14 mt-5" style="margin-bottom: 1%;">
+              <div class="row">
+                <div class="col-6 pr-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                          <h4 class="m-ttl">Soil and Irrigation</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #fertilityMultiSelect isMultiSelect="false" [options]="fertilityStatus"
+                          label="Fertility Status" [isSubmit]="isSubmit" isRequired="false"
+                          [(dropDownValue)]="selectedfertility"></app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #irrigationMultiSelect isMultiSelect="false" [options]="irrigationSources"
+                          label="Irrigation Source" [isSubmit]="isSubmit" isRequired="false"
+                          [(dropDownValue)]="selectedIrrigation"></app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #irrigationTypeMultiSelect isMultiSelect="false" [options]="irrigationTypes"
+                          label="Irrigation Type" [isSubmit]="isSubmit" isRequired="false"
+                          [(dropDownValue)]="selectedIrrigationType"></app-multi-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 pl-4 border-left border-secondary">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                          <h4 class="m-ttl">GPS Details</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Latitude<span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="latitude" formControlName="latitude">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Longitude<span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="longitude" formControlName="longitude">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <hr class="hr-dashed mt-0">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">Farm Labour</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Full-Time Workers Count
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="fullTimeWorkers" formControlName="fullTimeWorkers">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Part-Time Workers Count
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="partTimeWorkers" formControlName="partTimeWorkers">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Seasonal Workers Count
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="seasonalWorkers" formControlName="seasonalWorkers">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="add-training-selec-blk common-box box-shadow bg-white br14 mt-5" style="margin-bottom: 1%;">
+              <div class="row">
+                <div class="col-6 pr-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                          <h4 class="m-ttl">Conversion Information</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Last Date of Chemical Application
+                        </mat-label>
+                        <input matInput [matDatepicker]="lastDayPicker" formControlName="lastDayStr">
+                        <mat-datepicker-toggle matSuffix [for]="lastDayPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #lastDayPicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Conventional Lands
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="conventionalLand" formControlName="conventionalLand">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Fallow/Pasture Land
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="pastureLand" formControlName="pastureLand">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Conventional Crops
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="conventionalCrops" formControlName="conventionalCrops">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Estimated Yield
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="estimatedYield" formControlName="estimatedYield">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-6 pl-4 border-left border-secondary">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                          <h4 class="m-ttl">Conversion Status</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #farmCertificateMultiSelect isMultiSelect="false" [options]="farmCertificates"
+                          label="Certification Type" [isSubmit]="isSubmit" isRequired="false"
+                          [(dropDownValue)]="selectedFarmCertificate"></app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <app-multi-select #conversionStatusMultiSelect isMultiSelect="false"
+                          [options]="conversionStatus" label="Current Conversion status" [isSubmit]="isSubmit"
+                          isRequired="false" [(dropDownValue)]="selectedConversionStatus"></app-multi-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Conversion Date
+                        </mat-label>
+                        <input matInput [matDatepicker]="conversionDatePicker" formControlName="conversionDateStr">
+                        <mat-datepicker-toggle matSuffix [for]="conversionDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #conversionDatePicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Name of Inspector
+                            <span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="nameOfInspector" formControlName="nameOfInspector">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Is Qualified</p>
+                        <div class="pr-custom-switch switcher mb-3">
+                          <input type="checkbox" class="custom-control-input" id="swtch4" value="" checked
+                            formControlName="isQualified">
+                          <label for="swtch4">
+                            <span class="cir"><small></small></span>
+                            <small>&nbsp;</small>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div [ngStyle]="selectedTab == 3 && !id  ? {'display':'block'} : {'display':'none'}"
+          class="tab-pane fade show active" id="frmr-dtls" role="tabpanel" aria-labelledby="frmr-dtls-tab">
+          <form [formGroup]="sowingForm">
+            <div class="add-training-selec-blk common-box  box-shadow bg-white br14" style="margin-top: 3%;">
+              <div class="row">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">Sowing Information</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <p><b>Farm Name :</b><span>{{farmForm.value.name}}</span></p>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #cropCategoryMultiSelect isMultiSelect="false" [options]="cropCategories"
+                      label="Crop Category" [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedCropCategory"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #seasonMultiSelect isMultiSelect="false" [options]="seasons"
+                      label="Harvest Season" [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedSeason"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #cropMultiSelect isMultiSelect="false" [options]="crops" label="Crop Name"
+                      [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedCrop"
+                      (dropDownValueChange)="onCropChange($event)"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #varietyMultiSelect isMultiSelect="false" [options]="varieties" label="Variety"
+                      [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedVariety"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Cultivation Area (Ha)
+                        <span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="cultivationArea" formControlName="cultivationArea">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Sowing Date</mat-label>
+                      <input matInput [matDatepicker]="sowingDatePicker" formControlName="sowingDateStr">
+                      <mat-datepicker-toggle matSuffix [for]="sowingDatePicker"></mat-datepicker-toggle>
+                      <mat-datepicker #sowingDatePicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #sowingTypeMultiSelect isMultiSelect="false" [options]="sowingTypes" label="Type"
+                      [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedSowingType"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <app-multi-select #seedSourceMultiSelect isMultiSelect="false" [options]="seedSources"
+                      label="Seed Source" [isSubmit]="isSubmit" isRequired="false"
+                      [(dropDownValue)]="selectedSeedSource"></app-multi-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Seed Quantity Used (Kg/acre)
+                        <span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="seedQuantityUsed" formControlName="seedQuantityUsed">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="common-box-inner">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Estimated Yield (maunds)
+                        <span class="text-danger"></span></mat-label>
+                      <input matInput type="text" name="estimatedYield" formControlName="estimatedYield">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div [ngStyle]="id ? selectedTab ==  2 ? {'display':'block'} : {'display':'none'} :  selectedTab == 4 ? {'display':'block'} : {'display':'none'}"
+          class="tab-pane fade show active" id="frmr-dtls" role="tabpanel" aria-labelledby="frmr-dtls-tab">
+          <form [formGroup]="familyForm">
+            <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+              <div class="row">
+                <div class="col-6 pr-4">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">Family Information</h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Number Of FamilyMembers</p>
+                        <mat-form-field appearance="fill" class="full-width">
+                          <input matInput type="text" name="numberOfFamilyMembers"
+                            formControlName="numberOfFamilyMembers">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="row col-12">
+                        <p class="p p-14 fw-600 mb-2 col-3">Head Of Family</p>
+                        <div class="cust-radio-bttn-wrap col-9">
+                          <div class="cust-radio-bttn">
+                            <input type="radio" id="control_03" name="headOfFamily" value="male" checked
+                              formControlName="headOfFamily">
+                            <label for="control_03">
+                              <span><img class="st" src="assets/images/icons/gender-male-ico-white.png"
+                                  alt="ico"></span>
+                            </label>
+                          </div>
+                          <div class="cust-radio-bttn">
+                            <input type="radio" id="control_04" name="headOfFamily" value="female"
+                              formControlName="headOfFamily">
+                            <label for="control_04">
+                              <span><img class="st" src="assets/images/icons/gender-female-ico-white.png"
+                                  alt="ico"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Total Number of Household Members Migrating for Work Last Year</p>
+                        <mat-form-field appearance="fill" class="full-width">
+                          <input matInput type="text" name="totalNumberOfHouseholdLastYear"
+                            formControlName="totalNumberOfHouseholdLastYear">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3 text-truncate">Total adults above 18 yr. in
+                          family</p>
+                        <div class="row">
+                          <div class="col-6 pr-2">
+                            <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Male<span class="text-danger"></span></mat-label>
+                              <input matInput type="text" name="totalAdultsMaleAbove18"
+                                formControlName="totalAdultsMaleAbove18">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-6 pl-2">
+                            <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Female<span class="text-danger"></span></mat-label>
+                              <input matInput type="text" name="totalAdultsFemaleAbove18"
+                                formControlName="totalAdultsFemaleAbove18">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3 text-truncate">Total children below 18 yr. in
+                          family</p>
+                        <div class="row">
+                          <div class="col-6 pr-2">
+                            <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Male<span class="text-danger"></span></mat-label>
+                              <input matInput type="text" name="totalAdultsMaleBelow18"
+                                formControlName="totalAdultsMaleBelow18">
+
+                            </mat-form-field>
+                          </div>
+                          <div class="col-6 pl-2">
+                            <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Female<span class="text-danger"></span></mat-label>
+                              <input matInput type="text" name="totalAdultsFemaleBelow18"
+                                formControlName="totalAdultsFemaleBelow18">
+
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3 text-truncate">Total No. of school going
+                          Children(&lt;18 Yrs)</p>
+                        <div class="row">
+                          <div class="col-6 pr-2">
+                            <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Male<span class="text-danger"></span></mat-label>
+                              <input matInput type="text" name="totalChildrensMale"
+                                formControlName="totalChildrensMale">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-6 pl-2">
+                            <mat-form-field appearance="fill" class="full-width">
+                              <mat-label>Female<span class="text-danger"></span></mat-label>
+                              <input matInput type="text" name="totalChildrensFemale"
+                                formControlName="totalChildrensFemale">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 pl-4 border-left border-secondary">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">Insurance Information</h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Life Insurance</p>
+                        <div class="pr-custom-switch switcher mb-3">
+                          <input type="checkbox" class="custom-control-input"
+                            (click)="toggleLifeInsurance(this.farmerForm?.value?.isLifeInsurance)" id="swtch5" value=""
+                            checked formControlName="isLifeInsurance">
+                          <label for="swtch5">
+                            <span class="cir"><small></small></span>
+                            <small>&nbsp;</small>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-9">
+                      <div class="common-box-inner" *ngIf="familyForm?.value?.isLifeInsurance">
+                        <p class="p p-14 fw-600 mb-3">Life Insurance Amount</p>
+                        <mat-form-field appearance="fill" class="full-width">
+                          <!-- <mat-label>Life Insurance Amount<span class="text-danger"></span></mat-label> -->
+                          <input matInput type="text" name="lifeInsuranceaAmount"
+                            formControlName="lifeInsuranceaAmount">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <hr class="hr-dashed mt-0">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Health Insurance</p>
+                        <div class="pr-custom-switch switcher mb-3">
+                          <input type="checkbox" class="custom-control-input" id="swtch6" value="" checked
+                            formControlName="isHealthInsurance">
+                          <label for="swtch6">
+                            <span class="cir"><small></small></span>
+                            <small>&nbsp;</small>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-9">
+                      <div class="common-box-inner" *ngIf="familyForm?.value?.isHealthInsurance">
+                        <p class="p p-14 fw-600 mb-3">Health Insurance Amount</p>
+                        <mat-form-field appearance="fill" class="full-width">
+                          <!-- <mat-label>Health Insurance Amount<span class="text-danger"></span></mat-label> -->
+                          <input matInput type="text" name="healthInsuranceAmount"
+                            formControlName="healthInsuranceAmount">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <hr class="hr-dashed mt-0">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3">Crop Insurance</p>
+                        <div class="pr-custom-switch switcher mb-3">
+                          <input type="checkbox" class="custom-control-input" id="swtch7" value="" checked
+                            formControlName="isCropInsurance">
+                          <label for="swtch7">
+                            <span class="cir"><small></small></span>
+                            <small>&nbsp;</small>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="common-box-inner" *ngIf="familyForm?.value?.isCropInsurance">
+                        <app-multi-select #cropMultiSelect isMultiSelect="true" [options]="crops" label="Crop Insured"
+                          [isSubmit]="isSubmit" [isRequired]="false" [(dropDownValue)]="selectedCrop1">
+                        </app-multi-select>
+                      </div>
+                    </div>
+
+                    <div class="col-4" *ngIf="familyForm?.value?.isCropInsurance">
+                      <div class="common-box-inner">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>No Of Acres Insured<span class="text-danger"></span></mat-label>
+                          <input matInput type="text" name="noOfAcresInsured" formControlName="noOfAcresInsured">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div [ngStyle]="id ? selectedTab ==  3 ? {'display':'block'} : {'display':'none'} :  selectedTab == 5 ? {'display':'block'} : {'display':'none'}"
+          class="tab-pane fade show active" id="frmr-dtls" role="tabpanel" aria-labelledby="frmr-dtls-tab">
+          <!-- <app-bank-information-list [bankDetails]="bankDetails" [bankTrigger]="bankTrigger"  (bankData)="saveBankDetails($event)"  ></app-bank-information-list> -->
+          <!-- <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+                  <div style="display: flex;justify-content: space-between;padding: 20px">
+                  <h4 class="m-ttl col-">Bank Information</h4>
+                  <div>
+                  <button (click)="addBankInformation()" class="btn bttn-primary bttn-add st mr-2">+</button><span class="p p-14 fw-700 text-dark"></span>
+                  </div>
+                  </div>
+                  <div class="row"><div class="col-12">
+                   <table-generic [isEdit]="false"  [displayedColumns]="displayedColumns1"
+                   [definedColumns]="definedColumns1" [searchColumns]="searchColumns1" [canShowSearch]="false"
+                   [data]="bankDetails" [isAction]="true" [datatrigger]="datatrigger1" [isPagination]="false"
+                   (deleteRow)="deleteConfirm1($event)">
+                   </table-generic>
+                  </div> </div>
+                  </div> -->
+
+          <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+            <div style="display: flex;justify-content: space-between;padding: 20px">
+              <h4 class="m-ttl col-">Animal Husbandry Information</h4>
+              <div>
+                <button (click)="addAnimalInformation()" class="btn bttn-primary bttn-add st mr-2">+</button><span
+                  class="p p-14 fw-700 text-dark"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <table-generic [isEdit]="false" [displayedColumns]="displayedColumns2"
+                  [definedColumns]="definedColumns2" [searchColumns]="searchColumns2" [canShowSearch]="false"
+                  [data]="animalDetails" [isAction]="true" [datatrigger]="datatrigger2" [isPagination]="false"
+                  (deleteRow)="deleteConfirm2($event)">
+                </table-generic>
+              </div>
+            </div>
+          </div>
+
+          <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+            <div style="display: flex;justify-content: space-between;padding: 20px">
+              <h4 class="m-ttl col-">Farm Equipment Information</h4>
+              <div>
+                <button (click)="addFarmInformation()" class="btn bttn-primary bttn-add st mr-2">+</button><span
+                  class="p p-14 fw-700 text-dark"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <table-generic [isEdit]="false" [displayedColumns]="displayedColumns3"
+                  [definedColumns]="definedColumns3" [searchColumns]="searchColumns3" [canShowSearch]="false"
+                  [data]="farmDetails" [isAction]="true" [datatrigger]="datatrigger3" [isPagination]="false"
+                  (deleteRow)="deleteConfirm3($event)">
+                </table-generic>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div [ngStyle]="id ? selectedTab ==  4 ? {'display':'block'} : {'display':'none'} :  selectedTab == 6 ? {'display':'block'} : {'display':'none'}"
+          class="tab-pane fade show active" id="frmr-dtls" role="tabpanel" aria-labelledby="frmr-dtls-tab">
+          <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+            <div style="display: flex;justify-content: space-between;padding: 20px">
+              <h4 class="m-ttl col-">Bank Information</h4>
+              <div>
+                <button (click)="addBankInformation()" class="btn bttn-primary bttn-add st mr-2">+</button><span
+                  class="p p-14 fw-700 text-dark"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <table-generic [isEdit]="false" [displayedColumns]="displayedColumns1"
+                  [definedColumns]="definedColumns1" [searchColumns]="searchColumns1" [canShowSearch]="false"
+                  [data]="bankDetails" [isAction]="true" [datatrigger]="datatrigger1" [isPagination]="false"
+                  (deleteRow)="deleteConfirm1($event)">
+                </table-generic>
+              </div>
+            </div>
+          </div>
+
+          <form [formGroup]="loanForm">
+            <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+              <div class="row">
+                <div class="col-12 pl-4 border-left border-secondary">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                      <h4 class="m-ttl">loan Details</h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <p class="p p-14 fw-600 mb-3"> loan Taken Last Year</p>
+                        <div class="pr-custom-switch switcher mb-3">
+                          <input type="checkbox" class="custom-control-input"
+                            (click)="toggleLoanDetails(this.farmerForm?.value?.loanTakenLastYear)" id="swtch8" value=""
+                            checked formControlName="loanTakenLastYear">
+                          <label for="swtch8">
+                            <span class="cir"><small></small></span>
+                            <small>&nbsp;</small>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                          <app-multi-select #loanTakenFromMultiSelect isMultiSelect="false" [options]="loantakenfroms"
+                            label="Loan Taken From" [isSubmit]="isSubmit" isRequired="false"
+                            [(dropDownValue)]="selectedloanTakenFrom"></app-multi-select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                          <mat-form-field appearance="fill" class="full-width">
+                            <mat-label> Amount
+                              <span class="text-danger"></span></mat-label>
+                            <input matInput type="text" name="amount" formControlName="amount">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                          <app-multi-select #farmerTypeMultiSelect isMultiSelect="false" [options]="purposes"
+                            label="Purpose" [isSubmit]="isSubmit" isRequired="false"
+                            [(dropDownValue)]="selectedPurpose"></app-multi-select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                          <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Interest Rate(%)
+                              <span class="text-danger"></span></mat-label>
+                            <input matInput type="text" name="amount" formControlName="interest">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                          <app-multi-select #farmerTypeMultiSelect isMultiSelect="false" [options]="periods"
+                            label="Interest period" [isSubmit]="isSubmit" isRequired="false"
+                            [(dropDownValue)]="selectedPeriod"></app-multi-select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                          <app-multi-select #farmerTypeMultiSelect isMultiSelect="false" [options]="securitys"
+                            label="Security" [isSubmit]="isSubmit" isRequired="false"
+                            [(dropDownValue)]="selectedSecurity"></app-multi-select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3">
+                      <div class="common-box-inner">
+                        <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                          <mat-form-field appearance="fill" class="full-width">
+                            <mat-label>Loan Repayment Amount
+                              <span class="text-danger"></span></mat-label>
+                            <input matInput type="text" name="repaymentAmount" formControlName="repaymentAmount">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-3 px-2">
+                      <div class="common-box-inner" *ngIf="loanForm?.value?.loanTakenLastYear">
+                        <mat-form-field appearance="fill" class="full-width">
+                          <mat-label>Repayment Date</mat-label>
+                          <input matInput [matDatepicker]="repaymentDateStr" formControlName="repaymentDateStr">
+                          <mat-datepicker-toggle matSuffix [for]="repaymentDateStr"></mat-datepicker-toggle>
+                          <mat-datepicker #repaymentDateStr></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="col-auto align-self-center" style="margin-top: 2%;">
+            <button class="next-tab btn bttn-primary st mr-4" (click)="submitForm()">Submit</button>
+            <button class="next-tab btn bttn-primary st mr-4" (click)="cancel()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

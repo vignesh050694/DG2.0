@@ -1,0 +1,729 @@
+<!-- <p>works</p> -->
+
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item">
+            <a class="st" (click)="cancel()">Farmer</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="st" routerLink="farmer/static-farmer-create/detail"
+              >Details</a
+            >
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section
+  class="pr-section master-data-sec"
+  style="margin-top: 3%; padding-right: 3%"
+>
+  <div class="row">
+    <div class="col align-self-center">
+      <ul
+        class="nav nav-tabs master-info-blk border-0"
+        id="myTab"
+        role="tablist"
+      >
+        <li class="nav-item" *ngFor="let tab of tabs; let i = index">
+          <a
+            (click)="tabChanged(i)"
+            class="nav-link media"
+            [ngClass]="{ active: tab?.key == selectedTab?.key }"
+            id="farmer-tab"
+            data-toggle="tab"
+            href="#farmer"
+            role="tab"
+            aria-controls="farmer"
+            aria-selected="true"
+          >
+            <div class="media-body">
+              <p class="p s-ttl">{{ tab?.value }}</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <button (click)="cancel()" class="btn btn-secondary btn-sm">
+        Cancel
+      </button>
+    </div>
+  </div>
+</section>
+<!-- <section class="pr-section pr-title-section"> -->
+<!-- <div class="row">
+    <div class="col align-self-center">
+      <h5 class="page-ttl">Farmer Details</h5>
+    </div>
+    <div class="col-auto align-self-center">
+      <div class="add-farmer-user-blk">
+        <div class="media"></div>
+      </div>
+    </div>
+  </div> -->
+<!-- </section> -->
+
+<section style="width: 98%">
+  <div class="row">
+    <div class="col-12">
+      <div class="training-inner tab-content" id="trainingDetailModal">
+        <div
+          class="tab-pane fade show active"
+          id="trainingDetailModal"
+          role="tabpanel"
+          aria-labelledby="trainingDetailModalLabel "
+        >
+          <div
+            [ngStyle]="
+              selectedTab?.key == 0 ? { display: 'block' } : { display: 'none' }
+            "
+            class="add-training-selec-blk common-box box-shadow bg-white br14"
+            style="margin: 2% 0%"
+          >
+            <div class="row">
+              <div class="col-6 pr-4">
+                <div class="col-12 pr-4">
+                  <div class="row">
+                    <div class="col-12" style="padding: 20px 20px 20px 20px">
+                      <h4 class="m-ttl">Farmer Information</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="pr-dashed-table-wrap px-0 mb-0">
+                            <div
+                              class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div"
+                            >
+                              <div class="col-3">
+                                <p class="p">Enrollment Place</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.enrollmentPlace
+                                }}</b>
+                              </div>
+                              <div class="col-3">
+                                <p class="p">Date Range</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.enrollmentDateStr
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Is certification farmer?</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.isCertifiedFarmer ? "Yes" : "No"
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Certification Type</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.certificateType?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">ICS Code</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.icsCode
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">ICS Unit No.</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.icsUnitNo?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">ICS Tracenet Reg. No.</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.icsTracenetRegNo?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Farmercode By Tracenet</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.farmerCodeByTracenet
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Beneficiary in any Govt. Scheme</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.beneficiaryInAnyGovtScheme
+                                    ? "Yes"
+                                    : "No"
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Name Of The Scheme</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.schemaName
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Government Department</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.department?.name
+                                }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="col-6" style="padding-left: 50%; margin-top: 10%">
+                    <div class="col-2 pr-4">
+                      <div class="col-12 pr-4">
+                        <div class="row">
+                          <div
+                            class="col-12"
+                            *ngIf="farmer?.image"
+                            style="padding: 20px 0"
+                          >
+                            <h4 class="m-ttl">Farmer Photo</h4>
+                          </div>
+                          <div
+                            class="col-12"
+                            *ngIf="farmer?.image"
+                            style="padding: 0"
+                          >
+                            <img
+                              alt=""
+                              src="{{ farmer?.imageUrl }}"
+                              style="
+                                width: 200px;
+                                height: 150px;
+                                object-fit: unset;
+                              "
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6" style="padding-left: 50%; margin-top: 10%">
+                    <div class="col-2 pr-4">
+                      <div class="col-12 pr-4">
+                        <div class="row">
+                          <div
+                            class="col-12"
+                            *ngIf="farmer?.image"
+                            style="padding: 20px 0"
+                          >
+                            <h4 class="m-ttl">Finger Print</h4>
+                          </div>
+                          <div
+                            class="col-12"
+                            *ngIf="farmer?.image"
+                            style="padding: 0"
+                          >
+                            <img
+                              alt=""
+                              src="{{ farmer?.printUrl }}"
+                              style="
+                                width: 200px;
+                                height: 150px;
+                                object-fit: unset;
+                              "
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-2 pr-2">
+                <div class="col-12 pr-4">
+                  <div class="row">
+                    <div class="actn-wrap">
+                      <button
+                        class="btn bttn-primary bttn-edit st"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Edit"
+                        (click)="edit()"
+                      >
+                        <span
+                          ><img
+                            class="img-abs st"
+                            src="assets/images/icons/edit-white-ico.png"
+                            alt="edit"
+                          />
+                        </span>
+                      </button>
+                      <span class="p p-14 btn_txt">Edit</span>
+                      <button
+                        class="btn bttn-danger bttn-remove st"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Remove"
+                        (click)="deleteConfirm()"
+                      >
+                        <span
+                          ><img
+                            class="img-abs st"
+                            src="assets/images/icons/delete-white-ico.png"
+                            alt="remove"
+                        /></span>
+                      </button>
+                      <span class="p p-14 btn_txt">Delete</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 pr-4">
+                <div class="col-12 pr-4">
+                  <div class="row">
+                    <div class="col-12 row-space">
+                      <h4 class="m-ttl">Personal Information</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="pr-dashed-table-wrap px-0 mb-0">
+                            <div
+                              class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div"
+                            >
+                              <div class="col-3">
+                                <p class="p">Farmer Name</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Father Name</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.fatherName
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Date Of Birth</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.dobStr
+                                }}</b>
+                              </div>
+                              <!-- <div class="col-3">
+                      <p class="p"> Age</p>
+                      <b class="sec_ttl wrap-word">{{farmer?.Age .name}}</b>
+                    </div> -->
+                              <div class="col-3">
+                                <p class="p">Gender</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.gender
+                                }}</b>
+                              </div>
+                              <div class="col-3">
+                                <p class="p">Farmer Code</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.farmerCode
+                                }}</b>
+                              </div>
+                              <div class="col-3">
+                                <p class="p">Farmer Code By ICS</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.farmerCodeByIcs
+                                }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 row-space">
+                      <h4 class="m-ttl">Contact Information</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="pr-dashed-table-wrap px-0 mb-0">
+                            <div
+                              class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div"
+                            >
+                              <div class="col-3">
+                                <p class="p">Farmer Address</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.address
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Email</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.emailId
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Mobile Number</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.mobileNumber
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Country</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  location?.taluk?.district?.state?.country
+                                    ?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">State</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  location?.taluk?.district?.state?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">District</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  location?.taluk?.district?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Taluk</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  location?.taluk?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Village</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  location?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Group</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  fgGroup?.name
+                                }}</b>
+                              </div>
+                              <div class="col-3">
+                                <p class="p">FPO/FG Group</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.fpoGroup?.name
+                                }}</b>
+                              </div>
+                              <div class="col-3">
+                                <p class="p">Phone Number</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.phoneNumber
+                                }}</b>
+                              </div>
+                              <div class="col-3">
+                                <p class="p">Status</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.isActive
+                                }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 row-space">
+                      <h4 class="m-ttl">Family Information</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="pr-dashed-table-wrap px-0 mb-0">
+                            <div
+                              class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div"
+                            >
+                              <div class="col-3">
+                                <p class="p">Number Of Family Members</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.numberOfFamilyMembers
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">
+                                  Total adults Male above 18 years in family
+                                </p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.totalAdultsMaleAbove18
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">
+                                  Total adults Female above 18 years in family
+                                </p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.totalAdultsFemaleAbove18
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">
+                                  Total children Male below 18 years in family
+                                </p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.totalAdultsMaleBelow18
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">
+                                  Total children Female below 18 years in family
+                                </p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.totalAdultsFemaleBelow18
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">
+                                  Total No. of school going Children(<18Yrs)<
+                                  /p>
+                                  <b class="sec_ttl wrap-word">{{
+                                    farmer?.family?.totalChildrensMale
+                                  }}</b>
+                                </p>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">
+                                  Total No. of school going Children-Female
+                                  (<18Yrs)< /p>
+                                  <b class="sec_ttl wrap-word">{{
+                                    farmer?.family?.totalChildrensFemale
+                                  }}</b>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 row-space">
+                      <h4 class="m-ttl">Insurance Information</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="pr-dashed-table-wrap px-0 mb-0">
+                            <div
+                              class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div"
+                            >
+                              <div class="col-3">
+                                <p class="p">Is Life Insured</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.isLifeInsurance ? "Yes" : "No"
+                                }}</b>
+                              </div>
+                              <div class="col-3">
+                                <p class="p">Life Insurance</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.lifeInsuranceaAmount
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Is Health Insured</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.isHealthInsurance
+                                    ? "Yes"
+                                    : "No"
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Health Insurance Amount</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.healthInsuranceAmount
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Is Crop Insured</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.isCropInsurance ? "Yes" : "No"
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Crop Insured</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  crop?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">No Of Acres Insured</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.family?.noOfAcresInsured
+                                }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-12 row-space">
+                    <h4 class="m-ttl">Bank Information</h4>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="pr-dashed-table-wrap px-0 mb-0">
+                          <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+                            <div class="col-3">
+                              <p class="p">Loan Taken Last Year</p>
+                              <b class="sec_ttl wrap-word">{{
+                                farmer?.loanTakenLastYear}}</b>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                    <div class="col-12 row-space">
+                      <h4 class="m-ttl">Loan Details</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="pr-dashed-table-wrap px-0 mb-0">
+                            <div
+                              class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div"
+                            >
+                              <div class="col-3">
+                                <p class="p">Loan Taken Last Year</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.loanTakenLastYear ? "Yes" : "No"
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Loan Taken From</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.loanTakenFrom?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Amount</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.amount
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Purpose</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.purpose?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Interest Rate(%)</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.interest
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Interest period</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.period?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Security</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.security?.name
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Loan Repayment Amount</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.repaymentAmount
+                                }}</b>
+                              </div>
+
+                              <div class="col-3">
+                                <p class="p">Loan Repayment Date</p>
+                                <b class="sec_ttl wrap-word">{{
+                                  farmer?.loan?.repaymentDateStr
+                                }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 row-space">
+                      <h1 class="format_bold" id="trainingDetailModalLabel">
+                        <b>Farmer Map</b>
+                      </h1>
+                      <app-farmer-map
+                        *ngIf="farmer"
+                        [farmerData]="farmer"
+                        height="600px"
+                      ></app-farmer-map>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            [ngStyle]="
+              selectedTab?.key == 1 ? { display: 'block' } : { display: 'none' }
+            "
+            style="margin: 2% 0%"
+          >
+            <app-farm-list-screen
+              *ngIf="isFarm == false && id"
+              [farmerId]="id"
+              (actionTrigger)="showFarmScreen($event)"
+            ></app-farm-list-screen>
+            <app-farm-screen
+              *ngIf="isFarm == true && id"
+              (actionTrigger)="showFarmScreen($event)"
+              [farmerId]="id"
+              [id]="farmId"
+            ></app-farm-screen>
+          </div>
+
+          <div
+            [ngStyle]="
+              selectedTab?.key == 2 ? { display: 'block' } : { display: 'none' }
+            "
+            style="margin: 2% 0%"
+          >
+            <app-sowing-list-screen
+              *ngIf="isSowing == false && id"
+              [farmerId]="id"
+              (actionTrigger)="displaySowingScreen($event)"
+            ></app-sowing-list-screen>
+            <app-sowing-screen
+              *ngIf="isSowing == true && id"
+              (actionTrigger)="displaySowingScreen($event)"
+              [farmerId]="id"
+              [id]="sowingId"
+            ></app-sowing-screen>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

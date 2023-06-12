@@ -1,0 +1,248 @@
+{
+    "isStepRequired": "true",
+    "title": "Farmer",
+    "pages": [
+      {
+        "id": "farmerDetails",
+        "title": "Farmer Details",
+        "pageIndex": 1,
+        "cssClass": "nav-item list-group-item active",
+        "anchor": {
+          "cssClass": "nav-link active"
+        }
+      }
+    ],
+    "segments":{
+    "farmerDetails": {
+      "id": "farmerDetails",
+      "cssClass": "tab-pane fade show active",
+      "card": [
+        {
+          "cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+          "sections": [
+            {
+              "title": "Main Information",
+              "type": "card",
+              "cssClass": "col-6 pl-4",
+              "controls": [
+                {
+                  "type": "multi-edit-table",
+                  "div": {
+                    "cssClass": "col-12"
+                  },
+                  "tableData": [],
+                  "dtOptions": {
+                    "searching": false,
+                    "paging": false,
+                    "info": false
+                  },
+                  "displayedColumns": [
+                    {
+                      "id": "variety",
+                      "name": "Variety",
+                      "icon": null
+                    },
+                    {
+                      "id": "grade",
+                      "name": "Grade",
+                      "icon": null
+                    },
+                    {
+                      "id": "unit",
+                      "name": "Unit",
+                      "icon": null
+                    },
+                    {
+                      "id": "stock",
+                      "name": "Stock",
+                      "icon": null
+                    },
+                    {
+                      "id": "no_of_bags",
+                      "name": "No Of Bags",
+                      "icon": null
+                    }
+                  ],
+                  "options": [],
+                  "id": "dynamic_warehouse_stock_entry_detail",
+                  "disabled": false,
+                  "tableControls": [
+                    [
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "tableSelect",
+                        "dependency": {
+                          "childId": "grade",
+                          "parentId": "category",
+                          "depends": null
+                        },
+                        "endPoint": "report/config/dependency",
+                        "div": {
+                          "cssClass": "col-4 common-box-inner"
+                        },
+                        "options": [
+                          {
+                            "id": "3ea50e0829",
+                            "name": "Baasmathii"
+                          }
+                        ],
+                        "id": "variety",
+                        "name": "variety0",
+                        "disabled": false
+                      },
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "tableSelect",
+                        "dependency": {
+                          "childId": "grade,product,unit,pricePerUnit",
+                          "parentId": "variety",
+                          "depends": null
+                        },
+                        "endPoint": "report/config/value-dependency",
+                        "div": {
+                          "cssClass": "col-4 common-box-inner"
+                        },
+                        "options": [],
+                        "id": "grade",
+                        "dependencyQuery": {},
+                        "disabled": false
+                      },
+                      {
+                        "type": "label",
+                        "div": {
+                          "cssClass": "col-6"
+                        },
+                        "options": [],
+                        "id": "stock",
+                        "disabled": false
+                      },
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "text",
+                        "div": {
+                          "cssClass": "col-3"
+                        },
+                        "value": "",
+                        "options": [],
+                        "id": "no_of_bags",
+                        "rules": {
+                          "required": {
+                            "isRequired": true,
+                            "errorMessage": "<sup>*</sup>No Of Bags Shouldn't be empty"
+                          }
+                        },
+                        "disabled": false
+                      },
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "text",
+                        "div": {
+                          "cssClass": "col-3"
+                        },
+                        "value": "",
+                        "options": [],
+                        "id": "net_weight",
+                        "rules": {
+                          "required": {
+                            "isRequired": true,
+                            "errorMessage": "<sup>*</sup>Net Weight Shouldn't be empty"
+                          }
+                        },
+                        "disabled": false
+                      }
+                    ],
+                    [
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "tableSelect",
+                        "dependency": {
+                          "childId": "grade",
+                          "parentId": "category",
+                          "depends": null
+                        },
+                        "endPoint": "report/config/dependency",
+                        "div": {
+                          "cssClass": "col-4 common-box-inner"
+                        },
+                        "options": [
+                          {
+                            "id": "3ea50e0829",
+                            "name": "Baasmathii"
+                          }
+                        ],
+                        "id": "variety",
+                        "disabled": false
+                      },
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "tableSelect",
+                        "dependency": {
+                          "childId": "grade,product,unit,pricePerUnit",
+                          "parentId": "variety",
+                          "depends": null
+                        },
+                        "endPoint": "report/config/value-dependency",
+                        "div": {
+                          "cssClass": "col-4 common-box-inner"
+                        },
+                        "options": [],
+                        "id": "grade",
+                        "dependencyQuery": {},
+                        "disabled": false
+                      },
+                      {
+                        "type": "label",
+                        "div": {
+                          "cssClass": "col-6"
+                        },
+                        "options": [],
+                        "id": "stock",
+                        "disabled": false
+                      },
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "text",
+                        "div": {
+                          "cssClass": "col-3"
+                        },
+                        "value": "",
+                        "options": [],
+                        "id": "no_of_bags",
+                        "rules": {
+                          "required": {
+                            "isRequired": true,
+                            "errorMessage": "<sup>*</sup>No Of Bags Shouldn't be empty"
+                          }
+                        },
+                        "disabled": false
+                      },
+                      {
+                        "cssClass": "form-control pr-form-control",
+                        "type": "text",
+                        "div": {
+                          "cssClass": "col-3"
+                        },
+                        "value": "",
+                        "options": [],
+                        "id": "net_weight",
+                        "rules": {
+                          "required": {
+                            "isRequired": true,
+                            "errorMessage": "<sup>*</sup>Net Weight Shouldn't be empty"
+                          }
+                        },
+                        "disabled": false
+                      }
+                    ]
+                  ]
+                }
+
+              ]
+            }
+
+          ]
+        }
+      ]
+    }
+  }
+ }

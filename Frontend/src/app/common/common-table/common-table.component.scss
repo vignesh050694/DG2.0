@@ -1,0 +1,15 @@
+.ellipsis{
+  width:200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+table{
+  table-layout: fixed;
+  width: 95%;
+
+}
+.pr-datatable-wrap{
+  padding-right: 10px;
+  margin: 0;
+}

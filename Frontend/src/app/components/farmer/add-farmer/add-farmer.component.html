@@ -1,0 +1,106 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st" href="#">Farmer</a></li>
+          <li class="breadcrumb-item"><a class="st" href="#">Farm Management</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Add Farmer</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+<section class="pr-section pr-title-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <h1 class="page-ttl">Add {{data.title}}</h1>
+    </div>
+  </div>
+</section>
+<section class="pr-section add-farmer-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <div class="custom-hr-list-wrap">
+        <div *ngIf="data?.isStepRequired">
+        <ul class="nav list-group list-group-horizontal" id="addFarmerTabs" role="tablist" >
+          <li (click)="tabChange(item)" class="{{item.cssClass}}" id="{{item.id}}-list" *ngFor="let item of data.pages">
+            <a class="nav-link" id="{{item.id}}-tab" data-toggle="tab" href="#{{item.id}}" role="tab"
+               aria-controls="{{item.id}}" aria-selected="false">{{item.title}}</a>
+          </li>
+          <!--<li class="nav-item list-group-item">
+            <a class="nav-link" id="othr-dtls-tab" data-toggle="tab" href="#othr-dtls" role="tab"
+               aria-controls="othr-dtls" aria-selected="false">Other Details</a>
+          </li>-->
+        </ul>
+       </div>
+      </div>
+    </div>
+    <div class="col-auto align-self-center" *ngIf="data?.isStepRequired">
+      <button class="next-tab btn bttn-primary st mr-4" (click)="submit()" *ngIf="canShowSubmit" [disabled]="isFormValid">Submit</button>
+      <button class="next-tab btn bttn-primary st mr-4" (click)="submit()" *ngIf="!canShowSubmit">Next</button>
+      <button class="next-tab btn bttn-primary st mr-4" (click)="cancel()" *ngIf="!canShowSubmit">Cancel</button>
+    </div>
+  </div>
+</section>
+<section class="pr-section add-farmer-section add-training-selec-sec">
+  <div class="row">
+    <div class="col-12">
+      <div class="registration-inner tab-content" id="registerTabContent">
+        <div class="{{data.segments[page.id]?.cssClass}}" [id]="data.segments[page.id].id" role="tabpanel" aria-labelledby="{{data.segments[page.id].id}}-tab" *ngFor="let page of data.pages">
+          <div class="{{cards.cssClass}}" *ngFor="let cards of data.segments[page.id].card; let i=index;">
+            <div class="row">
+              <div class="{{section.cssClass}} mt-3" *ngFor="let section of cards.sections; let j=index">
+                <h4 class="m-ttl">{{section.title}}</h4>
+                <div class="row">
+                  <div class="{{widget?.div?.cssClass}}" *ngFor="let widget of section.controls; let k=index" >
+                    <div *ngIf="!(widget.type=='accordian')" id="parent-{{widget.id}}">
+                      <app-farmer-widget [pageId]="pageId" [widget]="widget" id="{{widget.id}}"
+                                         [(value)]="result[widget.id]" (onError)="onErrorReceived($event,page)"
+                                         [(pageData)]="data"></app-farmer-widget>
+                    </div>
+                    <div class="col-12" *ngIf="widget.type=='accordian'">
+                      <div class="pr-custcol-wrap">
+                        <div class="accordion pr-accordion1 transparent-accordion"
+                             id="{{widget?.id}}">
+                          <div *ngFor="let control of widget?.accordianControls;let l=index;" class="{{control?.card?.cssClass}}">
+                            <div class="{{control?.card?.cardHeader?.cssClass}}" id="{{control?.card?.cardHeader?.id}}">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link btn-block st" type="button"
+                                        data-toggle="collapse" [attr.data-target]="'#'+control?.card?.cardHeader?.button?.id"
+                                        aria-expanded="true" aria-controls="{{control?.card?.cardHeader?.button?.id}}">
+                                  {{control?.card?.cardHeader?.button?.text}}
+                                </button>
+                              </h2>
+                            </div>
+                            <div id="{{control?.card?.cardHeader?.button?.id}}" class="collapse show"
+                                 aria-labelledby="{{control?.card?.cardHeader?.id}}"
+                                 data-parent="#{{widget?.id}}">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="{{accwidget?.div?.cssClass}}" *ngFor="let accwidget of control?.card?.body?.controls" id="parent-{{accwidget.id}}">
+                                    <app-farmer-widget pageId="{{this.pageId}}" [widget]="accwidget" id="{{accwidget.id}}" [(pageData)]="data" [(value)]="result[accwidget.id]"></app-farmer-widget>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="col-auto align-self-center" *ngIf="data?.isStepRequired!=true">
+  <button class="next-tab btn bttn-primary st mr-4" (click)="submit()" *ngIf="canShowSubmit" [disabled]="isFormValid">Submit</button>
+  <button class="next-tab btn bttn-primary st mr-4" (click)="submit()" *ngIf="!canShowSubmit">Save</button>
+</div>
+

@@ -1,0 +1,26 @@
+<!--<div class="row">
+  <div class="col-sm-12">
+    <button style="float:right" (click)="exportToExcel()" class="btn btn-success">Export Excel</button>
+  </div>
+</div>-->
+<!-- <table-generic #tablegeneric [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns" [searchColumns]="searchColumns"
+               [canShowSearch]="true"
+               [data]="devices" [isAction]="false" [datatrigger]="datatrigger" (editRow)='edit($event)'
+               (paginate)='onPaginate($event)' (deleteRow)='deleteConfirm($event)'>
+
+</table-generic> -->
+<app-common-table
+  #tablegeneric
+  [count]="count"
+  [displayedColumns]="displayedColumns"
+  [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns"
+  [canShowSearch]="true"
+  [data]="devices"
+  [isAction]="false"
+  [datatrigger]="datatrigger"
+  (editRow)="edit($event)"
+  (paginate)="onPaginate($event)"
+  (deleteRow)="deleteConfirm($event)"
+>
+</app-common-table>

@@ -1,0 +1,472 @@
+{
+  "controls": {
+    "segments": {
+      "card": [
+        {
+          "sections": [
+            {
+              "title": "General Information",
+              "controls": [
+                {
+                  "label": {
+                    "text": "Date",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "date",
+                  "cssClass": "form-control pr-form-control",
+                  "value": "2021-11-17",
+                  "id": "date"
+                },
+                {
+                  "label": {
+                    "text": "Season",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "season",
+                  "options": [
+                    {
+                      "id": "w3sdasqwrw",
+                      "name": "Bhaiwandhi"
+                    },
+                    {
+                      "id": "w3sdasqsadrw",
+                      "name": "Option3"
+                    },
+                    {
+                      "id": "w3sdasaxczrw",
+                      "name": "Option2"
+                    }
+                  ],
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Season is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Warehouse",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "warehouse",
+                  "options": [
+                    {
+                      "id": "w3sdasqwrw",
+                      "name": "Bhaiwandhi"
+                    },
+                    {
+                      "id": "w3sdasqsadrw",
+                      "name": "Option3"
+                    },
+                    {
+                      "id": "w3sdasaxczrw",
+                      "name": "Option2"
+                    }
+                  ],
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Warehouse is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Taluk",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "taluk",
+                  "options": [
+                    {
+                      "id": "w3sdasqwrw",
+                      "name": "Bhaiwandhi"
+                    },
+                    {
+                      "id": "w3sdasqsadrw",
+                      "name": "Option3"
+                    },
+                    {
+                      "id": "w3sdasaxczrw",
+                      "name": "Option2"
+                    }
+                  ],
+                  "datasource": "query",
+                  "query": "select id as id, name as name from dg.taluk d where d.is_deleted = false",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Taluk is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Village",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "village",
+                  "options": [
+                    {
+                      "id": "w3sdasqwrw",
+                      "name": "Bhaiwandhi"
+                    },
+                    {
+                      "id": "w3sdasqsadrw",
+                      "name": "Option3"
+                    },
+                    {
+                      "id": "w3sdasaxczrw",
+                      "name": "Option2"
+                    }
+                  ],
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Village is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Is Certificated  ?",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "checkbox",
+                  "cssClass": "pr-custom-switch switcher mb-3",
+                  "value": true,
+                  "id": "isCertifiedFarmer",
+                  "datasource": "query",
+                  "query": "select id as id, name as name, css_class as css_class, src as src from dg.checkbox c where c.page = 'farmerDetails'",
+                  "options": [
+                    {
+                      "cssClass": "custom-control-input",
+                      "id": "swtch1"
+                    }
+                  ],
+                  "showOffIds": [ "farmer" ],
+                  "showIds": [ "farmerName", "contactMobileNumber" ]
+                },
+
+                {
+                  "label": {
+                    "text": "Farmer",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "farmer",
+                  "options": [
+                    {
+                      "id": "w3sdasqwrw",
+                      "name": "Bhaiwandhi"
+                    },
+                    {
+                      "id": "w3sdasqsadrw",
+                      "name": "Option3"
+                    },
+                    {
+                      "id": "w3sdasaxczrw",
+                      "name": "Option2"
+                    }
+                  ],
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>farmer is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+
+                {
+                  "label": {
+                    "text": "Farmer Name",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "isDisabled": false,
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "farmerName",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Farmer Code is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Mobile Number",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "isDisabled": false,
+                  "cssClass": "st form-control pr-form-control",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "Mobile Number is Required"
+                    },
+                    "pattern": {
+                      "condition": "[0-9]{10}",
+                      "errorMessage": "Enter Valid Pattern"
+                    }
+                  },
+                  "id": "contactMobileNumber"
+                }
+
+
+
+
+
+
+              ]
+            },
+            {
+              "title": "Product Details",
+              "controls": [
+                {
+                  "label": {
+                    "text": "Product Name",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-2"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": {
+                    "id": "w3sdasqwrw",
+                    "name": "Bhaiwandhi"
+                  },
+                  "changeValues": [
+                    {
+                      "id": "unit",
+                      "value": "Kg"
+                    }
+                  ],
+                  "dependency": {
+                    "childId": "variety"
+                  },
+                  "id": "crop",
+                  "options": [
+                    {
+                      "id": "w3sdasqwrw",
+                      "name": "Bhaiwandhi"
+                    },
+                    {
+                      "id": "w3sdasqsadrw",
+                      "name": "Option3"
+                    },
+                    {
+                      "id": "w3sdasaxczrw",
+                      "name": "Option2"
+                    }
+                  ],
+                  "datasource": "query",
+                  "query": "select id as id, name as name from dg.taluk d where d.is_deleted = false",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Product Name is Required"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Variety",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-2"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": {
+                    "id": "w3sdasqwrw",
+                    "name": "Bhaiwandhi"
+                  },
+                  "id": "variety",
+                  "options": [
+                    {
+                      "id": "w3sdasqwrw",
+                      "name": "Bhaiwandhi"
+                    },
+                    {
+                      "id": "w3sdasqsadrw",
+                      "name": "Option3"
+                    },
+                    {
+                      "id": "w3sdasaxczrw",
+                      "name": "Option2"
+                    }
+                  ],
+                  "dependency": {
+                    "parentId": "crop"
+                  },
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Village is Required"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "unit",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-2"
+                  },
+                  "type": "text",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "unit",
+                  "isDisabled": true
+                },
+                {
+                  "label": {
+                    "text": "Farmer Name",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-2"
+                  },
+                  "type": "text",
+                  "isDisabled": false,
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "farmerName",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Farmer Code is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Farmer Name",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-1"
+                  },
+                  "type": "text",
+                  "isDisabled": false,
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "farmerName",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Farmer Code is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Farmer Name",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-1"
+                  },
+                  "type": "text",
+                  "cssClass": "st form-control pr-form-control",
+                  "value": "Rabi",
+                  "id": "farmerName",
+                  "isDisabled": false,
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "<sup>*</sup>Farmer Code is Required"
+                    },
+                    "pattern": {
+                      "condition": "[A-Za-z]{3}[0-9]{3}",
+                      "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

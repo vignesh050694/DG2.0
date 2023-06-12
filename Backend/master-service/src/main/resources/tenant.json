@@ -1,0 +1,10 @@
+[
+  {
+    "tenantName" : "default",
+    "schema" : "calpyte"
+  },
+  {
+    "tenantName" : "calpyte",
+    "schema" : "calpyte"
+  }
+]

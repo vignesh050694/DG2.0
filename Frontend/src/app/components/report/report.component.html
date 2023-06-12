@@ -1,0 +1,234 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item">
+            <a class="st">{{ title }}</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="col-md-12 row procurement-header">
+  <section class="pr-section crop-harvest-sec col-md-12">
+    <div class="row">
+      <div class="row col-sm-9" style="margin-top: 1%">
+        <div class="col-sm-3" *ngFor="let card of cardArray">
+          <div class="crop-harvest-blk">
+            <div class="media crop-blk-horizontal">
+              <div class="crop-blk-img">
+                <img class="st" [src]="card?.image" alt="ico" />
+              </div>
+              <div class="media-body">
+                <h4 class="crop-nm">{{ card?.count }}</h4>
+                <p class="p">{{ card?.name }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-sm-3" style="margin-top: 2%">
+        <div class="col float-right">
+          <div
+            class="col-auto align-self-center"
+            *ngIf="isAddBtn"
+            (click)="addClick(null)"
+          >
+            <a
+              class="btn bttn-primary bttn-add st mr-2"
+              [routerLink]="routePath"
+              >+</a
+            ><span class="p p-14 fw-700 text-dark" style="margin-left: 7px"
+              >ADD</span
+            >
+          </div>
+        </div>
+
+        <div class="col float-right">
+          <div class="d-inline-block">
+            <button
+              class="btn bttn-primary bttn-export st mr-3"
+              (click)="export(pdfDownloadUrl)"
+            >
+              <i class="fas fa-file-pdf" style="font-size: 18px"></i>
+            </button>
+            <div>
+              <span
+                class="p p-14 fw-700 text-dark mt-1"
+                style="margin-left: -10px"
+                >Export PDF</span
+              >
+            </div>
+            <!--<a class="btn bttn-primary bttn-export st mr-3" target="_blank" href="{{pdfDownloadUrl}}">
+      <i class="fas fa-file-pdf" style="font-size: 14px;"></i>
+    </a>-->
+          </div>
+        </div>
+
+        <div class="col float-right">
+          <div class="d-inline-block">
+            <!--<a class="btn bttn-primary bttn-export st mr-3" target="_blank" href="{{excelDownloadUrl}}">
+      <i class="fas fa-file-excel" style="font-size: 18px;"></i>
+    </a>-->
+            <button
+              class="btn bttn-primary bttn-export st mr-3"
+              (click)="export(excelDownloadUrl)"
+            >
+              <i class="fas fa-file-excel" style="font-size: 18px"></i>
+            </button>
+            <div>
+              <span
+                class="p p-14 fw-700 text-dark mt-1"
+                style="margin-left: -10px"
+                >Export Excel</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+<br />
+<section class="pr-section master-data-sec" *ngIf="tabs?.length > 0">
+  <div class="row">
+    <div class="col align-self-center">
+      <ul
+        class="nav nav-tabs master-info-blk border-0"
+        id="myTab"
+        role="tablist"
+      >
+        <li class="nav-item" *ngFor="let tab of tabs; let i = index">
+          <a
+            (click)="tabChanged(i)"
+            class="nav-link media"
+            [ngClass]="{ active: tab?.key == selectedTab?.key }"
+            data-toggle="tab"
+            role="tab"
+            aria-selected="true"
+          >
+            <div class="media-body">
+              <p class="p s-ttl">{{ tab.value }}</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<app-dynamic-forms
+  *ngIf="isFilterDataLoaded"
+  [formData]="formData"
+  [isDateRange]="isDateRange"
+  (searchEvent)="onSearch($event)"
+>
+</app-dynamic-forms>
+<br />
+<!-- <table-generic
+  [count]="count"
+  [displayedColumns]="displayedColumns"
+  [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns"
+  [canShowSearch]="true"
+  [isDetail]="true"
+  [data]="datas"
+  [isAction]="true"
+  [datatrigger]="datatrigger"
+  (editRow)="edit($event)"
+  (paginate)="onPaginate($event)"
+  (searchEvent)="onSearch($event)"
+  (detailRow)="detail($event)"
+  (deleteRow)="deleteConfirm($event)"
+>
+</table-generic> -->
+<div style="padding: 10px">
+  <app-common-table
+    [count]="count"
+    [displayedColumns]="displayedColumns"
+    [definedColumns]="definedColumns"
+    [searchColumns]="searchColumns"
+    [canShowSearch]="false"
+    [isDetail]="false"
+    [data]="datas"
+    [isAction]="false"
+    [datatrigger]="datatrigger"
+    (editRow)="edit($event)"
+    (paginate)="onPaginate($event)"
+    (searchEvent)="onSearch($event)"
+    (detailRow)="detail($event)"
+    (deleteRow)="deleteConfirm($event)"
+  >
+  </app-common-table>
+</div>
+<div
+  class="pr-modal modal right fade"
+  id="trainingDetailModal"
+  #trainingDetailModal
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="trainingDetailModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trainingDetailModalLabel">
+          {{ reportName }}_detail
+        </h5>
+        <button
+          type="button"
+          class="close bttn-close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close()"
+        >
+          <span
+            aria-hidden="true"
+            data-toggle="tooltip"
+            data-placement="left"
+            title="Close"
+            >&times;</span
+          >
+        </button>
+        <div class="actn-wrap">
+          <button
+            class="btn bttn-primary bttn-edit st"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Edit"
+            (click)="editDetail($event)"
+          >
+            <span
+              ><img
+                class="img-abs st"
+                src="assets/images/icons/edit-white-ico.png"
+                alt="edit"
+            /></span>
+          </button>
+          <span class="p p-14 btn_txt">Edit</span>
+          <button
+            class="btn bttn-danger bttn-remove st"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Remove"
+            (click)="deleteConfirm($event)"
+          >
+            <span
+              ><img
+                class="img-abs st"
+                src="assets/images/icons/delete-white-ico.png"
+                alt="remove"
+            /></span>
+          </button>
+          <span class="p p-14 btn_txt">Delete</span>
+        </div>
+      </div>
+
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>

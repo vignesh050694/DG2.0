@@ -1,0 +1,24 @@
+<div class="overflow-hidden-js">
+
+  <sourcetrace-header class="pr-header"></sourcetrace-header>
+
+  <div class="pr-outer-wrap container-fluid">
+    <div class="row">
+      <div class="col-auto px-0">
+        <app-sidebar class="pr-sidenav"></app-sidebar>
+      </div>
+      <div class="col px-0">
+        <div class="pr-content st" id="pr-content">
+          <div class="container-fluid px-0">
+            <!--<h2>{{ 'HOME.TITLE' | translate }}</h2>
+            <select #langSelect [(ngModel)]="selected" (ngModelChange)="onChange()">
+              <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+            </select>-->
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

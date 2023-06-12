@@ -1,0 +1,191 @@
+<form [formGroup]="mobileUserForm">
+  <section class="pr-section add-training-selec-sec">
+    <div class="row">
+      <div class="col-12">
+        <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="m-ttl" style="margin-top: 2%;">Mobile User Information</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="pr-dashed-table-wrap px-0 mb-0">
+                <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+                  <div class="col-3">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Agent Name<span class="text-danger">*</span></mat-label>
+                      <input matInput type="text" name="name" formControlName="name" [ngClass]="{'is-invalid': isSubmit && basic.name.errors}">
+                        <mat-error *ngIf="basic.name.hasError('required')">
+                          <sup>*</sup>Name Required</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-3">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Id<span class="text-danger">*</span></mat-label>
+                      <input matInput type="text" name="id" formControlName="userId"
+                        [ngClass]="{'is-invalid': isSubmit && basic.userId.errors}">
+                        <mat-error *ngIf="basic.userId.hasError('required')">
+                          <sup>*</sup>Id Required</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-3" *ngIf="idTypes.length>0">
+                    <app-multi-select #idTypeMultiSelect isMultiSelect="false" [options]="idTypes" label="ID Type" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedIdType"></app-multi-select>
+                  </div>
+
+                  <div class="col-3">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Identity Number</mat-label>
+                      <input matInput type="text" name="name" formControlName="idNo"
+                        [ngClass]="{'is-invalid': isSubmit && basic.idNo.errors}">
+                        <mat-error *ngIf="basic.idNo.hasError('required')">
+                          <sup>*</sup>Identity Number Required</mat-error>
+                        <mat-error *ngIf="basic.idNo.hasError('pattern')">
+                          <sup>*</sup>Invalid ID Number</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-3">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Date</mat-label>
+                      <input matInput [matDatepicker]="fromPicker" formControlName="date">
+                      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #fromPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-3" style="margin-top: 2%;">
+                    <mat-radio-group aria-label="Select an option" formControlName="gender">
+                      <mat-radio-button value="male">Male</mat-radio-button>&nbsp;
+                      <mat-radio-button value="female" style="padding-left: 3%;">female</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pr-section add-training-selec-sec">
+    <div class="row">
+      <div class="col-12">
+        <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="m-ttl" style="margin-top: 2%;">Contact Information Information</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+                <div class="col-3">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Address</mat-label>
+                    <input matInput type="text" name="address" formControlName="address"
+                    [ngClass]="{'is-invalid': isSubmit && basic.address.errors}">
+                    <!-- <textarea matInput name="address" formControlName="address"
+                      [ngClass]="{'is-invalid': isSubmit && basic.address.errors}"></textarea> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput type="text" name="phoneNo" formControlName="phoneNo"
+                      [ngClass]="{'is-invalid': isSubmit && basic.phoneNo.errors}">
+                      <mat-error *ngIf="basic.phoneNo.hasError('pattern')">
+                        <sup>*</sup>Invalid Phone Number</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput type="text" name="mobileNo" formControlName="mobileNo"
+                      [ngClass]="{'is-invalid': isSubmit && basic.mobileNo.errors}">
+                      <mat-error *ngIf="basic.mobileNo.hasError('pattern')">
+                        <sup>*</sup>Invalid Mobile Number</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Email Id</mat-label>
+                    <input matInput type="text" name="emailId" formControlName="emailId"
+                      [ngClass]="{'is-invalid': isSubmit && basic.emailId.errors}">
+                      <mat-error *ngIf="basic.emailId.hasError('email')">
+                        <sup>*</sup>Invalid Email</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pr-section add-training-selec-sec">
+    <div class="row">
+      <div class="col-12">
+        <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="m-ttl" style="margin-top: 2%;">Credential Information</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+                <div class="col-md-3" style="margin-top: 2%;">
+                  <mat-radio-group aria-label="Select an option" formControlName="isActive">
+                    <mat-radio-button value="active">Active</mat-radio-button>&nbsp;
+                    <mat-radio-button value="inActive" style="padding-left: 6%;">InActive</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div class="col-md-3">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Password<span class="text-danger">*</span></mat-label>
+                    <input matInput type="password" name="password" formControlName="password"
+                      [ngClass]="{'is-invalid': isSubmit && basic.password.errors}">
+                      <mat-error *ngIf="basic.password.hasError('required')">
+                        <sup>*</sup>Password Required</mat-error>
+                        <mat-error *ngIf="basic.password.hasError('minlength')">
+                          <sup>*</sup>Minimum 6 characters required</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Confirm Password<span class="text-danger">*</span></mat-label>
+                    <input matInput type="text" name="confirmPassword" formControlName="confirmPassword"
+                      [ngClass]="{'is-invalid': isSubmit && basic.confirmPassword.errors}">
+                    <mat-error *ngIf="basic.confirmPassword.hasError('required')">
+                      <sup>*</sup>Please enter confirm password.
+                    </mat-error>
+                    <mat-error *ngIf="basic.confirmPassword.hasError('mustMatch')">
+                      <sup>*</sup>Password Must match.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="col-3 align-self-center">
+    <div class="row" style="margin-top: 2%;">
+      <div class="col-12">
+        <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles"
+          (click)="submitForm()">
+          Save
+        </button>
+        <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</form>

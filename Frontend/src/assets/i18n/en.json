@@ -1,0 +1,9 @@
+{
+  "HOME": {
+    "TITLE": "Hello Angular with ngx-translate!",
+    "SELECT": "Change language"
+  },
+  "SHARED-VIEW": {
+    "TITLE": "Shared module with ngx-translate!"
+  }
+}

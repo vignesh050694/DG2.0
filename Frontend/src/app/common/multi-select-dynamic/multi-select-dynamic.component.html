@@ -1,0 +1,33 @@
+<form #dropDownForm="ngForm" *ngIf="emitId=='true'">
+  <mat-form-field appearance="fill">
+    <mat-label class="mat-form-field-invalid ng-touched">{{label}}</mat-label>
+    <mat-select [multiple]="isMultiSelect" #multiSelectDynamic name="{{label}}" [(ngModel)]="dropDownValue" [disabled]="disabled"
+      [required]="isRequired" [name]="widgetName" (focus)="onFocus($event)" (ngModelChange)="onchange($event)" [id]="dropDownId">
+      <mat-option>
+        <ngx-mat-select-search [formControl]="websiteMultiFilterCtrl" placeholderLabel="Find {{label}}...">
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let website of filteredWebsitesMulti | async" [value]="website.id">
+        {{website.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="isSubmit&&basic.multiSelectDynamic.errors">{{label}} is required</mat-error>
+  </mat-form-field>
+</form>
+
+<form #dropDownForm="ngForm" *ngIf="emitId=='false'">
+  <mat-form-field appearance="fill">
+    <mat-label class="mat-form-field-invalid ng-touched">{{label}}</mat-label>
+    <mat-select [multiple]="isMultiSelect" #multiSelectDynamic name="{{label}}" [(ngModel)]="dropDownValue" [name]="widgetName"
+                [required]="isRequired" [disabled]="disabled" (focus)="onFocus($event)" (ngModelChange)="onchange($event)" [id]="dropDownId">
+      <mat-option>
+        <ngx-mat-select-search [formControl]="websiteMultiFilterCtrl" placeholderLabel="Find {{label}}...">
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let website of filteredWebsitesMulti | async" [value]="website">
+        {{website.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="isSubmit&&basic.multiSelectDynamic.errors">{{label}} is required</mat-error>
+  </mat-form-field>
+</form>

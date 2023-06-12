@@ -1,0 +1,29 @@
+<app-common-table
+  [count]="count"
+  [displayedColumns]="displayedColumns"
+  [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns"
+  [data]="seasons"
+  [isAction]="true"
+  [datatrigger]="datatrigger"
+  (editRow)="edit($event)"
+  (paginate)="onPaginate($event)"
+  (deleteRow)="deleteConfirm($event)"
+  (searchEvent)="onSearch($event)"
+></app-common-table>
+
+<!-- <table-generic
+  [count]="count"
+  [displayedColumns]="displayedColumns"
+  [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns"
+  [canShowSearch]="true"
+  [data]="seasons"
+  [isAction]="true"
+  [datatrigger]="datatrigger"
+  (editRow)="edit($event)"
+  (paginate)="onPaginate($event)"
+  (deleteRow)="deleteConfirm($event)"
+  (searchEvent)="onSearch($event)"
+>
+</table-generic> -->

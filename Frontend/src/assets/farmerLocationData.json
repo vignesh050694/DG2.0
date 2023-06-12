@@ -1,0 +1,98 @@
+{
+  "cardData": [
+    {
+      "title": "Farmers",
+      "count": 36589,
+      "imageLink": "assets/images/icons/farmers-ico.png"
+    },
+    {
+      "title": "Plot",
+      "count": 14564,
+      "imageLink": "assets/images/icons/plots-ico.png"
+    },
+    {
+      "title": "Harvest (Ton)",
+      "count": 1564,
+      "imageLink": "assets/images/icons/harvest-ico.png"
+    },
+    {
+      "title": "Calendar",
+      "count": 1505,
+      "imageLink": "assets/images/icons/calendar-ico.png"
+    }
+  ],
+  "userCrops": {
+    "title": "More Crops",
+    "crops": [
+      "assets/images/crops/coffee-46x46.png",
+      "assets/images/crops/peas-46x46.png",
+      "assets/images/crops/capcicum-46x46.png",
+      "assets/images/crops/tomato-46x46.png"
+    ]
+  },
+  "tableData": [
+    {
+      "title": "Farmer Balance",
+      "id": "headingOne",
+      "tableData": [
+        {
+          "name": "Wheat",
+          "quantity": "28 ton",
+          "amount": "789"
+        },
+        {
+          "name": "Rice",
+          "quantity": "52 ton",
+          "amount": "817"
+        },
+        {
+          "name": "Corn",
+          "quantity": "14 ton",
+          "amount": "611"
+        }
+      ]
+    },
+    {
+      "title": "Procurement",
+      "id": "headingTwo",
+      "tableData": [
+        {
+          "name": "Wheat",
+          "quantity": "28 ton",
+          "amount": "789"
+        },
+        {
+          "name": "Rice",
+          "quantity": "52 ton",
+          "amount": "817"
+        },
+        {
+          "name": "Corn",
+          "quantity": "14 ton",
+          "amount": "611"
+        }
+      ]
+    },
+    {
+      "title": "Distribution",
+      "id": "headingOne",
+      "tableData": [
+        {
+          "name": "Wheat",
+          "quantity": "28 ton",
+          "amount": "789"
+        },
+        {
+          "name": "Rice",
+          "quantity": "52 ton",
+          "amount": "817"
+        },
+        {
+          "name": "Corn",
+          "quantity": "14 ton",
+          "amount": "611"
+        }
+      ]
+    }
+  ]
+}

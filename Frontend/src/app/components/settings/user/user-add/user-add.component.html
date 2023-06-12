@@ -1,0 +1,227 @@
+<form [formGroup]="userForm">
+  <section class="pr-section add-training-selec-sec">
+    <div class="row">
+      <div class="col-12">
+        <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="m-ttl" style="margin-top: 2%;">User Information</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="pr-dashed-table-wrap px-0 mb-0">
+                <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+                  <div class="col-3">
+                    <div class="form-group">
+                        <app-multi-select #subOrganizationMultiSelect isMultiSelect="false" [options]="subOrganizations" label="Sub Organization" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedSubOrganization"></app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>User Name<span class="text-danger">*</span></mat-label>
+                        <input matInput type="text" name="userName" formControlName="userName">
+                        <mat-error *ngIf="basic.userName.hasError('required')">User Name is Required</mat-error>
+                        <mat-error *ngIf="basic.userName.hasError('pattern')">Invalid</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-3" >
+                    <div class="form-group">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>First Name<span class="text-danger">*</span></mat-label>
+                        <input matInput type="text" name="firstName" formControlName="firstName">
+                        <mat-error *ngIf="basic.firstName.hasError('required')">First Name is Required</mat-error>
+                        <mat-error *ngIf="basic.firstName.hasError('pattern')">Invalid</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput type="text" name="lastName" formControlName="lastName">
+                        <mat-error *ngIf="basic.lastName.hasError('required')">Last Name is Required</mat-error>
+                        <mat-error *ngIf="basic.lastName.hasError('pattern')">Invalid</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Language</mat-label>
+                        <input matInput type="text" name="language" formControlName="language">
+                        <mat-error *ngIf="basic.language.hasError('required')">Language is Required</mat-error>
+                        <mat-error *ngIf="basic.language.hasError('pattern')">Invalid</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-group">
+                      <mat-label>Photo[.jpg .jpeg .png] <span class="text-danger">image should be less than 50kb</span></mat-label>
+                      <div *ngIf="imageUrl==''">
+                        <app-file-upload (onUploadComplete)='onUploadComplete($event)' [allowedMimeType]="allowedMimeType"
+                                         [maxFileSize]="maxFileSize" [uploadtrigger]="uploadtrigger"></app-file-upload>
+                      </div>
+                      <div *ngIf="imageUrl!=''">
+                        <img style="width:80px;height:80px;margin:10px;" [src]="imageUrl" />
+                        <button mat-icon-button color="warn" matTooltip="Delete" type="button" (click)="remove()">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="pr-section add-training-selec-sec">
+    <div class="row">
+      <div class="col-12">
+        <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="m-ttl" style="margin-top: 2%;">Contact Information</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+                <div class="col-3">
+                  <div class="form-group">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Address</mat-label>
+                      <input matInput type="text" name="address" formControlName="address">
+                      <mat-error *ngIf="basic.address.hasError('required')">Address is Required</mat-error>
+                      <mat-error *ngIf="basic.address.hasError('pattern')">Invalid</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Phone Number</mat-label>
+                      <input matInput type="text" name="phoneNumber" formControlName="phoneNumber">
+                      <mat-error *ngIf="basic.phoneNumber.hasError('required')">Phone Number is Required</mat-error>
+                      <mat-error *ngIf="basic.phoneNumber.hasError('pattern')">Invalid</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Mobile Number</mat-label>
+                      <input matInput type="text" name="mobileNumber" formControlName="mobileNumber">
+                      <mat-error *ngIf="basic.mobileNumber.hasError('required')">Mobile Number is Required</mat-error>
+                      <mat-error *ngIf="basic.mobileNumber.hasError('pattern')">Invalid</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Email</mat-label>
+                      <input matInput type="text" name="email" formControlName="email">
+                      <mat-error *ngIf="basic.email.hasError('required')">Email Required</mat-error>
+                      <mat-error *ngIf="basic.email.hasError('email')">Invalid</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pr-section add-training-selec-sec">
+    <div class="row">
+      <div class="col-12">
+        <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="m-ttl" style="margin-top: 2%;">Contact Information</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+                <div class="col-3">
+                  <div class="form-group">
+                    <mat-checkbox formControlName="setPassword" (change)="onSetPasswordChange($event.checked)">
+                      Set Password
+                    </mat-checkbox>
+                  </div>
+                </div>
+
+             <div class="col-3" *ngIf="showPassword">
+                  <div class="form-group">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Password<span class="text-danger">*</span></mat-label>
+                      <input matInput type="password" name="password" formControlName="password" (input)="onPasswordChange()"
+                      [ngClass]="{'is-invalid': isSubmit && basic.password.errors}">
+                      <mat-error *ngIf="basic.password.hasError('required')">
+                        <sup>*</sup>Password Required</mat-error>
+                        <mat-error *ngIf="basic.password.hasError('minlength')">
+                          <sup>*</sup>Minimum 6 characters required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3" *ngIf="showPassword">
+                  <div class="form-group">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Confirm Password<span class="text-danger">*</span></mat-label>
+                      <input matInput type="password" name="confirmPassword" formControlName="confirmPassword" (input)="onPasswordChange()"
+                      [ngClass]="{'is-invalid': isSubmit && basic.confirmPassword.errors}">
+                      <mat-error *ngIf="basic.confirmPassword.hasError('required')">
+                        <sup>*</sup>Please enter confirm password.
+                      </mat-error>
+                      <mat-error *ngIf="basic.confirmPassword.hasError('mustMatch')">
+                        <sup>*</sup>Password Must match.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <mat-checkbox formControlName="isActive">
+                      Status
+                    </mat-checkbox>
+                  </div>
+                </div>
+
+             <!-- <div class="col-3">
+                    <div *ngIf="roles.length>0">
+                      <app-multi-select #roleMultiSelect isMultiSelect="false" [options]="roles" label="Select Role" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedRole"></app-multi-select>
+                    </div>
+                </div> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br/>
+  <div class="col-3 align-self-center">
+    <div class="row">
+      <div class="col-12">
+          <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="submitForm()">
+            Submit
+          </button>
+          <button (click)="cancel()" class="btn bttn-primary-outline st mr-0">
+            Cancel
+          </button>
+      </div>
+    </div>
+  </div>
+</form>

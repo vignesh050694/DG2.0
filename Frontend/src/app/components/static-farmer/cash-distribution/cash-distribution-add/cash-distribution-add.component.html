@@ -1,0 +1,60 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+
+<form [formGroup]="cashDistributionForm">
+  <div class="modal-body">
+    <div class="row">
+      <!-- <div class="form-group col-md-6">
+        <app-multi-select
+          #farmerMultiSelect
+          isMultiSelect="false"
+          [options]="mobileUserId"
+          label="MobileUserId"
+          [isSubmit]="isSubmit"
+          [isRequired]="true"
+          [(dropDownValue)]="selectedMobileUserId"
+           >
+        </app-multi-select>
+      </div> -->
+      <!-- <ng-container *ngIf="cashDistributionForm?.value == 'update'">
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Balance</mat-label>
+          <input matInput type="text" name="balance" formControlName="addBalance">
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+      <div class="form-group col-lg-6">
+        <app-multi-select #userMultiSelect isMultiSelect="false" [options]="mobileUsers" label="MobileUser" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedUser" formControlName="mobileUser"></app-multi-select>
+       </div>
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Mobile User Id</mat-label>
+          <input matInput type="text" [value]="selectedUser?.idNo" name="mobileUserId" formControlName="mobileUserId" readonly="true">
+          <mat-error *ngIf="basic.mobileUserId.hasError('required')">Mobile User Id Required</mat-error>
+        </mat-form-field>
+      </div> -->
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Balance</mat-label>
+          <input matInput type="text" name="updateBalance" formControlName="updateBalance">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="form-group text-right mb-0">
+      <button (click)="submitForm()" data-toggle="modal" data-target="#saveAddedRoles" class="btn btn-primary waves-effect waves-light mr-1" type="submit" >
+        Submit
+      </button>
+      <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>

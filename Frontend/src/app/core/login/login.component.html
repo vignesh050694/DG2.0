@@ -1,0 +1,57 @@
+<div class="pr-login-wrap container-fluid">
+  <div class="pr-login-wrap-width">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col px-0">
+        <div class="login-text text-white">
+          <h2 class="ttl">Architects of <br> New-Age Sustainable <br> Agriculture</h2>
+          <p class="p sb-ttl">SourceTrace's advanced technology platform <br>
+            DATAGREEN provides comprehensive solutions to <br> manage all aspects of the agricultural
+            value chain.</p>
+          <p class="p crdts">Copyright &copy; 2020 SourceTrace</p>
+        </div>
+      </div>
+      <div class="col-auto px-0">
+        <div class="login-form-wrap">
+          <div class="login-form-outer">
+            <form class="login-form" [formGroup]="loginForm">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="frm-ttl">Sign In</h3>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col">
+                  <mat-form-field appearance="fill">
+                    <input matInput type="text" name="userName" formControlName="userName" placeholder="User Name">
+                    <mat-error *ngIf="basic.userName.hasError('required')">UserName Required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col">
+                  <mat-form-field appearance="fill">
+                    <input matInput type="password" name="password" formControlName="password" placeholder="Password">
+                    <mat-error *ngIf="basic.password.hasError('required')">Password Required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-block bttn-primary bttn-login st" type="button"
+                    (click)="submit()">Login</button>
+                </div>
+              </div>
+              <div class=" row">
+                <div class="col-12">
+                  <p class="p agrmnt">By Logging In, you agree to our <a class="st" href="http://">Customer
+                      Agreement.</a></p>
+                </div>
+              </div>
+            </form>
+            <a class="frgt-lnk st" href="">Forgot Password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

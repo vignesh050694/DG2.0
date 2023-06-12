@@ -1,0 +1,90 @@
+<button type="button" class="btn btn-white st br50 sidebarcollapse" id="sidebarcollapse" data-toggle="button"
+  aria-pressed="false">
+  <span class="st"><img class="img-abs st" src="assets/images/icons/arrow-right-ico.png" alt=">"></span>
+</button>
+
+<nav class="pr-sidebar st" id="pr-sidebar">
+  <!-- <a class="logo" href="/">
+     <img class="img-abs st logo-sm" src="assets/images/icons/logo-sm.png" alt="logo">
+    <img class="img-abs st logo-lg" src="assets/images/icons/logo-lg.png" alt="logo">
+  </a> -->
+  <div class="user-blk">
+    <div class="media">
+      <div class="img-blk st br50">
+        <img class="img-abs st" src="assets/images/icons/user-white-ico.png" alt="img">
+        <span class="sttng-ico st">
+          <img class="st" src="assets/images/icons/settings-white-ico.png" alt="ico">
+        </span>
+      </div>
+    </div>
+    <span>Vignesh V !</span>
+    <p class="p p-10 fw-500 text-truncate" title="Head Product Designer">Admin</p>
+  </div>
+
+  <div class="pr-sidebar-nav-wrap">
+    <ul class="pr-sidebar-nav nav nav-tabs justify-content-start" id="myTab" role="tablist">
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="{{item.title}}"
+        *ngFor="let item of navItems">
+        <a *ngIf="item.child" class="nav-link st" id="{{item?.id}}-tab" data-toggle="tab" href="#{{item.id}}" role="tab"
+          aria-controls="{{item?.id}}" aria-selected="false">
+          <span class="ico">
+            <img class="img-abs st actv" src="{{item.activeIcon}}" alt="ico">
+            <img class="img-abs st" src="{{item.icon}}" alt="ico">
+          </span>
+          <span class="lnk">{{item.title}}</span>
+        </a>
+        <a id="{{item.id}}-tab" *ngIf="item.link" class="nav-link st" routerLink="{{item.link}}"
+          (click)="onMainMenuClicked(item.id)" aria-controls="{{item?.id}}" aria-selected="false">
+          <span class="ico">
+            <img class="img-abs st actv" src="{{item.activeIcon}}" alt="ico">
+            <img class="img-abs st" src="{{item.icon}}" alt="ico">
+          </span>
+          <span class="lnk">{{item.title}}</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+
+  <div class="pr-sidebar-tabcontent">
+    <div class="tab-content" id="myTabContent" *ngFor="let parentData of navItems" >
+      <div class="tab-pane fade" id="{{parentData?.id}}" role="tabpanel" aria-labelledby="{{parentData?.id}}-tab">
+        <div class="tab-content-header">
+          <h4 class="ttl">{{parentData?.title}}</h4>
+          <span class="bck-bttn br50 st" (click)="collapsePanel(parentData?.id,false)"><img class="st"
+              src="assets/images/icons/arrow-left-dark.png" alt="ico"></span>
+        </div>
+        <div class="tab-content-body" style="overflow-y: auto;max-height: 85%;height: 85%;">
+          <div class="accordion pr-accordion1" id="accordionExample">
+            <div *ngFor="let childData of parentData.child">
+              <div *ngIf="childData.link" (click)="collapsePanel(parentData?.id,true)">
+                <a class="link" routerLink="{{childData?.link}}">{{childData?.title}}</a>
+              </div>
+              <div *ngIf="childData.child">
+                <div class="card st">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block st" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        {{childData.title}}
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body" *ngFor="let child of childData.child">
+                      <div (click)="collapsePanel(parentData?.id,true)">
+                        <a class="lnk st" routerLink="{{child?.link}}">{{child?.title}}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

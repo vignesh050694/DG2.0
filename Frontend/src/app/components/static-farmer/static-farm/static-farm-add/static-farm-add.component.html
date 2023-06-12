@@ -1,0 +1,404 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st">Farmer</a></li>
+        <li class="breadcrumb-item"><a class="st" (click)="cancel()">Farm</a></li>
+        <li class="breadcrumb-item"><a class="st" href="farmer/static-farm">{{title}}</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<section class="pr-section add-farmer-section add-training-selec-sec">
+  <div class="row">
+    <div class="col-12">
+      <div class="registration-inner tab-content" id="registerTabContent">
+        <div class="col align-self-center" style="padding-top: 10px;">
+          <h2 class="page-ttl"><b>{{title}} Farm</b></h2>
+        </div>
+        <form [formGroup]="farmForm">
+          <div class="add-training-selec-blk common-box box-shadow bg-white br14" style="margin: 3% 0%;">
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                    <h4 class="m-ttl">Farm Information</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <app-multi-select #farmerMultiSelect isMultiSelect="false" [options]="farmers" label="Farmer"
+                  [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedFarmer"></app-multi-select>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Farm Name<span class="text-danger"></span></mat-label>
+                    <input matInput type="text" name="name" formControlName="name">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-3">
+                <div style="display: flex;justify-content: space-between;">
+                  <label for="idImage" style="font-size: small;" class="form-label">Farm Photo</label>
+                  <div style="display: flex;">
+                    <a><i class="far fa fa-eye" *ngIf="farmImgUrl"
+                        (click)="imagePreview(popupKey?.farmImg)"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a><i class="far fa-trash-alt" *ngIf="farmImgUrl" (click)="deleteImg(popupKey?.farmImg)"></i></a>
+                  </div>
+                </div>
+                <input ng2FileSelect [uploader]="farmPhotoUpload" (onFileSelected)="onFarmPhoto($event)"
+                  accept="image/png,image/jpeg" class="form-control form-control-sm" type="file" id="farmImage">
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Survey No.<span class="text-danger"></span></mat-label>
+                    <input matInput type="text" name="surveyNo" formControlName="surveyNo">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Proposed planting area (Ha)<span class="text-danger"></span></mat-label>
+                    <input matInput type="text" name="ppArea" formControlName="ppArea">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <app-multi-select #landOwnershipMultiSelect isMultiSelect="false" [options]="landOwnerships"
+                    label="Land Owner Ship" [isSubmit]="isSubmit" isRequired="false"
+                    [(dropDownValue)]="selectedLandOwnerShip"></app-multi-select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <p class="p p-14 fw-600 mb-3">Is Address same as Farmer?</p>
+                  <div class="pr-custom-switch switcher mb-3">
+                    <input type="checkbox" class="custom-control-input" id="swtch3" value="" checked
+                      formControlName="isSameFarmer">
+                    <label for="swtch3">
+                      <span class="cir"><small></small></span>
+                      <small>&nbsp;</small>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3" *ngIf="this.farmForm?.value?.isSameFarmer">
+                <div class="common-box-inner">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Farm Address<span class="text-danger"></span></mat-label>
+                    <input matInput type="text" name="farmAddress" formControlName="farmAddress">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-3" *ngIf="!this.farmForm?.value?.isSameFarmer">
+                <div class="common-box-inner">
+                  <p><b>{{farmerForm.value.address}}</b></p>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <app-multi-select #approachMultiSelect isMultiSelect="false" [options]="approachRoads"
+                    label="Approach Road" [isSubmit]="isSubmit" isRequired="false"
+                    [(dropDownValue)]="selectedApproach"></app-multi-select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Farm Registration Number<span class="text-danger"></span></mat-label>
+                    <input matInput type="text" name="registrationNumber" formControlName="registrationNumber">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <app-multi-select #topographyMultiSelect isMultiSelect="false" [options]="landTopographies"
+                    label="Land Topography" [isSubmit]="isSubmit" isRequired="false"
+                    [(dropDownValue)]="selectedTopography"></app-multi-select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <app-multi-select #gradientMultiSelect isMultiSelect="false" [options]="landGradients"
+                    label="Land Gradient" [isSubmit]="isSubmit" isRequired="false"
+                    [(dropDownValue)]="selectedGradient"></app-multi-select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="common-box-inner">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>totalLandHolding<span class="text-danger"></span></mat-label>
+                    <input matInput type="text" name="totalLandHolding" formControlName="totalLandHolding">
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- <div class="col-3">
+                      <div class="common-box-inner">
+                          <p class="p p-14 fw-600 mb-3">Farm photo</p>
+                          <div class="row">
+                              <div class="col">
+                                  <input class="st form-control pr-form-control mb-1" type="text"
+                                      placeholder="" value="IMG1105253.JPG"></div>
+                              <div class="col-auto pl-0 align-self-center">
+                                  <a class="btn-action text-dark1 cursor-pointer" data-toggle="tooltip"
+                                      data-placement="top" title="remove"><i class="far fa-trash-alt"></i></a>
+                              </div>
+                          </div>
+                          <small class="p p-12 pl-1">
+                              JPG, JPEG or PNG. Max size of 500K
+                          </small>
+                      </div>
+                  </div> -->
+            </div>
+          </div>
+          <div class="add-training-selec-blk common-box box-shadow bg-white br14 mt-5">
+            <div class="row">
+              <div class="col-6 pr-4">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                        <h4 class="m-ttl">Soil and Irrigation</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #fertilityMultiSelect isMultiSelect="false" [options]="fertilityStatus"
+                        label="Fertility Status" [isSubmit]="isSubmit" isRequired="false"
+                        [(dropDownValue)]="selectedfertility"></app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #irrigationMultiSelect isMultiSelect="false" [options]="irrigationSources"
+                        label="Irrigation Source" [isSubmit]="isSubmit" isRequired="false"
+                        [(dropDownValue)]="selectedIrrigation"></app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #irrigationTypeMultiSelect isMultiSelect="false" [options]="irrigationTypes"
+                        label="Irrigation Type" [isSubmit]="isSubmit" isRequired="false"
+                        [(dropDownValue)]="selectedIrrigationType"></app-multi-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 pl-4 border-left border-secondary">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                        <h4 class="m-ttl">GPS Details</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Latitude<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="latitude" formControlName="latitude">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Longitude<span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="longitude" formControlName="longitude">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <hr class="hr-dashed mt-0">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                    <h4 class="m-ttl">Farm Labour</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Full-Time Workers Count
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="fullTimeWorkers" formControlName="fullTimeWorkers">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Part-Time Workers Count
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="partTimeWorkers" formControlName="partTimeWorkers">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Seasonal Workers Count
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="seasonalWorkers" formControlName="seasonalWorkers">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="add-training-selec-blk common-box box-shadow bg-white br14 mt-5" style="margin-bottom: 1%;">
+            <div class="row">
+              <div class="col-6 pr-4">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                        <h4 class="m-ttl">Conversion Information</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Last Date of Chemical Application
+                      </mat-label>
+                      <input matInput [matDatepicker]="lastDayPicker" formControlName="lastDayStr">
+                      <mat-datepicker-toggle matSuffix [for]="lastDayPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #lastDayPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Conventional Lands
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="conventionalLand" formControlName="conventionalLand">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Fallow/Pasture Land
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="pastureLand" formControlName="pastureLand">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Conventional Crops
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="conventionalCrops" formControlName="conventionalCrops">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Estimated Yield
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="estimatedYield" formControlName="estimatedYield">
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-6 pl-4 border-left border-secondary">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-12" style="padding: 20px 20px 20px 20px;">
+                        <h4 class="m-ttl">Conversion Status</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #farmCertificateMultiSelect isMultiSelect="false" [options]="certificationTypes"
+                        label="Certification Type" [isSubmit]="isSubmit" isRequired="false"
+                        [(dropDownValue)]="selectedFarmCertificate"></app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <app-multi-select #conversionStatusMultiSelect isMultiSelect="false" [options]="conversionStatus"
+                        label="Current Conversion status" [isSubmit]="isSubmit" isRequired="false"
+                        [(dropDownValue)]="selectedConversionStatus"></app-multi-select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Conversion Date
+                      </mat-label>
+                      <input matInput [matDatepicker]="conversionDatePicker" formControlName="conversionDateStr">
+                      <mat-datepicker-toggle matSuffix [for]="conversionDatePicker"></mat-datepicker-toggle>
+                      <mat-datepicker #conversionDatePicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <mat-form-field appearance="fill" class="full-width">
+                        <mat-label>Name of Inspector
+                          <span class="text-danger"></span></mat-label>
+                        <input matInput type="text" name="nameOfInspector" formControlName="nameOfInspector">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="common-box-inner">
+                      <p class="p p-14 fw-600 mb-3">Is Qualified</p>
+                      <div class="pr-custom-switch switcher mb-3">
+                        <input type="checkbox" class="custom-control-input" id="swtch4" value="" checked
+                          formControlName="isQualified">
+                        <label for="swtch4">
+                          <span class="cir"><small></small></span>
+                          <small>&nbsp;</small>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto align-self-center" style="margin-bottom: 2%;">
+            <button class="next-tab btn bttn-primary st mr-4" type="submit" (click)="submitForm()">Submit</button>
+            <button class="next-tab btn bttn-primary st mr-4" (click)="cancel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st" href="/">Settings</a></li>
+          <li class="breadcrumb-item">
+            <a class="st" href="/settings/group">Group</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+<div style="text-align: end; padding: 10px 30px" (click)="add()">
+  <button class="btn bttn-primary bttn-add st mr-2">+</button
+  ><span class="p p-14 fw-700 text-dark">{{ buttonText }}</span>
+</div>
+<div class="pr-section">
+  <div class="br21 st">
+    <div class="pr-datatable-wrap">
+      <app-group-list
+        [events]="groupReloadEvent.asObservable()"
+        (editFromList)="edit($event)"
+      ></app-group-list>
+    </div>
+  </div>
+</div>

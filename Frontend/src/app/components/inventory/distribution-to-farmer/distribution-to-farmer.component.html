@@ -1,0 +1,76 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st">Inventory</a></li>
+          <li class="breadcrumb-item">
+            <a class="st" href="inventory/distribution-to-farmer"
+              >Distribution To Farmer</a
+            >
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="pr-section pr-title-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <h1 class="page-ttl">Distribution To Farmer</h1>
+    </div>
+  </div>
+</section> -->
+
+<section class="col-md-12 row procurement-header" style="margin-top: 1%">
+  <div class="col-9">
+    <section class="pr-section crop-harvest-sec">
+      <div class="row">
+        <div class="col align-self-center">
+          <div class="crop-harvest-blk">
+            <div
+              class="media crop-blk-horizontal"
+              *ngFor="let card of cardArray"
+            >
+              <div class="crop-blk-img">
+                <img class="st" [src]="card?.image" alt="ico" />
+              </div>
+              <div class="media-body">
+                <h4 class="crop-nm">{{ card?.count }}</h4>
+                <p class="p">{{ card?.name }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-3" style="margin-top: 1%; margin-bottom: 1%">
+    <app-page-header [buttonText]="buttonText" (addEvent)="add()">
+    </app-page-header>
+  </div>
+</section>
+<br />
+
+<div style="margin-left: 0.5%; margin-bottom: 1%; margin-right: 0.5%">
+  <app-dynamic-forms
+    *ngIf="isFilterDataLoaded"
+    [formData]="formData"
+    (searchEvent)="onSearchResult($event)"
+  >
+  </app-dynamic-forms>
+</div>
+
+<div class="pr-section">
+  <div class="br21 st">
+    <div class="pr-datatable-wrap">
+      <app-distribution-to-farmer-list
+        [events]="distributionToFarmersReloadEvent.asObservable()"
+        (editFromList)="edit($event)"
+        (deleteFromList)="delete($event)"
+      >
+      </app-distribution-to-farmer-list>
+    </div>
+  </div>
+</div>

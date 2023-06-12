@@ -1,0 +1,12 @@
+<div>
+  <form [formGroup]="uploadForm">
+    <input type="file" class="form-control" ng2FileSelect formControlName="file" [uploader]="uploader" (click)="onFileClick()" (change)="onFileChange($event)" accept="image/png,image/jpeg" />
+    <!--<input type="file" (change)="onFileChange($event)" accept="image/png,image/jpeg" />-->
+    <div *ngIf="basicsubmit && basic.file.errors" class="text-danger">
+      <span>In-Valid File</span>
+    </div>
+  </form>
+</div>
+<div class="text-danger">
+  <span>{{errorMessageText}}</span>
+</div>

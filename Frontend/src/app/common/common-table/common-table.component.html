@@ -1,0 +1,127 @@
+<div class="pr-datatable-wrap">
+  <table
+    datatable
+    class="pr-datatable pr-datatable-sm table table-hover box-shadow bg-white overflow-visible br21"
+    id="master_date_table"
+  >
+    <thead>
+      <tr>
+        <th *ngFor="let disCol of displayedColumns; let i = index">
+          <span>{{ disCol | titlecase }}</span>
+        </th>
+        <th class="action-col text-center" *ngIf="isAction">
+          <span>Actions</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr role="row" *ngIf="canShowSearch">
+        <th
+          *ngFor="let defCol of definedColumns; let i = index"
+          class="sorting_asc filter_head"
+          tabindex="0"
+          aria-controls="master_date_table"
+          rowspan="1"
+          colspan="1"
+          aria-sort="ascending"
+          aria-label="code: activate to sort column descending"
+        >
+          <input
+            *ngIf="searchColumns[i]?.canShow"
+            class="form-control"
+            (keyup)="search($event)"
+            autocomplete="off"
+            id="{{ searchColumns[i]?.name }}"
+            size="1"
+            type="text"
+            formcontrolname="{{ searchColumns[i].name }}"
+            placeholder="Search {{ displayedColumns[i] }}"
+            style="border-radius: 5px"
+            size="1"
+          />
+        </th>
+        <th
+          class="action-col text-center sorting"
+          tabindex="0"
+          aria-controls="master_date_table"
+          rowspan="1"
+          colspan="1"
+          aria-label="Actions: activate to sort column ascending"
+        >
+          <a class="reset-lnk st" (click)="reset()">Reset All</a>
+        </th>
+      </tr>
+      <tr *ngFor="let item of data">
+        <td *ngFor="let defCol of definedColumns">
+          <button
+            *ngIf="defCol == 'map'"
+            class="btn"
+            (click)="getMap(item[defCol])"
+          >
+            <mat-icon style="color: red"> location_on</mat-icon>
+          </button>
+          <p
+            style="font-weight: lighter"
+            matTooltip="{{ item[defCol]?.name }}"
+            *ngIf="!!item[defCol]?.name && defCol != 'map'"
+            class="ellipsis"
+          >
+            {{ item[defCol]?.name }}
+          </p>
+          <p
+            style="font-weight: lighter"
+            matTooltip="{{ item[defCol] }}"
+            *ngIf="!!!item[defCol]?.name && defCol != 'map'"
+            class="ellipsis"
+          >
+            {{ item[defCol] }}
+          </p>
+        </td>
+        <td *ngIf="!isAction"></td>
+        <td *ngIf="isAction" class="text-center action-col">
+          <div class="action-col-body">
+            <ul class="list-inline dt-btn-list">
+              <li class="list-inline-item">
+                <a
+                  *ngIf="isDetail"
+                  (click)="detail(item?.id)"
+                  class="btn-action"
+                  matTooltip="detail"
+                  ><i class="fas fa-eye"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a
+                  *ngIf="isEdit"
+                  (click)="edit(item?.id)"
+                  class="btn-action"
+                  matTooltip="edit"
+                  ><i class="fas fa-pen"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a
+                  (click)="delete(item?.id)"
+                  class="btn-action"
+                  matTooltip="remove"
+                  ><i class="far fa-trash-alt"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td [colSpan]="displayedColumns?.length + 1">
+          <mat-paginator
+            [length]="count"
+            [pageSizeOptions]="[10, 25, 100]"
+            showFirstLastButtons
+            (page)="onPaginate($event)"
+          >
+          </mat-paginator>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

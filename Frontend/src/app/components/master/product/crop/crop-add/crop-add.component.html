@@ -1,0 +1,42 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+
+<form [formGroup]="cropForm">
+  <div class="modal-body">
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name<span class="text-danger"></span></mat-label>
+        <input matInput type="text" name="name" formControlName="name" >
+          <mat-error *ngIf="basic.name.hasError('required')">Name Required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Unit</mat-label>
+        <mat-select formControlName="unit" [compareWith]="objectComparisonFunction" [ngClass]="{ 'is-invalid': isSubmit && basic?.unit?.errors }">
+          <mat-option>
+            <ngx-mat-select-search [formControl]="catalogueFilterCtrl" placeholderLabel="Find unit..."></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let catalogue of filteredCatalogue|async" [value]="catalogue">{{catalogue.name}}</mat-option>
+        </mat-select>
+        <mat-error class="text-danger" *ngIf="isSubmit && basic.unit.errors?.required" [ngClass]="{ 'is-invalid': isSubmit && basic.unit.errors }">
+          <sup>*</sup>Please select Unit
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="modal-footer">
+      <div class="form-group text-right mb-0">
+        <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+          Submit
+        </button>
+        <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

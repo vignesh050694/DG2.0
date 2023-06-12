@@ -1,0 +1,50 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+<mat-dialog-content>
+<form [formGroup]="seasonForm">
+  <div class="modal-body">
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name<span class="text-danger"></span></mat-label>
+        <input matInput type="text" formControlName="name">
+        <mat-error *ngIf="basic.name.hasError('required')">Name Required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Choose from date</mat-label>
+          <input matInput [matDatepicker]="fromPicker" formControlName="from" (dateChange)="dateRange($event)">
+          <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+          <mat-datepicker #fromPicker></mat-datepicker>
+          <mat-error *ngIf="basic.from.hasError('required')">From Date Required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Choose to date</mat-label>
+          <input matInput [matDatepicker]="toPicker" formControlName="to" [min]="seasonRange">
+          <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+          <mat-datepicker #toPicker></mat-datepicker>
+          <mat-error *ngIf="basic.to.hasError('required')">To Date Required</mat-error>
+          <mat-error *ngIf="basic.to.hasError('matDatepickerMin')">Minimum Season Range 3 Months</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="form-group text-right mb-0">
+        <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+          Submit
+        </button>
+        <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+</mat-dialog-content>

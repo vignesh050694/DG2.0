@@ -1,0 +1,78 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st">Procurement</a></li>
+          <li class="breadcrumb-item">
+            <a class="st" href="procurement/product-reception"
+              >Product Reception</a
+            >
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="col-md-12 row procurement-header" style="margin-top: 1%">
+  <div class="col-9">
+    <section class="pr-section crop-harvest-sec">
+      <div class="row">
+        <div class="col align-self-center">
+          <div class="crop-harvest-blk">
+            <div
+              class="media crop-blk-horizontal"
+              *ngFor="let card of cardArray"
+            >
+              <div class="crop-blk-img">
+                <img class="st" [src]="card?.image" alt="ico" />
+              </div>
+              <div class="media-body">
+                <h4 class="crop-nm">{{ card?.count }}</h4>
+                <p class="p">{{ card?.name }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-3" style="margin-top: 1%; margin-bottom: 1%">
+    <app-page-header
+      [title]="title"
+      [buttonText]="buttonText"
+      (addEvent)="add()"
+      (searchEvent)="search($event)"
+    >
+    </app-page-header>
+  </div>
+</section>
+
+<div
+  style="
+    margin-left: 0.5%;
+    margin-bottom: 1%;
+    margin-right: 0.5%;
+    margin-top: 1%;
+  "
+>
+  <app-dynamic-forms
+    *ngIf="isFilterDataLoaded"
+    [formData]="formData"
+    (searchEvent)="onSearchResult($event)"
+  >
+  </app-dynamic-forms>
+</div>
+<div class="pr-section">
+  <div class="br21 st">
+    <div class="pr-datatable-wrap">
+      <app-product-reception-list
+        [events]="procurementReloadEvent.asObservable()"
+        (editFromList)="edit($event)"
+        (deleteFromList)="delete($event)"
+      >
+      </app-product-reception-list>
+    </div>
+  </div>
+</div>

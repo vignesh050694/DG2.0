@@ -1,0 +1,78 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="organizationForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="form-group col-6">
+        <mat-form-field appearance="fill" class="input-full-width">
+          <mat-label>Organization Id</mat-label>
+          <input matInput formControlName="organizationId" >
+          <mat-error *ngIf="basic.organizationId.hasError('required')">Please enter organization Id</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" name="name">
+          <mat-error *ngIf="basic.name.hasError('required')">Please enter name</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field appearance="fill" class="input-full-width">
+          <mat-label>Contact Person</mat-label>
+          <input matInput formControlName="contactPerson" name="contactPerson">
+          <mat-error *ngIf="basic.contactPerson.hasError('required')">Please enter contact person</mat-error>
+        </mat-form-field>
+      </div>
+       <div class="form-group col-md-6">
+        <mat-form-field
+          appearance="fill"
+          class="full-width"
+        >
+          <mat-label>Phone Number<span class="text-danger"></span></mat-label>
+          <input
+            matInput
+            type="text"
+            mask="(000)000-0000"
+            prefix="+91"
+            name="contactNumber"
+            formControlName="contactNumber"
+          />
+          <mat-error *ngIf="basic.contactNumber.hasError('required')">Please enter contact number</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field appearance="fill" class="input-full-width">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address">
+          <mat-error *ngIf="basic.address.hasError('required')">Please enter address</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6"  style="background-color: #fafafa; height: 50px;">
+          <mat-label>Status: </mat-label>
+          <div>
+            <mat-radio-group formControlName="isActive" class="full-width">
+              <mat-radio-button [value]=true>Active</mat-radio-button>
+              <mat-radio-button [value]=false>InActive</mat-radio-button>
+              <mat-error *ngIf="isSubmit && basic.isActive.hasError('required')">Please select status</mat-error>
+            </mat-radio-group>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="form-group text-right mb-0">
+      <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+        Submit
+      </button>
+      <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
+

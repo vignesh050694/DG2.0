@@ -1,0 +1,204 @@
+<div *ngIf="widget.type=='date'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <input matInput id="{{widget?.id}}" [matDatepicker]="datePicker" [(ngModel)]="value"
+      (ngModelChange)="valueChange.emit(value)" />
+    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+    <mat-error [innerHTML]="isError(widget?.rules,value)"></mat-error>
+  </mat-form-field>
+</div>
+
+<div *ngIf="widget.type=='text'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <input id="widget-{{widget?.id}}" name="{{widget?.id}}" [disabled]="widget.isDisabled" matInput type="text"
+      placeholder="{{widget?.placeholder}}" pattern="{{widget?.rules?.pattern?.condition}}"
+      required="{{widget?.rules?.required?.isRequired}}" maxlength="{{widget?.rules?.maxLength?.length}}"
+      [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" (change)="evalOp(widget?.eval)">
+  </mat-form-field>
+  <span style="color:red" [innerHTML]="isError(widget?.rules,value)"></span>
+</div>
+
+<div *ngIf="widget.type=='number'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <mat-form-field appearance="fill" class="full-width">
+    <input id="{{widget?.id}}" name="{{widget?.id}}" matInput type="number" placeholder="{{widget?.placeholder}}"
+      pattern="{{widget?.rules?.pattern?.condition}}" required="{{widget?.rules?.required?.isRequired}}"
+      [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)">
+  </mat-form-field>
+  <span style="color:red" [innerHTML]="isError(widget?.rules,value)"></span>
+</div>
+
+<div *ngIf="widget.type=='radio'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <div class="{{widget.cssClass}}" *ngFor="let option of widget.options">
+    <input type="radio" name="{{option.id}}" id="{{option.id}}" value="{{option.name}}" [(ngModel)]="value"
+      (ngModelChange)="valueChange.emit(value)">
+    <label for="{{option.id}}">
+      <span *ngIf="option?.src!='null'"><img class="st" src="{{option.src}}" alt="ico"></span>
+      <span *ngIf="option?.src=='null'"><em>{{option?.name}}</em></span>
+    </label>
+  </div>
+</div>
+
+<div *ngIf="widget.type=='checkbox'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <div class="{{widget?.cssClass}}">
+    <input type="checkbox" class="{{widget?.options[0]?.cssClass}}" [checked]=true
+      id="{{widget?.id}}{{widget?.options[0].id}}" (ngModel)="value" (ngModelChange)="valueChange.emit(value)"
+      (change)="onCheckboxChange($event,widget.showIds,widget?.showOffIds,widget?.switchIds,widget?.switchOffIds)">
+    <label for="{{widget?.id}}{{widget?.options[0].id}}">
+      <span class="cir"><small></small></span>
+      <small>&nbsp;</small>
+    </label>
+  </div>
+</div>
+
+<!-- select -->
+<div *ngIf="widget.type=='select'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <app-multi-select-dynamic id="widget{{widget?.id}}" isMultiSelect="false" [options]="widget.options"
+    dropDownId="select-{{widget?.id}}" [disabled]="widget?.isDisabled" [events]="optionReloadEvent.asObservable()" [isSubmit]="isSubmit"
+    [(dropDownValue)]="value" emitId="true" (dropDownValueChange)="onDropDownValueChange($event, false)"
+    (updateOption)="updateOption($event)"></app-multi-select-dynamic>
+</div>
+
+<!-- select inside table -->
+<div *ngIf="widget.type=='tableSelect'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <!--using inside table-->
+  <app-multi-select-dynamic id="widget{{widget?.id}}" isMultiSelect="false" [options]="widget.options"
+    [isSubmit]="isSubmit" [(dropDownValue)]="value" emitId="false" [widgetName]="widget?.name"
+    (dropDownValueChange)="onDropDownValueChange($event)"
+    dropDownId="select-{{widget?.id}}" [events]="optionReloadEvent.asObservable()"
+    (updateOption)="updateOption($event)">
+  </app-multi-select-dynamic>
+</div>
+
+
+<!-- select to load table -->
+<div *ngIf="widget.type=='tableDropDown'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <app-multi-select-dynamic id="widget{{widget?.id}}" isMultiSelect="false"
+    [options]="widget.options" emitId="true"
+    name="widget{{widget?.id}}"
+    [widgetName]="widget?.name"
+    [isSubmit]="isSubmit" [(dropDownValue)]="value"
+    (dropDownValueChange)="onTableDropDownChange($event)"
+    [events]="optionReloadEvent.asObservable()"
+    dropDownId="select-{{widget?.id}}"
+    (updateOption)="updateOption($event)">
+  </app-multi-select-dynamic>
+</div>
+
+<div *ngIf="widget.type=='multi-select'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <app-multi-select-dynamic [label]="widget?.label?.text" [options]="widget?.options" [isMultiSelect]="true"
+    [(dropDownValue)]="value" [events]="optionReloadEvent.asObservable()"
+    (dropDownValueChange)="valueChange.emit(value)" [widgetName]="widget?.name" dropDownId="select-{{widget?.id}}"
+    (updateOption)="updateOption($event)">
+  </app-multi-select-dynamic>
+</div>
+
+<div *ngIf="widget?.type=='file'">
+  <p class="{{widget?.label?.cssClass}}">{{widget?.label?.text}}</p>
+  <app-file-upload allowedMimeType="image/x-png" [maxFileSize]="4400" (onUploadComplete)="uploadImage($event)">
+  </app-file-upload>
+</div>
+
+<div *ngIf="widget.type=='table'" id="tableWidget">
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="row">
+      <div class="col-12">
+        <table datatable [dtOptions]="widget?.dtOptions"
+          class="pr-datatable pr-datatable-sm table table-hover table-responsive">
+          <thead>
+            <tr>
+              <th *ngFor="let tableHeading of widget?.displayedColumns"><span>{{tableHeading?.name}}</span></th>
+              <th class="action-col text-center">
+                <span>Actions</span>
+                <button class="btn bttn-primary bttn-add st" title="Add" (click)="addNewRowInTable()">
+                  +
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of widget.tableData;let i=index">
+              <td class="{{column.div.cssClass}}" *ngFor="let column of widget.controls">
+                <span *ngIf="!row.isEdit && (!!row.data[column.id].name)">{{row.data[column.id].name}}</span>
+                <span *ngIf="!row.isEdit && !(!!row.data[column.id].name)">{{row.data[column.id]}}</span>
+                <div *ngIf="column.type=='label'">
+                  <app-farmer-widget [widget]="column" id="{{column.id}}" [(value)]="row.data[column.id]">
+                  </app-farmer-widget>
+                </div>
+                <div *ngIf="row.isEdit">
+                  <app-farmer-widget [widget]="column" id="{{column.id}}" [(value)]="row.data[column.id]">
+                  </app-farmer-widget>
+                </div>
+              </td>
+              <td class="text-center">
+                <ul class="list-inline dt-btn-list">
+                  <li class="list-inline-item">
+                    <a class="btn-action" title="edit" (click)="editTable(row.isEdit,i)">
+                      <i *ngIf="!row.isEdit" class="fas fa-pen"></i>
+                      <i *ngIf="row.isEdit" class="fas fa-regular fa-check-circle"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="btn-action" (click)="deleteRowTable(i)" title="remove"><i
+                        class="far fa-trash-alt"></i></a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="widget.type=='multi-edit-table'" id="multi-edit-tableWidget">
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="row">
+      <div class="col-12">
+        <table datatable [dtOptions]="widget?.dtOptions"
+               class="pr-datatable pr-datatable-sm table table-hover table-responsive">
+          <thead>
+            <tr>
+              <th *ngFor="let tableHeading of widget?.displayedColumns"><span>{{tableHeading?.name}}</span></th>
+              <th class="action-col text-center">
+                <span>Actions</span>
+                <!--<button class="btn ml-3 bttn-primary bttn-add st" title="Add" (click)="saveMultiEditTable()">
+                  <i class="fas fa-regular fa-check-circle"></i>
+                </button>-->
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of widget.tableControls;let i=index">
+              <td class="{{column.div.cssClass}}" *ngFor="let column of widget.tableControls[i]">
+                <div>
+                  <app-farmer-widget name="{{column.id}}{{i}}" [widget]="column" id="{{column.id}}{{i}}" [(value)]="widget.multiEditData[i].data[column.id]" (valueChange)="onMultiEditChange(widget.multiEditData)">
+                  </app-farmer-widget>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="widget.type=='hr-line'">
+  <hr class="{{widget.hrLineProperty.cssClass}}" />
+</div>
+
+<div *ngIf="widget.type=='label'">
+  <p class="{{widget?.label?.cssClass}}" id="label_{{widget?.id}}">{{widget?.label?.text}}</p>
+</div>
+
+<div *ngIf="widget.type=='spacer'" class="{{widget?.cssClass}}"></div>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.sts.datagreen</groupId>
+		<artifactId>datagreen</artifactId>
+		<version>0.0.7-SNAPSHOT</version>
+		<relativePath>../datagreen/pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.datagreen.aggregator</groupId>
+	<artifactId>aggregator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>aggregator</name>
+	<description>Aggregator Service</description>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.keycloak</groupId>
+					<artifactId>connector</artifactId>
+					<version>0.0.5-SNAPSHOT</version>
+		</dependency>
+                <!-- Keycloak Dependenices -->
+<!--		<dependency>-->
+<!--			<groupId>com.keycloak</groupId>-->
+<!--			<artifactId>connector</artifactId>-->
+<!--			<version>0.0.2-SNAPSHOT</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.keycloak</groupId>-->
+<!--			<artifactId>keycloak-spring-boot-starter</artifactId>-->
+<!--			<version>18.0.2</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.keycloak</groupId>-->
+<!--			<artifactId>keycloak-admin-client</artifactId>-->
+<!--			<version>18.0.2</version>-->
+<!--		</dependency>-->
+
+		<!-- Keycloak Dependenices -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-transport</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-handler</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webflux</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor.netty</groupId>
+			<artifactId>reactor-netty-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor.netty</groupId>
+			<artifactId>reactor-netty-http</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>2.5.0</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,8 @@
+mat-select {
+  background-color: #FFF;
+  padding: .375rem .75rem;
+  border-radius:7px;
+}
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked {
+  background: green;
+}

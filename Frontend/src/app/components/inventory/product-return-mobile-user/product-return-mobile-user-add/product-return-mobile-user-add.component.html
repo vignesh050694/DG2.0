@@ -1,0 +1,123 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st" >Inventory</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/product-return-mobile-user">Product Return Mobile User</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/product-return-mobile-user/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<br/>
+
+<section class="pr-section">
+  <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-ttl">Product Return Mobile User</h4>
+      </div>
+    </div>
+    <form [formGroup]="productReturnMobileUserForm">
+      <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+
+        <div class="col-3" >
+          <app-multi-select #seasonMultiSelect  label="Season" [options]="seasons" isMultiSelect="false" [isSubmit]="isSubmit" isRequired="true"  [(dropDownValue)]="selectedSeason"></app-multi-select>
+        </div>
+
+        <div class="col-3">
+          <app-multi-select #mobileUserMultiSelect  label="MobileUser" [options]="mobileUsers" isMultiSelect="false" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedMobileUser" (dropDownValueChange)="onMobileUserChange($event)"></app-multi-select>
+        </div>
+
+        <div class="col-3">
+          <app-multi-select #warehouseMultiSelect  label="Warehouse" [options]="warehouses"  isMultiSelect="false" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedWarehouse"></app-multi-select>
+        </div>
+
+        <div class="col-3" >
+          <app-multi-select #groupMultiSelect  label="Group" [options]="groups" isMultiSelect="false" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedGroup"></app-multi-select>
+        </div>
+
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="date" />
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="basic.date.hasError('required')">Date Required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<section class="pr-section add-training-selec-sec" style="margin-top: 1%;">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12" style="margin-bottom: 1%;">
+            <h4 class="m-ttl">Product Return Details</h4>
+          </div>
+
+          <div class="col-2" >
+            <app-multi-select #categoryMultiSelect isMultiSelect="false" [options]="categories" label="Category" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="category" (dropDownValueChange)="getProductByCategory($event)"></app-multi-select>
+          </div>
+
+          <div class="col-2" >
+            <app-multi-select #productMultiSelect isMultiSelect="false" [options]="products" label="Product" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="product" (dropDownValueChange)="getUnitAndStock($event)"></app-multi-select>
+          </div>
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Available Stock</mat-label>
+                  <input matInput type="text" name="availableStock" [(ngModel)]="availableStocks" readonly>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Unit</mat-label>
+                  <input matInput type="text" name="unit" [(ngModel)]="unit" readonly>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Return Stock</mat-label>
+                  <input matInput type="text" name="returnStock" [(ngModel)]="returnStock">
+                </mat-form-field>
+                <div class="text-danger" *ngIf="(isAvailable)&&((returnStock > availableStocks)||(returnStock <= 0))" [ngClass]="{ 'is-invalid': isSubmit && isError }">
+                  <sup>*</sup>Please Enter Value Between 1 and {{availableStocks}}
+                </div>
+              </div>
+
+              <div class="col-2">
+                <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                (click)="addProductReturnMobileUserInformation()">
+                  +
+                </button>
+              </div>
+        </div>
+        <div *ngIf="showProductReturnMobileUserDetails">
+        <app-product-return-mobile-user-details #productReturnMobileUserDetail [data]="productReturnMobileUserDetails" [datatrigger]="datatrigger" (editRow)='edit($event)'
+            (deleteRow)='deleteConfirm($event)'>
+          </app-product-return-mobile-user-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br />
+<div class="col-3 align-self-center" style="margin-top: 1%; margin-bottom: 1%;">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
+

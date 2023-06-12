@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Authorization
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*"
+
+      routes:
+        - id: master
+          uri: http://92.204.243.106:8000/master/
+          predicates:
+            - Path= /master/**
+
+        - id: report
+          uri: http://92.204.243.106:8010/report/
+          predicates:
+            - Path= /report/**
+
+        - id: inventory
+          uri: http://92.204.243.106:8003/inventory/
+          predicates:
+            - Path= /inventory/**
+
+        - id: procurement
+          uri: http://92.204.243.106:8001/procurement/
+          predicates:
+            - Path= /procurement/**
+
+        - id: farmer
+          uri: http://92.204.243.106:8009/farmer/
+          predicates:
+            - Path= /farmer/**
+server:
+  port: 8111

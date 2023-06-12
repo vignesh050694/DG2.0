@@ -1,0 +1,6 @@
+<table-generic [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns" [canShowSearch]="true" [data]="stocksWarehouses" [isAction]="true" [isDetail]="true"
+  [datatrigger]="datatrigger" (editRow)='edit($event)' (detailRow)="detail($event)" (paginate)='onPaginate($event)'
+  (searchEvent)='onSearch($event)' (deleteRow)='deleteConfirm($event)'>
+
+</table-generic>

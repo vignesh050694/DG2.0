@@ -1,0 +1,42 @@
+keycloak:
+  auth-server-url: http://134.119.192.94:8080
+  bearer-only: true
+  credentials:
+    secret: fc1cb9af-347a-4d8e-9253-95140d4d43ee
+  principal-attribute: preferred_username
+  realm: datagreen
+  resource: dg-server
+  ssl-required: external
+  use-resource-role-mappings: true
+
+server:
+  port: 8011
+  servlet:
+    context-path: /aggregator
+spring:
+  application:
+    name: aggregator-service
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  jpa:
+    database: POSTGRESQL
+
+springfox:
+  documentation:
+    auto-startup: false
+
+keycloak-url:
+  user: http://134.119.192.94:8080/auth/admin/realms/datagreen/users
+
+token:
+  url: http://134.119.192.94:8080/realms/datagreen/protocol/openid-connect/token
+
+auth-server: http://134.119.192.94:8080/
+authUser: realm_admin
+authPassword: Realm123

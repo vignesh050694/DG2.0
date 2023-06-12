@@ -1,0 +1,8 @@
+{
+    "realm": "datagreen",
+    "resource": "db-backend",
+    "auth-server-url": "http://134.119.192.94:7000/auth/",
+    "credentials": {
+        "secret": "5Wf6acEyI5CmRqscRJLReWYjHCdfHY5p"
+    }
+}

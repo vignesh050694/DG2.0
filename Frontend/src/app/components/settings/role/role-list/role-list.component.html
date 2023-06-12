@@ -1,0 +1,21 @@
+<!-- <table-generic #tablegeneric [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns" [searchColumns]="searchColumns"
+               [canShowSearch]="true"
+               [data]="roles" [isAction]="true" [datatrigger]="datatrigger" (editRow)='edit($event)'
+               (paginate)='onPaginate($event)' (deleteRow)='deleteConfirm($event)'>
+
+</table-generic> -->
+<app-common-table
+  #tablegeneric
+  [count]="count"
+  [displayedColumns]="displayedColumns"
+  [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns"
+  [canShowSearch]="true"
+  [data]="roles"
+  [isAction]="true"
+  [datatrigger]="datatrigger"
+  (editRow)="edit($event)"
+  (paginate)="onPaginate($event)"
+  (deleteRow)="deleteConfirm($event)"
+>
+</app-common-table>

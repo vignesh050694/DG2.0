@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "label": "ProcurementData",
+      "type": "date",
+      "value": "12/02/22"
+    },
+    {
+      "label": "Name",
+      "type": "text",
+      "value": "test"
+    }
+  ],
+  "tableData": [
+    {
+      "label": "ProcurementData",
+      "type": "date",
+      "value": "12/02/22"
+    },
+    {
+      "label": "Name",
+      "type": "text",
+      "value": "test"
+    }
+  ]
+}

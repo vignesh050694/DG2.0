@@ -1,0 +1,102 @@
+
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st" >Inventory</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/distribution-stock-reception">Distribution Stock Reception</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/distribution-stock-reception/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="pr-section">
+  <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-ttl">General Information</h4>
+      </div>
+    </div>
+
+    <form [formGroup]="distributionStockReceptionForm">
+      <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="date" required />
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="basic.date.hasError('required')">Date Required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <div>
+            <app-multi-select isMultiSelect="false" #seasonMultiSelect [options]="seasons" label="Season" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedSeason"></app-multi-select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div  >
+            <app-multi-select isMultiSelect="false" #wareHouseMultiSelect [options]="warehouses" label="Receiver Warehouse" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedWarehouse" (dropDownValueChange)="changeWarehouse($event)"></app-multi-select>
+          </div>
+        </div>
+            <div class="col-3" >
+              <div>
+                <app-multi-select isMultiSelect="false" #transferReceiptMultiSelect [options]="receipts" label="Receipt Number" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedTransferReceiptNumber" (dropDownValueChange)="changeReceipt($event)"></app-multi-select>
+              </div>
+            </div>
+        <div class="col-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Truck Id</mat-label>
+            <input matInput type="text" name="truck id"  formControlName="truckId">
+            <mat-error *ngIf="basic.truckId.hasError('required')">Truck Id Required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Driver Name</mat-label>
+            <input matInput type="text" name="driver name"  formControlName="driverName">
+            <mat-error *ngIf="basic.driverName.hasError('required')">Driver Name Required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="pr-section product-recp-sec">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="m-ttl">Distribution Stock Reception</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="pr-dashed-table-wrap px-0 mb-0">
+              <app-distribution-stock-reception-details #distributionStockReceptionDetailsTab *ngIf="showDistributionStockReceptionDetails" [data]="distributionStockReceptionDetails" (saveRow)='save($event)' (deleteRow)='deleteConfirm($event)'>
+              </app-distribution-stock-reception-details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br />
+<div class="col-3 align-self-center" style="margin-top: 1%; margin-bottom: 1%;">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
+

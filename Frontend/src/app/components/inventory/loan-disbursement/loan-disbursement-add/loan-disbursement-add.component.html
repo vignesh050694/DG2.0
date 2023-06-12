@@ -1,0 +1,153 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st" >Inventory</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/loan-disbursement">Loan Disbursement</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/loan-disbursement/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<br/>
+
+<section class="pr-section">
+  <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-ttl">Loan Distribution</h4>
+      </div>
+    </div>
+    <form [formGroup]="loanDisbursementForm">
+      <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="date" />
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="basic.date.hasError('required')">Date Required</mat-error>
+
+          </mat-form-field>
+        </div>
+        <div class="col-3" >
+          <div>
+            <app-multi-select isMultiSelect="false" #vendorMultiSelect [options]="vendors" label="Vendor" [isSubmit]="isSubmit" isRequired="true"
+            [(dropDownValue)]="selectedVendor"></app-multi-select>
+          </div>
+        </div>
+        <div class="col-3">
+          <app-multi-select isMultiSelect="false" #farmerMultiSelect [options]="farmers" label="Farmer" [isSubmit]="isSubmit" isRequired="true"
+          [(dropDownValue)]="selectedFarmer"></app-multi-select>
+        </div>
+        <div class="col-3" >
+          <app-multi-select label="Group" [options]="groups" [(dropDownValue)]="selectedGroup" #groupMultiSelect isMultiSelect="false" [isSubmit]="isSubmit" isRequired="true"
+          ></app-multi-select>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<section class="pr-section add-training-selec-sec" style="margin-top: 1%;">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12" style="margin-bottom: 1%;">
+            <h4 class="m-ttl">Product Details</h4>
+          </div>
+          <div class="col-2">
+            <app-multi-select #categoryMultiSelect isMultiSelect="false" [options]="categories" label="Category" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="category" (dropDownValueChange)="changeCategory($event)"></app-multi-select>
+          </div>
+          <div class="col-2">
+            <app-multi-select #productMultiSelect isMultiSelect="false" [options]="products" label="Product" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="product" (dropDownValueChange)="changeSubCategory($event)"></app-multi-select>
+          </div>
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Unit Price</mat-label>
+                  <input matInput type="text" name="unitPrice" [(ngModel)]="unitPrice">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Quantity</mat-label>
+                  <input matInput type="text" name="quantity" [(ngModel)]="quantity">
+                </mat-form-field>
+              </div>
+
+              <div class="col-2">
+                <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                (click)="addLoanDisbursementInformation()">
+                  +
+                </button>
+              </div>
+        </div>
+        <div *ngIf="showLoanDisbursmentDetails">
+        <app-loan-disbursement-details #loanDisbursementTable [data]="loanDisbursementDetails" (editRow)='edit($event)' (deleteRow)='deleteConfirm($event)'>
+          </app-loan-disbursement-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br />
+<section class="pr-section add-training-selec-sec">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="m-ttl">Loan Information</h4>
+          </div>
+        </div>
+        <div class="row pb-1">
+          <div class="col-12">
+            <div class="add-inp-overview-blk">
+              <div class="row">
+                <div class="col-9 align-self-center">
+                  <div class="row">
+                    <div class="col-3">
+                      <p class="p p-14 text-dark1 mb-3">Total Product Amount($)</p>
+                      <input class="st form-control pr-form-control" type="text" placeholder="" [value]="getTotalAmount()" disabled/>
+                    </div>
+                    <div class="col-3">
+                      <p class="p p-14 text-dark1 mb-3">Interest(%) p.a</p>
+                      <input class="st form-control pr-form-control" type="text" placeholder="" value="" [(ngModel)]="interest" />
+                    </div>
+                    <div class="col-3">
+                      <p class="p p-14 text-dark1 fw-700 mb-3">Total Tenture Period</p>
+                      <input class="st form-control pr-form-control" type="text" placeholder="" value="" [(ngModel)]="tenturePeriod" (selectionChange)="repaymentPerYear()"/>
+                    </div>
+                    <div class="col-3">
+                      <p class="p p-14 text-dark1 mb-3">Repayment Per Year($)</p>
+                      <div>
+                        <span class="p p-16 fw-700 text-dark1 pr-2">&#8377;</span>
+                        <input class="st form-control pr-form-control d-inline-block" type="text" placeholder=""
+                          value="" [(ngModel)]="repayment" disabled/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3 align-self-center">
+                  <div class="row">
+                    <div class="col-12 text-right">
+                      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles"
+                        (click)="save()">
+                        Save
+                      </button>
+                      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Search Filter </mat-panel-title>
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+      <form [formGroup]="form">
+        <div class="row">
+          <div *ngFor="let childFormData of formData" class="form-row col-2">
+            <app-dynamic-form-template
+              [childFormData]="childFormData"
+              [form]="form"
+            ></app-dynamic-form-template>
+          </div>
+          <div class="form-row col-2" *ngIf="isDateRange == true">
+            <label>Date Range</label>
+            <mat-form-field appearance="fill">
+              <!-- <mat-label>Date Range</mat-label> -->
+              <mat-date-range-input
+                [formGroup]="dateRange"
+                [rangePicker]="datePicker"
+                [comparisonStart]="dateRange.value.start"
+                [comparisonEnd]="dateRange.value.end"
+              >
+                <input
+                  matStartDate
+                  placeholder="Start date"
+                  formControlName="start"
+                />
+                <input
+                  matEndDate
+                  placeholder="End date"
+                  formControlName="end"
+                />
+              </mat-date-range-input>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="datePicker"
+              ></mat-datepicker-toggle>
+              <mat-date-range-picker #datePicker></mat-date-range-picker>
+            </mat-form-field>
+          </div>
+          <div class="form-row col-1" style="margin-top: 2%">
+            <div class="btn btn-primary" (click)="onSave()">Search</div>
+          </div>
+          <div class="form-row col-1" style="margin-top: 2%">
+            <div class="btn btn-primary" (click)="reset()">Reset</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

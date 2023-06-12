@@ -1,0 +1,31 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st" href="/">Settings</a></li>
+          <li class="breadcrumb-item">
+            <a class="st" href="/settings/device">Device</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+<app-page-header
+  [title]="title"
+  [buttonText]="buttonText"
+  [isAddShow]="false"
+  (addEvent)="add()"
+  (searchEvent)="search($event)"
+></app-page-header>
+<div class="pr-section">
+  <div class="br21 st">
+    <div class="pr-datatable-wrap">
+      <app-device-list
+        [events]="deviceReloadEvent.asObservable()"
+        (editFromList)="edit($event)"
+      ></app-device-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.card {
+  border-radius: 15px;
+  margin: 6px;
+  padding: 0px;
+  // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+mat-cell{
+    // padding:1px;
+    text-align:center;
+    justify-content:center
+}
+mat-header-cell{
+  margin-left: 1%;
+  text-align:center;
+  justify-content:center
+}
+// mat-table{
+//     padding:0px;
+// }
+.mat-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+ border-bottom: none;
+}
+.mat-header-generic{
+    color:black;
+}
+
+// th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type{
+// padding-left: 0px;
+// }
+
+[hidden] {
+  display: none !important;
+}
+agm-map {
+  height: 300px;
+}

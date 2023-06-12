@@ -1,0 +1,73 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">Animal Husbandry Information</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+<form [formGroup]="animalInformationForm">
+  <div class="modal-body">
+    <div class="row">
+    <div class=" col-lg-6">
+        <app-multi-select #animalNameMultiSelect isMultiSelect="false" [options]="animalNames" label="Farm Animal"
+        [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedAnimalName"></app-multi-select>
+      </div>
+
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Animal count</mat-label>
+          <input matInput type="text" name="animalCount" formControlName="animalCount">
+          <mat-error *ngIf="basic.animalCount.hasError('required')">Please Enter the Animal Count</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class=" col-lg-6">
+        <app-multi-select #fodderTypeMultiSelect isMultiSelect="false" [options]="fodderTypes" label="Fodder"
+        [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedFodder"></app-multi-select>
+      </div>
+      <!-- <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Fodder</mat-label>
+          <input matInput type="text" name="foodType" formControlName="foodType">
+          <mat-error *ngIf="basic.bankName.hasError('required')">Please select Fodder</mat-error>
+        </mat-form-field>
+      </div> -->
+
+      <div class=" col-lg-6">
+        <app-multi-select #housingTypeMultiSelect isMultiSelect="false" [options]="housingTypes" label="Animal Housing"
+        [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedHousingType"></app-multi-select>
+      </div>
+      <!-- <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Animal Housing</mat-label>
+          <input matInput type="text" name="bankBranch" formControlName="bankBranch">
+          <mat-error *ngIf="basic.bankBranch.hasError('required')">Please select Animal Housing</mat-error>
+        </mat-form-field>
+      </div> -->
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Revenue*</mat-label>
+          <input matInput type="text" name="revenue" formControlName="revenue">
+          <mat-error *ngIf="basic.revenue.hasError('required')">Please enter Revenue</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-6">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Breed Name*</mat-label>
+          <input matInput type="text" name="breedName" formControlName="breedName">
+          <mat-error *ngIf="basic.breedName.hasError('required')">Please enter Breed Name</mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="form-group text-right mb-0">
+      <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm2()">
+        Add
+      </button>
+      <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>

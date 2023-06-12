@@ -1,0 +1,158 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st" >Procurement</a></li>
+        <li class="breadcrumb-item"><a class="st" href="procurement/product-transfer">Product Transfer</a></li>
+        <li class="breadcrumb-item"><a class="st" href="procurement/product-transfer/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<section class="pr-section add-training-selec-sec product-transfer-section">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="m-ttl">General Information</h4>
+          </div>
+        </div>
+            <div class="pr-dashed-table-wrap px-0 mb-0">
+              <form [formGroup]="productTransferForm">
+                <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+
+                  <div class="col-3" >
+                    <app-multi-select #senderWarehouseMultiSelect isMultiSelect="false" [options]="warehouses" label="Sender Warehouse" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedSenderWarehouse"></app-multi-select>
+                  </div>
+
+                  <div class="col-3" >
+                    <app-multi-select #receiverWarehouseMultiSelect isMultiSelect="false" [options]="warehouses" label="Receiver Warehouse" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedReceiverWarehouse"></app-multi-select>
+                  </div>
+
+                  <div class="col-3">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Date</mat-label>
+                      <input matInput [matDatepicker]="fromPicker" formControlName="transferDateStr">
+                      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #fromPicker></mat-datepicker>
+                      <mat-error *ngIf="basic.transferDateStr.hasError('required')">Select Date</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-3">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Truck Id<span class="text-danger">*</span></mat-label>
+                      <input matInput type="text" name="truckId" formControlName="truckId" >
+                      <mat-error *ngIf="basic.truckId.hasError('required')">Truck ID required</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-3">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Driver Name<span class="text-danger">*</span></mat-label>
+                      <input matInput type="text" name="driverName" formControlName="driverName">
+                      <mat-error *ngIf="basic.driverName.hasError('required')">Driver Name Required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<section class="pr-section add-training-selec-sec">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4 class="m-ttl">Product Details</h4>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 2%;">
+          <div class="col-lg-3">
+            <app-multi-select #productMultiSelect isMultiSelect="false" [options]="crops" label="Product Name" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="crop" (dropDownValueChange)="changeCrop($event)"></app-multi-select>
+            <mat-error *ngIf="!(productTransferDetails.size > 0) && isSubmit"><span>*Product Required</span></mat-error>
+          </div>
+
+          <div class="col-lg-3">
+            <app-multi-select #varietyMultiSelect isMultiSelect="false" [options]="varieties" label="Variety" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="variety" (dropDownValueChange)="changeVariety($event)"></app-multi-select>
+            <mat-error *ngIf="!(productTransferDetails.size > 0) && isSubmit"><span>*Variety Required</span></mat-error>
+          </div>
+
+          <div class="col-lg-2">
+            <app-multi-select #gradeMultiSelect isMultiSelect="false" [options]="grades" label="Grade" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="grade" (dropDownValueChange)="changeGrade($event)"></app-multi-select>
+            <mat-error *ngIf="!(productTransferDetails.size> 0) && isSubmit"><span>*Grade Required</span></mat-error>
+          </div>
+
+          <div class="col-lg-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Unit</mat-label>
+              <input matInput type="text" name="unit" [(ngModel)]="unit" readonly>
+            </mat-form-field>
+          </div>
+
+          <!-- <div class="col-lg-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Price</mat-label>
+              <input matInput type="text" name="price" [(ngModel)]="price" readonly>
+            </mat-form-field>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <mat-form-field appearance="fill">
+              <mat-label>No Of Bags</mat-label>
+              <input matInput type="text" name="noOfBag" [(ngModel)]="noOfBags">
+            </mat-form-field>
+            <mat-error *ngIf="!(productTransferDetails.size> 0) && isSubmit"><span>*No of Bags Required</span></mat-error>
+          </div>
+
+          <div class="col-lg-">
+            <mat-form-field appearance="fill">
+              <mat-label>Net Weight</mat-label>
+              <input matInput type="text" name="netWeight" [(ngModel)]="netWeight">
+            </mat-form-field>
+            <mat-error *ngIf="!(productTransferDetails.size> 0) && isSubmit"><span>*Net Weight Required</span></mat-error>
+          </div>
+          <div class="col-lg-3 row">
+            <div class="col-lg-2">
+              <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                (click)="addProductInformation()">+</button>
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-secondary bttn-add st border" data-toggle="tooltip" data-placement="top" title="clear"
+                (click)="clear()"><span><p style="font-size: 15px;font-weight: bold;">x</p></span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div *ngIf="showProductDetails==true"> -->
+          <div [ngStyle]="{'display': showProductTransferDetails ? 'block' : 'none' }">
+          <app-product-transfer-detail
+          #productTransferDetailsTab
+          [data]="productTransferDetails"
+          (editFromList)='edit($event)'
+        (deleteRow)='deleteConfirm($event)'>
+      </app-product-transfer-detail>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br />
+<div class="col-3 align-self-center">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<form #dropDownForm="ngForm" [formGroup]="multiSelectTableForm">
+  <mat-form-field appearance="fill">
+    <mat-label class="mat-form-field-invalid ng-touched">{{label}}</mat-label>
+    <mat-select formControlName="multiSelect" [multiple]="isMultiSelect" #multiSelect name="{{label}}"
+      [(ngModel)]="dropDownValue" [required]="isRequired" (ngModelChange)="dropDownValueChange.emit(dropDownValue)">
+      <mat-option>
+        <ngx-mat-select-search [formControl]="websiteMultiFilterCtrl" placeholderLabel="Find {{label}}...">
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let website of filteredWebsitesMulti | async" [value]="website">
+        {{website.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="isSubmit&&basic.multiSelect.errors">{{label}} is required</mat-error>
+  </mat-form-field>
+</form>
+

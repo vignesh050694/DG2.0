@@ -1,0 +1,9 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" minZoom="2" (mapClick)="mapClicked()">
+  <!-- <agm-marker-cluster [minimumClusterSize]="minClusterSize"
+    imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m"> -->
+    <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(i)" [latitude]="m.latitude"
+      [longitude]="m.longitude" [markerDraggable]="false" (dragEnd)="markerDragEnd(m, $event)">
+
+    </agm-marker>
+  <!-- </agm-marker-cluster> -->
+</agm-map>

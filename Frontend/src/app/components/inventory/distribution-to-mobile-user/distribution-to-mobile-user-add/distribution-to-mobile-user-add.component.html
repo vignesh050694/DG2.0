@@ -1,0 +1,156 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st">Inventory</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/distribution-to-mobile-user">Distribution to Mobile User</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/distribution-to-mobile-user/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<br />
+
+<section class="pr-section">
+  <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-ttl">General Information</h4>
+      </div>
+    </div>
+
+    <form [formGroup]="distributionToMobileUserForm">
+      <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+
+        <div class="col-3" >
+          <app-multi-select #seasonMultiSelect isMultiSelect="false" [options]="seasons" label="Season" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedSeason"></app-multi-select>
+        </div>
+
+        <div class="col-3" >
+          <app-multi-select #warehouseMultiSelect isMultiSelect="false" [options]="warehouses" label="Warehouse" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedWarehouse" (dropDownValueChange)="onWarehouseChange($event)"></app-multi-select>
+        </div>
+
+        <div class="col-3" >
+          <app-multi-select #mobileUserMultiSelect isMultiSelect="false" [options]="mobileUsers" label="Mobile User" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedMobileUser"></app-multi-select>
+        </div>
+
+        <div class="col-3" >
+          <app-multi-select #groupMultiSelect isMultiSelect="false" [options]="groups" label="Group Name" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedGroupName"></app-multi-select>
+        </div>
+
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="date" required />
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="basic.date.invalid">Date Required</mat-error>
+          </mat-form-field>
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<section class="pr-section add-training-selec-sec" style="margin-top: 0.5%;">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12" style="margin-bottom: 1%;">
+            <h4 class="m-ttl">Product Details</h4>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-2" >
+                <app-multi-select #categoryMultiSelect isMultiSelect="false" [options]="categories" label="Category" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="category" (dropDownValueChange)="getProductByCategory($event)"></app-multi-select>
+              </div>
+
+              <div class="col-2" >
+                <app-multi-select #subCategoryMultiSelect isMultiSelect="false" [options]="subCategories" label="Product" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="product" (dropDownValueChange)="changeSubCategory($event)"></app-multi-select>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Available Stock</mat-label>
+                  <input matInput type="text" name="availableStock" [(ngModel)]="availableStocks"  readonly="true">
+                </mat-form-field>
+                <div class="text-danger" *ngIf="availableStocks <= 0 && detailSubmit==true  ">
+                  <sup>*</sup>No Stocks Available
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Unit</mat-label>
+                  <input matInput type="text" name="unit" [(ngModel)]="unit" readonly="true">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Unit Price</mat-label>
+                  <input matInput type="text" name="unitPrice" [(ngModel)]="unitPrice" readonly="true">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Batch Number</mat-label>
+                  <input matInput type="text" name="batchNo" [(ngModel)]="batchNo">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Distribution Quantity</mat-label>
+                  <input matInput type="text" name="distributionStock" [(ngModel)]="distributingStockMobileUser" >
+                </mat-form-field>
+                <div class="text-danger" *ngIf="(isAvailable)&&((distributingStockMobileUser > availableStocks)||(distributingStockMobileUser <= 0))" [ngClass]="{ 'is-invalid': isSubmit && isError }">
+                  <sup>*</sup>Please Enter Value Between 1 and {{availableStocks}}
+                </div>
+              </div>
+              <div class="col-lg-3 row">
+                <div class="col-lg-2">
+                  <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                    (click)="addDistributionToMobileUserInformation()">+</button>
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-secondary bttn-add st border" data-toggle="tooltip" data-placement="top" title="clear"
+                    (click)="clear()"><span><p style="font-size: 15px;font-weight: bold;">x</p></span></button>
+                </div>
+              </div>
+            </div>
+            <div [ngStyle]="{'display': showDistributionToMobileUserDetails ? 'block' : 'none' }">
+              <app-distribution-to-mobile-user-details
+              #distributionToMobileUserDetailsTab
+              [data]="distributionToMobileUserDetails"
+              (editRow)="edit($event)"
+              (deleteRow)="deleteConfirm($event)"
+              >
+              </app-distribution-to-mobile-user-details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br />
+<div class="col-3 align-self-center" style="margin-top: 1%; margin-bottom: 1%;">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
+

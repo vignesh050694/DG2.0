@@ -1,0 +1,102 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+@import "assets/css/styleguide.css";
+@import "assets/css/layout.css";
+@import "assets/css/media.css";
+
+/*!  Extra CSS  */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-form-field {
+    width: 100% !important;
+}
+.mat-dialog-height-transition {
+  transition: height 0.5s;
+}
+.form-header{
+    background-color:cadetblue;
+}
+.form-header-title {
+  color: white;
+  font-weight: bold;
+  padding-left:5px;
+}
+.cdk-global-overlay-wrapper {
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  overflow: auto;
+  pointer-events: auto;
+}
+html {
+  overflow-y: scroll;
+}
+.no-record-text{
+    text-align:center;
+}
+mat-error{
+  margin-top: 9px;
+  font-size: 12px;
+  color: #e03c3c;
+}
+.margin-spacer{
+   margin-bottom: 2%;
+}
+.margin-top-spacer{
+  margin-top: 6%;
+}
+// mat-form-field{
+//  background-color: yellow;
+// }
+// ::ng-deep .mat-form-field {
+
+// }
+
+.mat-form-field-flex {
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  // border-radius:  8px !important;
+}
+
+// .mat-form-field-underline {
+//   display: none !important;
+// }
+
+.mat-input-element{
+  font-weight :500 !important
+}
+
+
+// .mat-form-field-wrapper {
+//   margin:  0 !important;
+//   padding: -300px !important;
+// }
+
+// .mat-form-field-underline{
+//    background-color: transparent !important;
+//    border: none !important;
+// }
+
+// .mat-form-field-ripple {
+//   background-color: transparent !important;
+//   // color: transparent !important;
+//   // // border: none !important;
+// }
+// .mat-input-element {
+//   background-color: yellow;
+// }
+// .mat-form-field-label {
+//   background-color: orange;
+// }
+// .mat-form-field-underline {
+//   background-color: red;
+// }
+// .mat-form-field-ripple {
+//   background-color: green;
+// }
+// .mat-form-field-required-marker {
+//   background-color: blue;
+// }

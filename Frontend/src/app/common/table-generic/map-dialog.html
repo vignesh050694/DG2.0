@@ -1,0 +1,11 @@
+<div class="modal-header no-header">
+  <h3 class="page-ttl">Farm location</h3>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+<agm-map  [minZoom]="1" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+    <agm-marker *ngFor="let m of markers; let i = index"  [latitude]="m.lat"
+      [longitude]="m.lon" [markerDraggable]="false">
+    </agm-marker>
+</agm-map>

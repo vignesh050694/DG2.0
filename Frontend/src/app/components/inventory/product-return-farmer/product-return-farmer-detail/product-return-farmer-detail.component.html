@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-12">
+    <mat-table mat-tabl #table [dataSource]="rows" matSort #sort="matSort" matSortActive="id" matSortDirection="asc">
+      <ng-container *ngFor="let column of definedColumns; let i = index" matColumnDef="{{displayedColumns[i]}}">
+        <mat-header-cell *matHeaderCellDef>
+          <h3><b>{{displayedColumns[i]| titleCasePipe}}</b></h3>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row">
+          <div *ngIf="row[column]?.name">
+            <p matTooltip="{{row[column]?.name}}">{{row[column]?.name}}</p>
+          </div>
+          <div *ngIf="!row[column]?.name">
+            <p matTooltip="{{row[column]}}">{{row[column]}}</p>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <h3><b>Actions</b></h3>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row ; let j = index">
+          <div>
+            <button (click)="edit(row,j)" mat-icon-button color="primary" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>&nbsp;
+            <button mat-icon-button color="warn" matTooltip="Delete" type="button" (click)="delete(template,j)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>
+

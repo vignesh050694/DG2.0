@@ -1,0 +1,86 @@
+<div class="modal-header no-header">
+  <h1 class="page-ttl">{{title}}</h1>
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </div>
+</div>
+
+<form [formGroup]="warehouseForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name<span class="text-danger"></span></mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="basic.name.hasError('required')">Name Required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Location</mat-label>
+          <input matInput type="text" name="location" formControlName="location">
+          <!-- <mat-error *ngIf="basic.location.hasError('required')">Location Required</mat-error> -->
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Warehouse In-Charge</mat-label>
+          <input matInput type="text" name="warehouseInCharge" formControlName="warehouseInCharge">
+          <!-- <mat-error *ngIf="basic.warehouseInCharge.hasError('required')">Warehouse InCharge Name Required</mat-error> -->
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Storage Capacity in Tonnes</mat-label>
+          <input matInput type="text" name="storageCapacityInTonnes" formControlName="storageCapacityInTonnes">
+          <!-- <mat-error *ngIf="basic.storageCapacityInTonnes.hasError('required')">Storage Capacity Required</mat-error> -->
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Address</mat-label>
+          <input matInput type="text" name="address" formControlName="address">
+          <!-- <mat-error *ngIf="basic.address.hasError('required')">Address Required</mat-error> -->
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input matInput type="text" name="phoneNumber" formControlName="phoneNumber">
+          <!-- <mat-error *ngIf="basic.phoneNumber.hasError('required')">Phone Number Required</mat-error>-->
+          <mat-error *ngIf="basic.phoneNumber.hasError('pattern')">Enter Valid Format</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Type Of Storage Commodity</mat-label>
+          <input matInput type="text" name="typeOfStorageCommodity" formControlName="typeOfStorageCommodity">
+          <!-- <mat-error *ngIf="basic.typeOfStorageCommodity.hasError('required')">Type Storage Commodity Required</mat-error> -->
+        </mat-form-field>
+      </div>
+      <div class="form-group col-lg-4">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Warehouse OwnerShip</mat-label>
+          <input matInput type="text" name="warehouseOwnerShip" formControlName="warehouseOwnerShip">
+          <!-- <mat-error *ngIf="basic.warehouseOwnerShip.hasError('required')">warehouse Owner Name Required</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</form>
+<div class="modal-footer">
+  <div class="form-group text-right mb-0">
+    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" (click)="submitForm()">
+      Submit
+    </button>
+    <button (click)="cancel()" class="btn btn-secondary waves-effect waves-light">
+      Cancel
+    </button>
+
+  </div>
+</div>
+

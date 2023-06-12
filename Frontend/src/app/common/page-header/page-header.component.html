@@ -1,0 +1,20 @@
+<section class="pr-section pr-title-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <h1 class="page-ttl">{{title}}</h1>
+    </div>
+    <!--<div class="col-6 align-self-center">
+      <div class="pr-content-search-wrap">
+        <div class="pr-content-searchbar ml-auto mb-3">
+          <span class="pr-content-searchbar-ico">
+            <img class="st" src="assets/images/icons/content-search-ico.png" />
+          </span>
+          <input class="form-control pr-form-control pr-content-search-input" type="text" name="" [(ngModel)]="searchText" placeholder="Search..." (ngModelChange)="onSearchChange($event)">
+        </div>
+      </div>
+    </div>-->
+    <div class="col-auto align-self-center" *ngIf="isAddShow" (click)="addClick(null)">
+      <button class="btn bttn-primary bttn-add st mr-2">+</button><span class="p p-14 fw-700 text-dark">{{buttonText}}</span>
+    </div>
+  </div>
+</section>

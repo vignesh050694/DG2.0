@@ -1,0 +1,81 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st">Master</a></li>
+          <li class="breadcrumb-item">
+            <a class="st" href="/master/location">Location</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="pr-section master-data-sec">
+  <div class="row">
+    <div class="col align-self-center">
+      <ul
+        class="nav nav-tabs master-info-blk border-0"
+        id="myTab"
+        role="tablist"
+      >
+        <li class="nav-item" *ngFor="let heading of headings; let i = index">
+          <a
+            (click)="tabChanged(i)"
+            class="nav-link media"
+            [ngClass]="[heading === selectedTab ? 'active' : 'in-active']"
+            [class.active]="heading === selectedTab"
+            id="location-tab"
+            data-toggle="tab"
+            href="#location"
+            role="tab"
+            aria-controls="location"
+            aria-selected="true"
+          >
+            <div class="media-body">
+              <h4 class="m-ttl">{{ locationCount[heading] }}</h4>
+              <p class="p s-ttl">{{ heading }}</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div style="text-align: end; padding: 10px 30px" (click)="add()">
+      <button class="btn bttn-primary bttn-add st mr-2">+</button
+      ><span class="p p-14 fw-700 text-dark">{{ buttonText }}</span>
+    </div>
+  </div>
+</section>
+<br />
+<app-country-list
+  [events]="countryReloadEvent.asObservable()"
+  (editFromList)="edit($event)"
+  (deleteFromList)="delete($event)"
+  *ngIf="selectedTab == headings[0]"
+></app-country-list>
+<app-state-list
+  [events]="stateReloadEvent.asObservable()"
+  (editFromList)="edit($event)"
+  (deleteFromList)="delete($event)"
+  *ngIf="selectedTab == headings[1]"
+></app-state-list>
+<app-district-list
+  [events]="districtReloadEvent.asObservable()"
+  (editFromList)="edit($event)"
+  (deleteFromList)="delete($event)"
+  *ngIf="selectedTab == headings[2]"
+></app-district-list>
+<app-taluk-list
+  [events]="talukReloadEvent.asObservable()"
+  (editFromList)="edit($event)"
+  (deleteFromList)="delete($event)"
+  *ngIf="selectedTab == headings[3]"
+></app-taluk-list>
+<app-village-list
+  [events]="villageReloadEvent.asObservable()"
+  (editFromList)="edit($event)"
+  (deleteFromList)="delete($event)"
+  *ngIf="selectedTab == headings[4]"
+></app-village-list>

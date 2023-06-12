@@ -1,0 +1,360 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st" href="#">Farmer</a></li>
+          <li class="breadcrumb-item"><a class="st" href="#">Farm Management</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Farmer Locations</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="pr-section farm-location-sec">
+  <div class="row mx-0">
+    <div class="col px-0">
+      <div class="map-wrap">
+
+        <div class="maps-filter-wrap">
+          <p>
+            <a class="btn  filter-btn  st" role="button"  data-toggle="collapse" href="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">Filters
+          </a>
+          </p>
+
+          <div class="collapse" id="collapseExample" style="width:50%">
+            <div class="card card-body">
+              <div class="row col-12">
+                <div class="form-group col-6">
+                  <app-multi-select #countryMultiSelect isMultiSelect="false" [options]="countries" label="Country" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedCountry" (dropDownValueChange)='changeState($event)'></app-multi-select>
+              </div>
+               <div class="form-group col-6">
+                  <app-multi-select #stateMultiSelect isMultiSelect="false" [options]="states" label="State" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedState" (dropDownValueChange)='changeDistrict($event)'></app-multi-select>
+              </div>
+              <div class="form-group col-6">
+                  <app-multi-select #districtMultiSelect isMultiSelect="false" [options]="districts" label="District" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedDistrict" (dropDownValueChange)='changeTaluk($event)'></app-multi-select>
+              </div>
+              <div class="form-group col-6">
+                  <app-multi-select #talukMultiSelect isMultiSelect="false" [options]="taluks" label="Taluk" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedTaluk"  (dropDownValueChange)='changeVillage($event)'></app-multi-select>
+              </div>
+              <div class="form-group col-6">
+                <app-multi-select #villageMultiSelect isMultiSelect="false" [options]="villages" label="Village" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedVillage"></app-multi-select>
+              </div>
+              <div class="form-group col-6">
+                <app-multi-select #farmerMultiSelect isMultiSelect="false" [options]="farmers" label="Farmer" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="selectedFarmer"></app-multi-select>
+              </div>
+              </div>
+              <div class="col-12" style="display: flex;justify-content: end;">
+                <button (click)="search()" type="button" class="btn btn-primary btn-sm">Search</button>&nbsp;
+                <button (click)="clear()"  type="button" class="btn btn-secondary btn-sm">Clear</button>
+              </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="maps-info-blk-wrap" *ngIf="farmerAggregate?.length > 0">
+          <div class="maps-info-blk">
+            <div class="row">
+              <div class="col-6" *ngFor="let card of farmerAggregate;let i = index">
+                <div class="maps-info-blk-list">
+                  <div class="media">
+                    <div class="ico-blk align-self-center">
+                      <img class="st" [src]="cardIcons[i]" alt="ico">
+                    </div>
+                    <div class="media-body align-self-center">
+                      <h5 class="ttl">{{card?.count}}</h5>
+                      <p class="p">{{card?.title}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="maps-farmer-info-wrap">
+          <div class="maps-farmer-info-collapse">
+            <div class="maps-farmer-info-head">
+              <div class="media">
+                <div class="farmer-img st">
+                  <img class="st" *ngIf="!farmerDetails?.image"  src="assets/images/icons/user-payment-accordion-ico.png" alt="img">
+                  <img class="st" *ngIf="farmerDetails?.image"  src="{{farmerDetails?.imageUrl}}" alt="img">
+                </div>
+                <div class="media-body st">
+                  <h5 class="farmer-name">{{farmerCoordinates[mapClickedIndex]?.name}}</h5>
+                  <a class="pr-collapse-link st" data-toggle="collapse" href="#farmerInfoCollapse" aria-expanded="false"
+                    aria-controls="farmerInfoCollapse">View Details<span><i class="fas fa-chevron-down"></i></span></a>
+                </div>
+                <div class="detls-btn-blk">
+                  <button class="btn bttn-primary bttn-icon bttn-icon-round st" id="farmerDashToggle"
+                    ><span><i class="fas fa-chevron-right"></i></span></button>
+                </div>
+              </div>
+            </div>
+            <div class="maps-farmer-info-body">
+              <div class="collapse" id="farmerInfoCollapse">
+                <div class="collapse-content">
+                  <div class="row">
+                    <div class="col-12" *ngIf="sowingDetails?.length > 0">
+                      <p class="f-name"><span>Farmer Name:</span>{{farmerDetails?.name}}</p>
+                    </div>
+                  </div>
+                  <div class="not-found" *ngIf="!sowingDetails || sowingDetails?.length == 0">
+                        <p>No Sowing Details Found !</p>
+                  </div>
+                  <div class="row mb-2"  *ngIf="sowingDetails?.length > 0">
+                    <div class="col-6"><span class="ttl">Crops</span></div>
+                  </div>
+                  <div class="row mb-3" *ngIf="sowingDetails?.length > 0">
+                    <div class="col-6 pr-2" *ngIf="sowingDetails[0]?.variety">
+                      <div class="crop-blk colr-yellow">
+                        <h4 class="crop-nm">{{sowingDetails[0]?.variety?.name}}</h4>
+                        <p>{{sowingDetails[0]?.variety?.crop?.name}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="sowingDetails?.length > 0">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="crop-blk bg-sowing align-items-center">
+                            <div class="crop-blk-img">
+                              <img class="st" src="assets/images/icons/crop-sowing-ico.png" alt="ico">
+                            </div>
+                            <p class="p">Sowing Date</p>
+                            <h4 class="crop-nm">{{sowingDetails[0]?.sowingDate | date }}</h4>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="crop-blk bg-harvest align-items-center">
+                            <div class="crop-blk-img">
+                              <img class="st" src="assets/images/icons/crop-hervest-ico.png" alt="ico">
+                            </div>
+                            <p class="p">Harvest Date</p>
+                            <h4 class="crop-nm">{{sowingDetails[0]?.sowingDate | date }}</h4>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="crop-blk bg-harvest align-items-center">
+                            <div class="crop-blk-img">
+                              <img class="st" src="assets/images/icons/acre-ico.png" alt="ico">
+                            </div>
+                            <p class="p">Acre Area</p>
+                            <h4 class="crop-nm">{{sowingDetails[0]?.cultivationArea}}</h4>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="crop-blk bg-sowing align-items-center">
+                            <div class="crop-blk-img">
+                              <img class="st" src="assets/images/icons/harvest-hand-ico.png" alt="ico">
+                            </div>
+                            <p class="p">Est. Yeild</p>
+                            <h4 class="crop-nm">{{sowingDetails[0]?.estimatedYield}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3" *ngIf="sowingDetails?.length > 0">
+                    <div class="col-6 align-self-center"><span class="sec-ttl">Season</span></div>
+                    <div class="col-6 align-self-center" *ngIf="sowingDetails[0]?.season">
+                      <div class="crop-pill"><span class="crop-pill-ico"><img class="st"
+                            src="assets/images/icons/crop-rabi-white-ico.png"
+                            alt="img"></span>{{sowingDetails[0]?.season?.name}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="map-2" class="pr-map">
+          <app-Maps  [markers]="farmerCoordinates" (clicked)="showFarmer($event)"></app-Maps>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-auto px-0">
+      <div class="farmer-dash-wrap" data-simplebar data-simplebar-auto-hide="true">
+        <div class="farmer-dash">
+          <button class="btn bttn-close"><span><img class="st" src="assets/images/icons/close-ico.png"
+                alt="ico"></span></button>
+          <div class="farmer-dash-intro">
+            <div class="media">
+              <div class="user-prof-img-wrap">
+                <div class="profile-circle imgProgress-round imgProgress-progress">
+                  <svg class="imgProgress-svg" viewBox="0 0 32 32">
+                    <linearGradient id="grdColor" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" style="stop-color:rgb(100,161,94);stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:rgb(255,233,122);stop-opacity:1" />
+                    </linearGradient>
+                    <circle class="imgProgress-circle" r="16" cx="16" cy="16" stroke="url(#grdColor)" style="stroke-dashoffset:0px;
+                                      stroke-dasharray:50px 25px;fill:rgb(255, 255, 255);"></circle>
+                  </svg>
+                  <div class="imgProgress-img" *ngIf="farmerDetails?.image"
+                    style="background-image: url('{{farmerDetails?.imageUrl}}'), none;">
+                  </div>
+                </div>
+              </div>
+              <div class="media-body st">
+                <h5 class="farmer-name">{{farmerDetails?.name}}</h5><span class="farmer-badge"><img class="st"
+                    src="assets/images/icons/badge-ico.png" alt="ico"></span>
+                <p class="p cntc"><b>{{farmerDetails?.mobileNumber}}</b></p>
+                <ul class="list-group list-group-horizontal farmer-dash-intro-list">
+                  <li class="list-group-item"><b>{{farmerDetails?.farmerCode}}</b></li>
+                  <li class="list-group-item"><b>{{farmerDetails?.farmerGroup?.name}}</b></li>
+                  <li class="list-group-item"><b>{{farmerDetails?.certificateType}}</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="farmer-dash-data">
+            <div class="row">
+              <div class="col-12">
+                <h4 class="ttl">Farms & Crops</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="farmer-dash-data-inner br28 box-shadow">
+                  <div class="not-found" *ngIf="!sowingDetails || sowingDetails?.length == 0">
+                    <p>No Sowing Details Found !</p>
+                 </div>
+                  <div class="row found" *ngIf="sowingDetails?.length > 0">
+                    <div class="col-3">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="crop-blk-img">
+                            <div class="crop-image colr1">
+                              <div class="col-12 pr-2" *ngIf="sowingDetails[sowingIndex]?.variety">
+                                <div class="crop-blk colr-yellow">
+                                  <h3 class="crop-nm"><strong>Crop :</strong> {{sowingDetails[sowingIndex]?.variety?.crop?.name}}</h3><br>
+                                  <p><strong>Variety : </strong>{{sowingDetails[sowingIndex]?.variety?.name}} </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="crop-blk bg-light-grey align-items-center">
+                            <div class="crop-blk-img">
+                              <img class="st" src="assets/images/icons/plots-ico.png"
+                                alt="ico">
+                            </div>
+                            <p class="p">Plot</p>
+                            <h4 class="crop-nm">{{sowingDetails[sowingIndex]?.farm?.name}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-9">
+                      <div class="row">
+                          <div class="col-12">
+                            <div class="row" style="align-items:center">
+                              <p style="margin:3%"><b>More Crops</b></p>
+                                <mat-button-toggle-group [value]="0" style="overflow-x: auto;">
+                                  <mat-button-toggle *ngFor="let sowing of sowingDetails;let i = index" [value]="i" (click)="changeSowingIndex(i)" >{{sowing?.variety?.name}}</mat-button-toggle>
+                                </mat-button-toggle-group>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="crop-blk bg-sowing align-items-center">
+                                <div class="crop-blk-img">
+                                  <img class="st" src="assets/images/icons/crop-sowing-ico.png" alt="ico">
+                                </div>
+                                <p class="p">Sowing Date</p>
+                                <h4 class="crop-nm">{{sowingDetails[sowingIndex]?.sowingDate | date }}</h4>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="crop-blk bg-harvest align-items-center">
+                                <div class="crop-blk-img">
+                                  <img class="st" src="assets/images/icons/crop-hervest-ico.png" alt="ico">
+                                </div>
+                                <p class="p">Harvest Date</p>
+                                <h4 class="crop-nm">{{sowingDetails[sowingIndex]?.sowingDate | date }}</h4>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="crop-blk bg-harvest align-items-center">
+                                <div class="crop-blk-img">
+                                  <img class="st" src="assets/images/icons/acre-ico.png" alt="ico">
+                                </div>
+                                <p class="p">Acre Area</p>
+                                <h4 class="crop-nm">{{sowingDetails[sowingIndex]?.cultivationArea}}</h4>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="crop-blk bg-sowing align-items-center">
+                                <div class="crop-blk-img">
+                                  <img class="st" src="assets/images/icons/harvest-hand-ico.png" alt="ico">
+                                </div>
+                                <p class="p">Est. Yeild</p>
+                                <h4 class="crop-nm">{{sowingDetails[sowingIndex]?.estimatedYield}}</h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            </div>
+
+          </div>
+<!-- procurement -->
+            <div class="row" >
+              <div class="col-12">
+                <div class="pr-custom-accordion-wrap" data-simplebar
+                    data-simplebar-auto-hide="true">
+                    <div class="pr-custom-accordion">
+                        <div class="pr-accordion2 accordion" id="prAccordion">
+
+                            <div class="card br21">
+                                <div class="card-header st" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left"
+                                            type="button">
+                                            Procurement
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div class="collapse" aria-labelledby="headingTwo"
+                                    data-parent="#prAccordion" >
+                                    <div class="card-body">
+                                        <table class="pr-datatable table table-sm" *ngIf="procurementDetails?.length > 0">
+                                            <tbody>
+                                                <tr *ngFor="let procurement of procurementDetails">
+                                                   <th>{{procurement?.procurementDate | date}}</th>
+                                                    <th>Wheat</th>
+                                                    <th>{{procurement?.weight}} ton</th>
+                                                    <th class="amt"><span>&#8377;</span> 786</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="height:50px;width: 100%;text-align: center;align-items: center;" *ngIf="!procurementDetails || procurementDetails?.length == 0">
+                                         <p> No Procurements ! </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

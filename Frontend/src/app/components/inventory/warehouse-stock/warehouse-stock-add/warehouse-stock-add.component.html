@@ -1,0 +1,151 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st" >Inventory</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/warehouse-stock">Warehouse Stock Entry</a></li>
+        <li class="breadcrumb-item"><a class="st" href="inventory/warehouse-stock/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+<br />
+<section class="pr-section">
+  <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-ttl">General Information</h4>
+      </div>
+    </div>
+    <form [formGroup]="warehouseStockForm">
+      <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+
+      <div class="col-3" >
+        <app-multi-select #seasonMultiSelect isMultiSelect="false" [options]="seasons" label="Season" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedSeason"></app-multi-select>
+      </div>
+
+      <div class="col-3" >
+        <app-multi-select #wareHouseMultiSelect isMultiSelect="false" [options]="warehouses" label="Warehouse" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedWarehouse" (dropDownValueChange)="onWarehouseChange($event)"></app-multi-select>
+      </div>
+
+      <div class="col-3" >
+        <app-multi-select #vendorMultiSelect isMultiSelect="false" [options]="vendors" label="Vendor" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedVendor"></app-multi-select>
+      </div>
+
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Order/Invoice Number</mat-label>
+            <input matInput type="text" name="invoice" formControlName="invoice">
+            <mat-error *ngIf="basic.invoice.hasError('required')">Invoice Required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="date" />
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="basic.date.hasError('required')">Date Required</mat-error>
+          </mat-form-field>
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+</section>
+<br />
+<section class="pr-section add-training-selec-sec" style="margin-top: 0.5%;">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12" style="margin-bottom: 1%;">
+            <h4 class="m-ttl">Product Details</h4>
+          </div>
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-3">
+                <app-multi-select #categoryMultiSelect isMultiSelect="false" [options]="categories" label="Category" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="category" (dropDownValueChange)="changeCategory($event)"></app-multi-select>
+              </div>
+
+              <div class="col-lg-3">
+                <app-multi-select #subCategoryMultiSelect isMultiSelect="false" [options]="subCategories" label="Product" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="subCategory" (dropDownValueChange)="changeSubCategory($event)"></app-multi-select>
+              </div>
+              <div class="col-lg-3">
+                <mat-form-field appearance="fill">
+                  <mat-label>Unit</mat-label>
+                  <input matInput type="text" name="unit" [(ngModel)]="unit" readonly="true">
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-3">
+                <mat-form-field appearance="fill">
+                  <mat-label>Current Stock</mat-label>
+                  <input matInput type="text" name="currentStock" [(ngModel)]="currentStock" readonly="true">
+                </mat-form-field>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-lg-3">
+                <mat-form-field appearance="fill">
+                  <mat-label>Good Quantity</mat-label>
+                  <input matInput type="text" name="goodQuantity" [(ngModel)]="goodQuantity" (change)="setTotalPrice()">
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-3">
+                 <mat-form-field appearance="fill">
+                  <mat-label>Damaged Qty</mat-label>
+                  <input matInput type="text" name="damagedQuantity" [(ngModel)]="damagedQuantity"
+                    (change)="setTotalPrice()">
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-3">
+                <mat-form-field appearance="fill">
+                  <mat-label>Total Quantity</mat-label>
+                  <input matInput type="text" name="totalQty" [(ngModel)]="totalQuantity" readonly=true>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3 row">
+                <div class="col-lg-2">
+                  <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                    (click)="addProductInformation()">+</button>
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-secondary bttn-add st border" data-toggle="tooltip" data-placement="top" title="clear"
+                    (click)="clear()"><span><p style="font-size: 15px;font-weight: bold;">x</p></span></button>
+                </div>
+              </div>
+            </div>
+            <div [ngStyle]="{'display': showProductDetails ? 'block' : 'none' }">
+              <app-warehouse-stock-table
+              #warehouseStockTable
+              [data]="productDetails"
+              (editFromList)="edit($event)"
+              (deleteRow)="deleteConfirm($event)"
+              >
+              </app-warehouse-stock-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br />
+<div class="col-3 align-self-center" style="margin-top: 1%; margin-bottom: 1%;">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

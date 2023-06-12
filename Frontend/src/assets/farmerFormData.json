@@ -1,0 +1,1114 @@
+{
+	"isStepRequired": true,
+	"title": "Farmer",
+	"pages": [{
+			"id": "farmerDetails",
+			"title": "Farmer Details",
+			"pageIndex": 1,
+			"cssClass": "nav-item list-group-item active",
+			"anchor": {
+				"cssClass": "nav-link active"
+			}
+		},
+		{
+			"id": "financial",
+			"title": "Financial",
+			"pageIndex": 2,
+			"cssClass": "nav-item list-group-item",
+			"anchor": {
+				"cssClass": "nav-link active"
+			}
+		},
+		{
+			"id": "farmDetails",
+			"title": "Farm Details",
+			"pageIndex": 3,
+			"cssClass": "nav-item list-group-item",
+			"anchor": {
+				"cssClass": "nav-link active"
+			}
+		},
+		{
+			"id": "farmCropDetails",
+			"title": "Farm Crop Details",
+			"pageIndex": 4,
+			"cssClass": "nav-item list-group-item",
+			"anchor": {
+				"cssClass": "nav-link active"
+			}
+		},
+		{
+			"id": "otherDetails",
+			"title": "Other Details",
+			"pageIndex": 5,
+			"cssClass": "nav-item list-group-item",
+			"anchor": {
+				"cssClass": "nav-link active"
+			}
+		}
+	],
+	"segments": {
+		"farmerDetails": {
+			"id": "farmerDetails",
+			"cssClass": "tab-pane fade show active",
+			"card": [{
+					"cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+					"sections": [{
+							"title": "Main Information",
+							"type": "card",
+							"isAccoridan": false,
+							"cssClass": "col-6 pl-4",
+            "controls": [
+
+              {
+                "label": {
+                  "text": "Enrollment place",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-4"
+                },
+                "type": "select",
+                "cssClass": "st form-control pr-form-control",
+                "id": "enrollmentPlace",
+                "datasource": "query",
+                "query": "select id as id, name as name from dg.country c where c.is_deleted = false"
+              },
+              {
+                "label": {
+                  "text": "Date",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-4"
+                },
+                "type": "date",
+                "cssClass": "form-control pr-form-control",
+                "value": "2021-11-17",
+                "id": "mainInformationDate"
+              },
+              {
+                "label": {
+                  "text": "Farmer Code",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-4"
+                },
+                "type": "text",
+                "cssClass": "st form-control pr-form-control",
+                "value": "Rabi",
+                "id": "farmerCode",
+                "rules": {
+                  "required": {
+                    "isRequired": true,
+                    "errorMessage": "<sup>*</sup>Farmer Code is Required"
+                  },
+                  "pattern": {
+                    "condition": "[A-Za-z]{3}[0-9]{3}",
+                    "errorMessage": "<sup>*</sup>Enter Valid Pattern"
+                  }
+                }
+              },
+              {
+                "type": "hr-line",
+                "div": {
+                  "cssClass": "col-12"
+                },
+                "hrLineProperty": {
+                  "cssClass": "hr-dashed mt-4"
+                },
+                "value": ""
+              },
+              {
+                "label": {
+                  "text": "Is Certificated Farmer ?",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-12"
+                },
+                "type": "checkbox",
+                "cssClass": "pr-custom-switch switcher mb-3",
+                "value": true,
+                "id": "isCertifiedFarmer",
+                "datasource": "query",
+                "query": "select id as id, name as name, css_class as css_class, src as src from dg.checkbox c where c.page = 'farmerDetails'",
+                "showIds": [ "icsCode", "certificateType", "icsUnitNo", "icsTracenetRegNo", "farmerCodeByIcs", "farmerCodeByTracenet", "yearOfIcs" ]
+              },
+              {
+                "label": {
+                  "text": "ICS Code",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "type": "text",
+                "cssClass": "st form-control pr-form-control",
+                "id": "icsCode"
+              },
+              {
+                "label": {
+                  "text": "Certificate Type",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "type": "select",
+                "cssClass": "st form-control pr-form-control",
+                "datasource": "query",
+                "query": "select id as id, name as name from dg.catalogue_type c where c.is_deleted = false",
+                "id": "certificateType"
+              },
+              {
+                "label": {
+                  "text": "ICS Unit No.",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "type": "select",
+                "cssClass": "st form-control pr-form-control",
+                "datasource": "query",
+                "query": "select id as id, name as name from dg.catalogue_type c where c.is_deleted = false",
+                "id": "icsUnitNo"
+              },
+              {
+                "label": {
+                  "text": "ICS Tracenet Reg. No.",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "type": "select",
+                "cssClass": "st form-control pr-form-control",
+                "datasource": "query",
+                "query": "select id as id, name as name from dg.catalogue_type c where c.is_deleted = false",
+                "id": "icsTracenetRegNo"
+              },
+              {
+                "label": {
+                  "text": "Farmer Code by ICS",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "type": "text",
+                "cssClass": "st form-control pr-form-control",
+                "rules": {
+                  "required": {
+                    "isRequired": true,
+                    "errorMessage": "Farmer Code by ICS is Required"
+                  }
+                },
+                "id": "farmerCodeByIcs"
+              },
+              {
+                "label": {
+                  "text": "Farmercode by Tracenet",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "type": "text",
+                "cssClass": "st form-control pr-form-control",
+                "rules": {
+                  "required": {
+                    "isRequired": true,
+                    "errorMessage": "FarmerCode by Tracenet is Required"
+                  }
+                },
+                "id": "farmerCodeByTracenet"
+              },
+              {
+                "label": {
+                  "text": "Year Of ICS",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "type": "text",
+                "cssClass": "st form-control pr-form-control",
+                "rules": {
+                  "required": {
+                    "isRequired": true,
+                    "errorMessage": "Farmer Code is Required"
+                  },
+                  "pattern": {
+                    "condition": "[0-9]{4}",
+                    "errorMessage": "Enter Valid Pattern"
+                  }
+                },
+                "id": "yearOfIcs"
+              },
+              {
+                "type": "hr-line",
+                "div": {
+                  "cssClass": "col-12"
+                },
+                "hrLineProperty": {
+                  "cssClass": "hr-dashed mt-4"
+                },
+                "value": ""
+              },
+              {
+                "label": {
+                  "text": "Beneficiary in any Govt. Scheme?",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-12"
+                },
+                "type": "checkbox",
+                "cssClass": "pr-custom-switch switcher mb-3",
+                "value": true,
+                "id": "beneficiaryInAnyGovtScheme",
+                "datasource": "query",
+                "query": "select id as id, name as name, css_class as css_class, src as src from dg.checkbox c where c.page = 'farmerDetails2'",
+                "showIds": [ "mobileNumber", "nameOfTheScheme" ]
+              },
+              {
+                "label": {
+                  "text": "Name Of The Scheme",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "div": {
+                  "cssClass": "col-4"
+                },
+                "type": "text",
+                "cssClass": "st form-control pr-form-control",
+                "rules": {
+                  "required": {
+                    "isRequired": true,
+                    "errorMessage": "Name of The Scheme is Required"
+                  }
+                },
+                "id": "nameOfTheScheme"
+              },
+              {
+                "label": {
+                  "text": "Mobile Number",
+                  "cssClass": "p p-14 fw-600 mb-3"
+                },
+                "type": "multi-select",
+                "div": {
+                  "cssClass": "col-6"
+                },
+                "cssClass": "prselectcustom selectpicker auto-width",
+                "title": "Select Mob Number",
+                "datasource": "query",
+                "query": "select id as id, contact_number as name from dg.vendor c where c.is_deleted = false",
+                "id": "mobileNumber"
+              }
+            ]
+						},
+						{
+							"title": "Personal Information",
+							"type": "card",
+							"isAccoridan": false,
+							"cssClass": "col-6 pl-4",
+							"controls": [{
+									"label": {
+										"text": "Upload Image",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-12"
+									},
+									"type": "file",
+									"cssClass": "st form-control pr-form-control",
+									"id": "uploadImage"
+								},
+								{
+									"label": {
+										"text": "Farmer Name",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-6"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "Farmer Name is Required"
+										}
+									},
+									"id": "farmerName"
+								},
+								{
+									"label": {
+										"text": "Father Name",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-6"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "<sup>*</sup>Father Name is Required"
+										}
+									},
+									"id": "fatherName"
+								},
+								{
+									"label": {
+										"text": "Gender",
+										"cssClass": "p p-14 fw-600 mb-2"
+									},
+									"div": {
+										"cssClass": "col-12"
+									},
+									"type": "radio",
+									"cssClass": "cust-radio-bttn",
+									"datasource": "query",
+									"query": "select id as id, name as name, src as src, css_class as css_class from dg.radio r where r.page = 'farmerDetails'",
+									"id": "farmerDetailsInformationGender"
+								},
+								{
+									"label": {
+										"text": "Date",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-12"
+									},
+									"type": "date",
+									"cssClass": "form-control pr-form-control",
+									"id": "farmerDetailsInformationDate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+					"sections": [{
+							"title": "Contact Information",
+							"type": "card",
+							"isAccoridan": false,
+							"cssClass": "col-6 pl-4",
+							"controls": [{
+									"label": {
+										"text": "Mobile Number",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-4"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "Mobile Number is Required"
+										},
+										"pattern": {
+											"condition": "[0-9]{10}",
+											"errorMessage": "Enter Valid Pattern"
+										}
+									},
+									"id": "contactMobileNumber"
+								},
+								{
+									"label": {
+										"text": "Email",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-4"
+									},
+									"type": "text",
+									"cssClass": "form-control pr-form-control",
+									"id": "email"
+								},
+								{
+									"type": "hr-line",
+									"div": {
+										"cssClass": "col-12"
+									},
+									"hrLineProperty": {
+										"cssClass": "hr-dashed mt-4"
+									},
+									"value": ""
+								},
+								{
+									"type": "accordian",
+									"id": "accordionContactInfo",
+									"cssClass": "col-12",
+									"div": {
+										"cssClass": "col-12"
+									},
+									"accordianControls": [{
+										"card": {
+											"cssClass": "card",
+											"cardHeader": {
+												"cssClass": "card-header",
+												"id": "headingOne",
+												"button": {
+													"id": "collapseOne",
+													"text": "ADDRESS DETAILS"
+												}
+											},
+											"body": {
+												"controls": [{
+														"type": "text",
+														"cssClass": "form-control pr-form-control",
+														"id": "farmerAddress",
+														"label": {
+															"text": "Farmer Address",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-8 common-box-inner"
+														}
+													},
+													{
+														"type": "select",
+														"cssClass": "form-control pr-form-control",
+														"id": "country",
+														"label": {
+															"text": "Country",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-4 common-box-inner"
+														},
+														"datasource": "query",
+														"query": "select id as id, name as name from dg.Country s where s.is_deleted = false"
+													},
+													{
+														"label": {
+															"text": "State",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-4 common-box-inner"
+														},
+														"type": "select",
+														"cssClass": "st form-control pr-form-control",
+														"id": "state",
+														"datasource": "query",
+														"query": "select id as id, name as name from dg.state s where s.is_deleted = false"
+													},
+													{
+														"label": {
+															"text": "District",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-4"
+														},
+														"type": "select",
+														"cssClass": "st form-control pr-form-control",
+														"id": "district",
+														"datasource": "query",
+														"query": "select id as id, name as name from dg.district g where g.is_deleted = false"
+													},
+													{
+														"label": {
+															"text": "Taluk",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-4 common-box-inner"
+														},
+														"type": "select",
+														"cssClass": "st form-control pr-form-control",
+														"id": "taluk",
+														"datasource": "query",
+														"query": "select id as id, name as name from dg.taluk d where d.is_deleted = false"
+													},
+													{
+														"label": {
+															"text": "Village",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-4 common-box-inner"
+														},
+														"type": "select",
+														"cssClass": "st form-control pr-form-control",
+														"id": "village",
+														"datasource": "query",
+														"query": "select id as id, name as name from dg.village v where v.is_deleted = false"
+													}
+												]
+											}
+										}
+									}]
+								},
+								{
+									"type": "hr-line",
+									"div": {
+										"cssClass": "col-12"
+									},
+									"hrLineProperty": {
+										"cssClass": "hr-dashed mt-4"
+									},
+									"value": ""
+								},
+								{
+									"type": "accordian",
+									"id": "accordionContactInfo",
+									"cssClass": "col-12",
+									"div": {
+										"cssClass": "col-12"
+									},
+									"accordianControls": [{
+										"card": {
+											"cssClass": "card",
+											"cardHeader": {
+												"cssClass": "card-header",
+												"id": "headingTwo",
+												"button": {
+													"id": "collapseTwo",
+													"text": "OTHER DETAILS"
+												}
+											},
+											"body": {
+												"controls": [{
+														"type": "text",
+														"cssClass": "form-control pr-form-control",
+														"id": "group",
+														"label": {
+															"text": "Group",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-4 common-box-inner"
+														}
+													},
+													{
+														"label": {
+															"text": "Status",
+															"cssClass": "p p-14 fw-600 mb-3"
+														},
+														"div": {
+															"cssClass": "col-4 common-box-inner"
+														},
+														"type": "checkbox",
+														"cssClass": "pr-custom-switch switcher mb-3",
+														"value": true,
+														"datasource": "query",
+														"query": "select id as id, name as name, css_class as css_class, src as src from dg.checkbox c where c.page = 'farmerDetails3'",
+														"id": "isActive"
+													},
+													{
+														"type": "spacer",
+														"cssClass": "col-4"
+													}
+												]
+											}
+										}
+									}]
+								},
+								{
+									"type": "hr-line",
+									"div": {
+										"cssClass": "col-12"
+									},
+									"hrLineProperty": {
+										"cssClass": "hr-dashed mt-4"
+									},
+									"value": ""
+								}
+							]
+						},
+						{
+							"title": "Family Information",
+							"type": "card",
+							"isAccoridan": false,
+							"cssClass": "col-6 pl-4",
+              "controls": [
+                {
+                  "label": {
+                    "text": "Number Of Family Members",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-8"
+                  },
+                  "type": "text",
+                  "cssClass": "st form-control pr-form-control",
+                  "id": "numberOfFamilyMembers"
+                },
+                {
+                  "type": "spacer",
+                  "cssClass": "col-6"
+                },
+                {
+                  "label": {
+                    "text": "Total adults above 18 yr. in family",
+                    "cssClass": "p p-14 fw-600 mt-4"
+                  },
+                  "type": "label",
+                  "div": {
+                    "cssClass": "col-6"
+                  }
+                },
+                {
+                  "label": {
+                    "text": "Total adults below 18 yr. in family",
+                    "cssClass": "p p-14 fw-600 mt-4"
+                  },
+                  "type": "label",
+                  "div": {
+                    "cssClass": "col-6"
+                  }
+                },
+                {
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "placeholder": "Male",
+                  "cssClass": "st form-control pr-form-control",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "Male Count is Required"
+                    }
+                  },
+                  "id": "totalAdultsMaleAbove18"
+                },
+                {
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "placeholder": "Female",
+                  "cssClass": "st form-control pr-form-control",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "Female Count is Required"
+                    }
+                  },
+                  "id": "totalAdultsFemaleAbove18"
+                },
+                {
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "placeholder": "Male",
+                  "cssClass": "st form-control pr-form-control",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "Male Count is Required"
+                    }
+                  },
+                  "id": "totalAdultsMalebelow18"
+                },
+                {
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "placeholder": "Female",
+                  "cssClass": "st form-control pr-form-control",
+                  "rules": {
+                    "required": {
+                      "isRequired": true,
+                      "errorMessage": "Female Count is Required"
+                    }
+                  },
+                  "id": "totalAdultsFemalebelow18"
+                },
+                {
+                  "label": {
+                    "text": "Total childrens in family",
+                    "cssClass": "p p-14 fw-600 mt-4"
+                  },
+                  "type": "label",
+                  "div": {
+                    "cssClass": "col-12"
+                  }
+                },
+                {
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "placeholder": "Male",
+                  "cssClass": "st form-control pr-form-control",
+                  "rules": {
+                    "required": {
+                      "required": true,
+                      "errorMessage": "Male Count is Required"
+                    }
+                  },
+                  "id": "totalChildrensMale"
+                },
+                {
+                  "div": {
+                    "cssClass": "col-3"
+                  },
+                  "type": "text",
+                  "placeholder": "Female",
+                  "cssClass": "st form-control pr-form-control",
+                  "rules": {
+                    "required": {
+                      "required": true,
+                      "errorMessage": "Female Count is Required"
+                    }
+                  },
+                  "id": "totalChildrensFemale"
+                },
+                {
+                  "type": "spacer",
+                  "cssClass": "col-4"
+                },
+                {
+                  "label": {
+                    "text": "Parent",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-6"
+                  },
+                  "datasource": "query",
+                  "query": "select id as id, contact_number as name from dg.vendor c where c.is_deleted = false",
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  
+                  "endPoint": "endpointTOAdd",
+                  "id": "parent"
+                },
+                {
+                  "label": {
+                    "text": "Parent1",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-6"
+                  },
+                  "datasource": "query",
+                  "query": "select id as id, contact_number as name from dg.vendor c where c.is_deleted = false",
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "dependency": {
+                    "childId": "child",
+                    "depends": [ "parent" ]
+                  },
+                  "endPoint": "endpointTOAdd",
+                  "id": "parent1"
+                },
+                {
+                  "label": {
+                    "text": "Children",
+                    "cssClass": "p p-14 fw-600 mb-3"
+                  },
+                  "div": {
+                    "cssClass": "col-6"
+                  },
+                  "type": "select",
+                  "cssClass": "st form-control pr-form-control",
+                  "datasource": "query",
+                  "query": "select id as id, contact_number as name from dg.vendor c where c.is_deleted = false",
+                  "type": "select",
+                  "id": "child"
+                }
+              ]
+						}
+					]
+				}
+			]
+		},
+		"financial": {
+			"id": "financial",
+			"cssClass": "tab-pane fade",
+			"card": [{
+					"cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+					"sections": [{
+						"title": "Main Information",
+						"type": "card",
+						"isAccoridan": false,
+						"cssClass": "col-6 pl-4",
+						"controls": [{
+							"label": {
+								"text": "District",
+								"cssClass": "p p-14 fw-600 mb-3"
+							},
+							"div": {
+								"cssClass": "col-4"
+							},
+							"type": "select",
+							"cssClass": "st form-control pr-form-control",
+							"id": "enrollmentPlace",
+							"datasource": "query",
+							"query": "select id as id, name as name from dg.district g where g.is_deleted = false"
+						}]
+					}]
+				},
+				{
+					"cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+					"sections": [{
+						"title": "Table Information",
+						"type": "card",
+						"isAccoridan": false,
+						"cssClass": "col-6 pl-4",
+						"controls": [{
+							"type": "table",
+							"id": "informationTable",
+							"dtOptions": {
+								"searching": false,
+								"paging": false,
+								"info": false
+							},
+							"div": {
+								"cssClass": "col-4"
+							},
+							"displayedColumns": [{
+									"id": "accType",
+									"name": "AccountType"
+								},
+								{
+									"id": "accNo",
+									"name": "Account Number"
+								},
+								{
+									"id": "bankName",
+									"name": "Bank Name"
+								},
+								{
+									"id": "branchDetails",
+									"name": "Branch Details"
+								},
+								{
+									"id": "ifscCode",
+									"name": "IFSC Code"
+								}
+							],
+							"tableData": [{
+								"isEdit": false,
+								"data": {
+									"accType": "1",
+									"accNo": "2",
+									"bankName": "3",
+									"branchDetails": "4",
+									"ifscCode": "5"
+								}
+							}],
+							"controls": [{
+									"label": {
+										"text": "AccountType",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-4"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"value": "Rabi",
+									"id": "accType",
+									"isEdit": false,
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "<sup>*</sup>Farmer Code is Required"
+										},
+										"pattern": {
+											"condition": "[A-Za-z]{3}[0-9]{3}",
+											"errorMessage": "<sup>*</sup>Enter Valid Pattern"
+										}
+									}
+								},
+								{
+									"label": {
+										"text": "Account Number",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-4"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"value": "Rabi",
+									"isEdit": false,
+									"id": "accNo",
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "<sup>*</sup>Farmer Code is Required"
+										},
+										"pattern": {
+											"condition": "[A-Za-z]{3}[0-9]{3}",
+											"errorMessage": "<sup>*</sup>Enter Valid Pattern"
+										}
+									}
+								},
+								{
+									"label": {
+										"text": "Bank Name",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-4"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"value": "Rabi",
+									"id": "bankName",
+									"isEdit": false,
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "<sup>*</sup>Farmer Code is Required"
+										},
+										"pattern": {
+											"condition": "[A-Za-z]{3}[0-9]{3}",
+											"errorMessage": "<sup>*</sup>Enter Valid Pattern"
+										}
+									}
+								},
+								{
+									"label": {
+										"text": "Branch Details",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-4"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"value": "Rabi",
+									"id": "branchDetails",
+									"isEdit": false,
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "<sup>*</sup>Farmer Code is Required"
+										},
+										"pattern": {
+											"condition": "[A-Za-z]{3}[0-9]{3}",
+											"errorMessage": "<sup>*</sup>Enter Valid Pattern"
+										}
+									}
+								},
+								{
+									"label": {
+										"text": "IFSC Code",
+										"cssClass": "p p-14 fw-600 mb-3"
+									},
+									"div": {
+										"cssClass": "col-4"
+									},
+									"type": "text",
+									"cssClass": "st form-control pr-form-control",
+									"value": "Rabi",
+									"id": "ifscCode",
+									"isEdit": false,
+									"rules": {
+										"required": {
+											"isRequired": true,
+											"errorMessage": "<sup>*</sup>Farmer Code is Required"
+										},
+										"pattern": {
+											"condition": "[A-Za-z]{3}[0-9]{3}",
+											"errorMessage": "<sup>*</sup>Enter Valid Pattern"
+										}
+									}
+								}
+							]
+						}]
+					}]
+				}
+			]
+		},
+		"farmDetails": {
+			"id": "farmDetails",
+			"cssClass": "tab-pane fade",
+			"card": [{
+				"cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+				"sections": [{
+					"title": "Main Information",
+					"type": "card",
+					"isAccoridan": false,
+					"cssClass": "col-6 pl-4",
+					"controls": [{
+						"label": {
+							"text": "District",
+							"cssClass": "p p-14 fw-600 mb-3"
+						},
+						"div": {
+							"cssClass": "col-4"
+						},
+						"type": "select",
+						"cssClass": "st form-control pr-form-control",
+						"id": "enrollmentPlace",
+						"datasource": "query",
+						"query": "select id as id, name as name from dg.district g where g.is_deleted = false"
+					}]
+				}]
+			}]
+		},
+		"farmCropDetails": {
+			"id": "farmCropDetails",
+			"cssClass": "tab-pane fade",
+			"card": [{
+				"cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+				"sections": [{
+					"title": "Main Information",
+					"type": "card",
+					"isAccoridan": false,
+					"cssClass": "col-6 pl-4",
+					"controls": [{
+						"label": {
+							"text": "District",
+							"cssClass": "p p-14 fw-600 mb-3"
+						},
+						"div": {
+							"cssClass": "col-4"
+						},
+						"type": "select",
+						"cssClass": "st form-control pr-form-control",
+						"id": "enrollmentPlace",
+						"datasource": "query",
+						"query": "select id as id, name as name from dg.district g where g.is_deleted = false"
+					}]
+				}]
+			}]
+		},
+		"otherDetails": {
+			"id": "otherDetails",
+			"cssClass": "tab-pane fade",
+			"card": [{
+				"cssClass": "add-training-selec-blk common-box box-shadow bg-white br14 mt-5",
+				"sections": [{
+					"title": "Main Information",
+					"type": "card",
+					"isAccoridan": false,
+					"cssClass": "col-6 pl-4",
+					"controls": [{
+						"label": {
+							"text": "District",
+							"cssClass": "p p-14 fw-600 mb-3"
+						},
+						"div": {
+							"cssClass": "col-4"
+						},
+						"type": "select",
+						"cssClass": "st form-control pr-form-control",
+						"id": "enrollmentPlace",
+						"datasource": "query",
+						"query": "select id as id, name as name from dg.district g where g.is_deleted = false"
+					}]
+				}]
+			}]
+		}
+	}
+}

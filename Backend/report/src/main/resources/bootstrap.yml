@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: report-service
+    cloud:
+        consul:
+            discovery:
+                port: ${server.port}
+                healthCheckInterval: 15s
+                healthCheckPath: report/health
+            host: localhost
+            port: 8500

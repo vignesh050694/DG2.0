@@ -1,0 +1,111 @@
+<!-- <table-generic [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns" [canShowSearch]="true" [data]="distributionStockTransfers" [isAction]="true" [isDetail]="true"
+  [datatrigger]="datatrigger" (editRow)='edit($event)' (detailRow)="detail($event)" (paginate)='onPaginate($event)'
+  (searchEvent)='onSearch($event)' (deleteRow)='deleteConfirm($event)'>
+</table-generic> -->
+
+<app-common-table [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns"
+  [searchColumns]="searchColumns" [canShowSearch]="false" [data]="distributionStockTransfers" [isAction]="true" [isDetail]="true"
+  [datatrigger]="datatrigger" (editRow)='edit($event)' (detailRow)="detail($event)" (paginate)='onPaginate($event)'
+  (searchEvent)='onSearch($event)' (deleteRow)='deleteConfirm($event)'>
+</app-common-table>
+
+<div class="pr-modal modal right fade" id="trainingDetailModal" #trainingDetailModal data-keyboard="false" tabindex="-1"
+  aria-labelledby="trainingDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trainingDetailModalLabel">Distribution Stock Transfer Detail</h5>
+        <button type="button" class="close bttn-close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Close">&times;</span>
+        </button>
+        <div class="actn-wrap">
+          <button class="btn bttn-primary bttn-edit st" data-toggle="tooltip" data-placement="top" title="Edit" (click)="edit(detailId)">
+            <span><img class="img-abs st" src="assets/images/icons/edit-white-ico.png" alt="edit"></span>
+          </button>
+          <span class="p p-14 btn_txt">Edit</span>
+          <button class="btn bttn-danger bttn-remove st" data-toggle="tooltip" data-placement="top" title="Remove" (click)="deleteConfirm(detailId)">
+            <span><img class="img-abs st" src="assets/images/icons/delete-white-ico.png" alt="remove"></span>
+          </button>
+          <span class="p p-14 btn_txt">Delete</span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="pr-dashed-table-wrap px-0 mb-0">
+
+              <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+
+                    <div class="col-3">
+                      <p class="p">Date</p>
+                      <b class="sec_ttl">{{distributionStockTransfer?.date}}</b>
+                    </div>
+                    <div class="col-3">
+                      <p class="p">Season</p>
+                      <b class="sec_ttl">{{distributionStockTransfer?.season?.name}}</b>
+                    </div>
+                    <div class="col-3">
+                      <p class="p">Sender Warehouse</p>
+                      <b class="sec_ttl">{{distributionStockTransfer?.senderWarehouse?.name}}</b>
+                    </div>
+                    <div class="col-3">
+                      <p class="p">Receiver Warehouse</p>
+                      <b class="sec_ttl">{{distributionStockTransfer?.receiverWarehouse?.name}}</b>
+                    </div>
+                    <div class="col-3">
+                      <p class="p">Receipt Number</p>
+                      <b class="sec_ttl">{{distributionStockTransfer?.receiptNumber}}</b>
+                    </div>
+                    <div class="col-3">
+                      <p class="p">Truck Id</p>
+                      <b class="sec_ttl">{{distributionStockTransfer?.truckId}}</b>
+                    </div>
+                    <div class="col-3">
+                      <p class="p">Driver Name</p>
+                      <b class="sec_ttl">{{distributionStockTransfer?.driverName}}</b>
+                    </div>
+
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+
+
+          <div class="col-12">
+            <div class="pr-dashed-table-wrap bg-white border border-primary br21">
+              <table class="pr-dashed-table">
+                <tbody>
+                  <tr>
+                    <td>S.No</td>
+                    <td>Category</td>
+                    <td>Product</td>
+                    <td>Distribution Stock</td>
+                  </tr>
+
+                  <tr *ngFor="let detail of distributionStockTransfer?.distributionStockTransferDetails; let i = index" [attr.data-index]="i">
+                    <td>
+                      <h6 class="sec_ttl">{{i+1}}</h6>
+                    </td>
+                    <td>
+                      <h6 class="sec_ttl">{{detail?.product?.category?.name}}</h6>
+                    </td>
+                    <td>
+                      <h6 class="sec_ttl">{{detail?.product?.name}}</h6>
+                    </td>
+                    <td>
+                      <h6 class="sec_ttl">{{detail?.distributingStock}}</h6>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>

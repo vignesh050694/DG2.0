@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{name}}</mat-label>
+  <mat-select [(ngModel)]="selectedData" [compareWith]="objectComparisonFunction" [ngClass]="{ 'is-invalid': isSubmit && isError }">
+    <mat-option>
+      <ngx-mat-select-search [formControl]="filterCtrl" placeholderLabel="Find {{name}}..."></ngx-mat-select-search>
+    </mat-option>
+    <mat-option *ngFor="let data of filteredArray|async" [value]="data">{{data.name}}</mat-option>
+  </mat-select>
+  <mat-error class="text-danger" *ngIf="isSubmit && isError" [ngClass]="{ 'is-invalid': isSubmit && isError }">
+    <sup>*</sup>Please select {{name}}
+  </mat-error>
+</mat-form-field>
+

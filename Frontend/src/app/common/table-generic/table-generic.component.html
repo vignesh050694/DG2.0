@@ -1,0 +1,86 @@
+<mat-table mat-tabl #table [dataSource]="rows" matSort #sort="matSort" matSortActive="id" (matSortChange)="announceSortChange($event)">
+  <ng-container *ngFor="let column of definedColumns; let i = index" matColumnDef="{{displayedColumns[i]}}">
+    <mat-header-cell *matHeaderCellDef >
+      <table>
+        <tr *ngIf="!searchColumns[i]?.canShow">
+          <th mat-header-cell mat-sort-header>
+            <b>
+              <span class="mat-header-generic">{{displayedColumns[i]|titleCasePipe}}
+              </span>
+            </b>
+            </th>
+        </tr>
+        <tr *ngIf="searchColumns[i]?.canShow">
+          <th>
+           <p class="mat-header-generic" style="margin-top: 5%;"><b>{{displayedColumns[i]|titleCasePipe}}</b></p>
+          </th>
+        </tr>
+        <tr>
+          <div class="form-group" *ngIf="searchColumns[i]?.canShow">
+            <input type="text" class="form-control" formcontrolname="{{searchColumns[i]?.name}}"
+              id="{{searchColumns[i]?.name}}" (keyup)="search($event)" autocomplete="off" />
+          </div>
+        </tr>
+      </table>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button *ngIf="column == 'map'" class="btn"  (click)="getMap(row[column])"><mat-icon style="color: red;"> location_on</mat-icon></button>
+      <p matTooltip="{{ row[column]?.name}}" *ngIf="!!row[column]?.name && column != 'map'"  class="ellipsis">{{ row[column]?.name }}</p>
+      <p matTooltip="{{ row[column] }}" *ngIf="!!!row[column]?.name && column != 'map'" class="ellipsis" >{{ row[column] }}</p>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <b><span class="mat-header-generic">Actions</span></b>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <div *ngIf="isDetail">
+        <button mat-icon-button color="primary" type="button" (click)="detail(row?.id)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="isAction">
+        <button (click)="edit(row?.id)" mat-icon-button color="primary" matTooltip="Edit" *ngIf="isEdit">
+          <mat-icon>edit</mat-icon>
+        </button>&nbsp;
+        <button mat-icon-button color="warn" matTooltip="Delete" type="button" (click)="delete(template,row?.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+  <h1 *ngIf="!rows?.data?.length">
+    <p style="text-align: center;" [attr.colspan]="displayedColumns?.length">
+      No Records Found!
+    </p>
+  </h1>
+<div class="card">
+  <div *ngIf="isPagination">
+    <mat-paginator [length]="count" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons (page)="onPaginate($event)" [hidden]="!rows?.data?.length" >
+    </mat-paginator>
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4>Do u want to Delete</h4>
+  </div>
+  <div class="modal-footer">
+    <button mat-icon-button color="warn" matTooltip="Delete" type="button" (click)="deleteConfirm()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</ng-template>
+
+

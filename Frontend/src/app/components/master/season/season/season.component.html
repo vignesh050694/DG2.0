@@ -1,0 +1,36 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <div class="col-12 align-self-start">
+      <nav aria-label="breadcrumb">
+        <ol class="pr-breadcrumb breadcrumb st">
+          <li class="breadcrumb-item"><a class="st">Master</a></li>
+          <li class="breadcrumb-item">
+            <a class="st" routerLink="/master/season">Season</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<div style="text-align: end; padding: 10px 30px" (click)="add()">
+  <button class="btn bttn-primary bttn-add st mr-2">+</button
+  ><span class="p p-14 fw-700 text-dark">{{ buttonText }}</span>
+</div>
+
+<!-- <app-page-header
+  [title]=""
+  [buttonText]="buttonText"
+  (addEvent)="add()"
+  (searchEvent)="search($event)"
+></app-page-header> -->
+<div class="pr-section">
+  <div class="br21 st">
+    <div class="pr-datatable-wrap">
+      <app-season-list
+        [events]="seasonReloadEvent.asObservable()"
+        (editFromList)="edit($event)"
+      ></app-season-list>
+    </div>
+  </div>
+</div>

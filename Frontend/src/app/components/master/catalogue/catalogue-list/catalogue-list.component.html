@@ -1,0 +1,12 @@
+<!-- <table-generic [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns" [searchColumns]="searchColumns"
+               [canShowSearch]="true"
+               [data]="catalogues" [isAction]="true" [datatrigger]="datatrigger" (editRow)='edit($event)'
+               (paginate)='onPaginate($event)' (deleteRow)='deleteConfirm($event)' (searchEvent)='onSearch($event)'>
+
+</table-generic> -->
+
+<app-common-table [count]="count" [displayedColumns]="displayedColumns" [definedColumns]="definedColumns" [searchColumns]="searchColumns"
+               [isAction]="true" [data]="catalogues" [isAction]="true" [datatrigger]="datatrigger" (editRow)='edit($event)'
+               (paginate)='onPaginate($event)' (searchEvent)='onSearch($event)' (deleteRow)='deleteConfirm($event)'>
+</app-common-table>
+

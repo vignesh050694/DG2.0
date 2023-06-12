@@ -1,0 +1,195 @@
+<section class="pr-section pr-breadcrumbs-sec">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="pr-breadcrumb breadcrumb st">
+        <li class="breadcrumb-item"><a class="st" >Procurement</a></li>
+        <li class="breadcrumb-item"><a class="st" href="procurement/crop-sale">Crop Sale</a></li>
+        <li class="breadcrumb-item"><a class="st" href="procurement/crop-sale/add">Add</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="pr-section">
+  <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="m-ttl">General Information</h4>
+      </div>
+    </div>
+    <form [formGroup]="cropSaleForm" *ngIf="cropSaleForm">
+      <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
+        <div class="col-3">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="date" />
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+            <mat-error *ngIf="basic.date.hasError('required')">Select Date</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-3">
+          <app-multi-select #villageMultiSelect isMultiSelect="false" [options]="villages" label="Village" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedVillage"></app-multi-select>
+        </div>
+
+        <div class="col-3">
+          <app-multi-select #farmerMultiSelect isMultiSelect="false" [options]="farmers" label="Farmer" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedFarmer"></app-multi-select>
+        </div>
+
+        <div class="col-3">
+          <app-multi-select #farmMultiSelect isMultiSelect="false" [options]="farms" label="Farm" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedFarm"></app-multi-select>
+        </div>
+
+        <div class="col-3">
+          <app-multi-select #buyerMultiSelect isMultiSelect="false" [options]="buyers" label="Buyer" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedBuyer"></app-multi-select>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="pr-section add-training-selec-sec" style="margin-top: 1%;">
+  <div class="row">
+    <div class="col-12">
+      <div class="add-training-selec-blk common-box box-shadow bg-white br14">
+        <div class="row">
+          <div class="col-12" style="margin-bottom: 1%;">
+            <h4 class="m-ttl">Product Details</h4>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <!-- <div class="col-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Product Name</mat-label>
+                  <mat-select [(ngModel)]="crop" (selectionChange)="changeCrop($event)" [compareWith]="objectComparisonFunction">
+                    <mat-option *ngIf="crops.length == 0">None</mat-option>
+                    <mat-option *ngFor="let crop of crops" [value]="crop">
+                      {{crop?.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Variety</mat-label>
+                  <mat-select (selectionChange)="changeVariety($event)" [(ngModel)]="variety" [compareWith]="objectComparisonFunction">
+                    <mat-option *ngIf="varieties.length == 0">None</mat-option>
+                    <mat-option *ngFor="let variety of varieties" [value]="variety">
+                      {{variety?.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Grade</mat-label>
+                  <mat-select [(ngModel)]="grade" [compareWith]="objectComparisonFunction">
+                    <mat-option *ngIf="varieties.length == 0">None</mat-option>
+                    <mat-option *ngFor="let grade of grades" [value]="grade" >
+                      {{grade?.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div> -->
+              <div class="col-lg-3">
+                <app-multi-select #productMultiSelect isMultiSelect="false" [options]="crops" label="Product Name" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="crop" (dropDownValueChange)="changeCrop($event)"></app-multi-select>
+                <mat-error *ngIf="!(cropSaleDetails.size > 0) && isSubmit"><span>*Product Required</span></mat-error>
+              </div>
+    
+              <div class="col-lg-3">
+                <app-multi-select #varietyMultiSelect isMultiSelect="false" [options]="varieties" label="Variety" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="variety" (dropDownValueChange)="changeVariety($event)"></app-multi-select>
+                <mat-error *ngIf="!(cropSaleDetails.size > 0) && isSubmit"><span>*Variety Required</span></mat-error>
+              </div>
+    
+              <div class="col-lg-2">
+                <app-multi-select #gradeMultiSelect isMultiSelect="false" [options]="grades" label="Grade" [isSubmit]="isSubmit" isRequired="false" [(dropDownValue)]="grade" (dropDownValueChange)="changeGrade($event)"></app-multi-select>
+                <mat-error *ngIf="!(cropSaleDetails.size> 0) && isSubmit"><span>*Grade Required</span></mat-error>
+              </div>
+    
+              <div class="col-lg-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Unit</mat-label>
+                  <input matInput type="text" name="unit" [(ngModel)]="unit" readonly>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Price/KG</mat-label>
+                  <input matInput type="text" name="price" [(ngModel)]="price" (change)="calcTotal()">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Quantity(KG)</mat-label>
+                  <input matInput type="text" name="quantity" [(ngModel)]="quantity" (change)="calcTotal()">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Batch/Lot No</mat-label>
+                  <input matInput type="text" name="batch" [(ngModel)]="batchNo">
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field appearance="fill">
+                  <mat-label>Total Price</mat-label>
+                  <input matInput type="text" name="price" readonly="true" [(ngModel)]="total">
+                </mat-form-field>
+              </div>
+
+              <!-- <div class="col-2">
+                <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                  (click)="addProductInformation()">
+                  +
+                </button>
+              </div> -->
+
+              <div class="col-lg-3 row">
+                <div class="col-lg-2">
+                  <button class="btn bttn-primary bttn-add st" data-toggle="tooltip" data-placement="top" title="Add"
+                    (click)="addProductInformation()">+</button>
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-secondary bttn-add st border" data-toggle="tooltip" data-placement="top" title="clear"
+                    (click)="clear()"><span><p style="font-size: 15px;font-weight: bold;">x</p></span></button>
+                </div>
+              </div>
+            </div>
+            <!-- <div *ngIf="showProductDetails">
+            <app-crop-sale-product-detail #cropSaleDetailsTab [data]="productDetails" (editRow)='edit($event)' (deleteRow)='deleteConfirm($event)'>
+            </app-crop-sale-product-detail>
+          </div> -->
+          <div [ngStyle]="{'display': showProductDetails ? 'block' : 'none' }">
+            <app-crop-sale-product-detail
+            #cropSaleDetailsTab
+            [data]="cropSaleDetails"
+            (editFromList)='edit($event)'
+          (deleteRow)='deleteConfirm($event)'>
+        </app-crop-sale-product-detail>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="col-3 align-self-center" style="margin-top: 1%; margin-bottom: 1%;">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn bttn-primary st mr-3" data-toggle="modal" data-target="#saveAddedRoles" (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn bttn-primary-outline st mr-0" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<section class="pr-section pr-title-section">
+  <div class="row">
+    <div class="col align-self-center">
+      <h1 class="page-ttl">Role-Add</h1>
+    </div>
+    <div class="col-auto align-self-center">
+      <button class="btn bttn-primary st mr-2" (click)="onSave()"><span class="p p-14 fw-700 text-white">SAVE</span></button>
+      <button class="btn bttn-primary-outline st mr-0" (click)="goToList()"><span class="p p-14 fw-700 text-dark">CANCEL</span></button>
+    </div>
+  </div>
+</section>
+<section class="pr-section role-mnmgmnt-sec">
+  <div class="row">
+    <div class="col-lg-4 align-self-center">
+      <div class="inner-blk">
+        <input type="text" class="st form-control pr-form-control" placeholder="Add Role Name"
+              [(ngModel)]="roleName" />
+      </div>
+    </div>
+    <div class="col-lg-4 align-self-center">
+      <div class="inner-blk">
+        <div class="pr-custom-switch switcher mb-0">
+          <input type="checkbox" class="custom-control-input" id="test2" value="" checked=""
+                 [(ngModel)]="isAdmin">
+          <label for="test2">
+            <span class="cir"><small></small></span>
+            <small>Is Admin?</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 align-self-center">
+      <div class="inner-blk">
+        <div class="dropdown bootstrap-select prselectcustom">
+          <mat-select [(ngModel)]="selectedParentMenu" (selectionChange)="changeRoleMenu($event)">
+            <mat-option value="">select parent menu</mat-option>
+            <mat-option *ngFor="let parentMenu of parentMenus" [value]="parentMenu">{{parentMenu.title}}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="card">
+  <mat-table mat-tabl #table [dataSource]="rows" matSort #sort="matSort" matSortActive="id"
+             matSortDirection="asc">
+    <ng-container matColumnDef="{{displayedColumns[0]}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumns[0]| titleCasePipe}}</mat-header-cell>
+      <mat-cell *matCellDef="let row"><p>{{row?.id}}</p></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="{{displayedColumns[1]}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumns[1]| titleCasePipe}}</mat-header-cell>
+      <mat-cell *matCellDef="let row ; let i = index">
+        <span class="pr-custom-checkbox custom-control custom-checkbox ml-1">
+          <input type="checkbox" class="custom-control-input" id="{{menu?.menus[i]?.id}}_{{displayedColumns[1]}}" name="{{menu?.menus[i]?.id}}{{displayedColumns[1]}}" 
+                 (change)="onCheckBoxChange($event,i)" />
+          <label class="custom-control-label" for="{{menu?.menus[i]?.id}}_{{displayedColumns[1]}}">&nbsp;</label>
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="{{displayedColumns[2]}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumns[2]| titleCasePipe}}</mat-header-cell>
+      <mat-cell *matCellDef="let row ; let i = index">
+        <span class="pr-custom-checkbox custom-control custom-checkbox ml-1">
+          <input type="checkbox" class="custom-control-input" id="{{menu?.menus[i]?.id}}_{{displayedColumns[2]}}" name="{{menu?.menus[i]?.id}}{{displayedColumns[2]}}" 
+                 (change)="onCheckBoxChange($event,i)" /><label class="custom-control-label"
+                                                                             for="{{menu?.menus[i]?.id}}_{{displayedColumns[2]}}">&nbsp;</label>
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="{{displayedColumns[3]}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumns[3]| titleCasePipe}}</mat-header-cell>
+      <mat-cell *matCellDef="let row ; let i = index">
+        <span class="pr-custom-checkbox custom-control custom-checkbox ml-1">
+          <input type="checkbox" class="custom-control-input" id="{{menu?.menus[i]?.id}}_{{displayedColumns[3]}}" name="{{menu?.menus[i]?.id}}{{displayedColumns[3]}}" 
+                 (change)="onCheckBoxChange($event,i)" /><label class="custom-control-label"
+                                                                             for="{{menu?.menus[i]?.id}}_{{displayedColumns[3]}}">&nbsp;</label>
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="{{displayedColumns[4]}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumns[4]| titleCasePipe}}</mat-header-cell>
+      <mat-cell *matCellDef="let row ; let i = index">
+        <span class="pr-custom-checkbox custom-control custom-checkbox ml-1">
+          <input type="checkbox" class="custom-control-input"
+                 id="{{menu?.menus[i]?.id}}_{{displayedColumns[4]}}" name="{{menu?.menus[i]?.id}}{{displayedColumns[4]}}" 
+                 (change)="onCheckBoxChange($event,i)" />
+          <label class="custom-control-label" for="{{menu?.menus[i]?.id}}_{{displayedColumns[4]}}">&nbsp;</label>
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="{{displayedColumns[5]}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumns[5]| titleCasePipe}}</mat-header-cell>
+      <mat-cell *matCellDef="let row ; let i = index">
+        <span class="pr-custom-checkbox custom-control custom-checkbox ml-1">
+          <input type="checkbox" class="custom-control-input" id="{{menu?.menus[i]?.id}}_selectAll"
+                 (change)="onSelectAllCheckBoxChange($event,i)" /><label class="custom-control-label"
+                                                                             for="{{menu?.menus[i]?.id}}_selectAll">&nbsp;</label>
+        </span>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+<div class="card">
+  <mat-paginator [length]="count" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons (page)="onPaginate($event)">
+  </mat-paginator>
+</div>
