@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResponseEntity<User> saveUser(@RequestBody UserDTO user) throws CustomException, IOException {
+    public ResponseEntity<User> saveUser(@RequestBody UserDTO user) throws CustomException, JsonProcessingException {
         return new ResponseEntity<User>(userService.createUser(user), HttpStatus.CREATED);
     }
 

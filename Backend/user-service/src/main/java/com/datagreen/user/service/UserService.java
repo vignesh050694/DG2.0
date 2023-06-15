@@ -9,11 +9,10 @@ import com.datagreen.user.exception.CustomException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
-    User createUser(UserDTO user) throws CustomException, IOException;
+    User createUser(UserDTO user) throws CustomException, JsonProcessingException;
 
     List<User> getUser();
 

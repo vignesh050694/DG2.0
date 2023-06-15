@@ -18,10 +18,22 @@
         <module name="master" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aggregator" target="1.8" />
+      <module name="connector" target="1.8" />
+      <module name="datagreen" target="1.8" />
+      <module name="farmer" target="1.8" />
+      <module name="gateway" target="1.8" />
+      <module name="inventory" target="1.8" />
+      <module name="master" target="1.8" />
+      <module name="procurement" target="1.8" />
+      <module name="report" target="1.8" />
+      <module name="user" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="aggregator" options="" />
+      <module name="aggregator" options="-parameters" />
       <module name="connector" options="-parameters" />
       <module name="farmer" options="-parameters" />
       <module name="gateway" options="-parameters" />

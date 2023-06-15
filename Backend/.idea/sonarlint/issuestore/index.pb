@@ -9,6 +9,8 @@ y
 Iconnector/src/main/java/com/keycloak/connector/service/IIAMConnector.java,6\7\67003ba8b30be8b385037d48918e984a75ff0cdf
 }
 Maggregator-service/src/main/java/com/datagreen/aggregator/dto/VillageDTO.java,e\b\ebce8006eca41deb4e17872ba5b0c624046051f8
+D
+user-service/pom.xml,d\2\d2f5d1978e5f519100a679c4109f89296278badc
 F
 master-service/pom.xml,d\a\da0ccc936baf810876807dd6f866d756c4b3316d
 ™
@@ -25,6 +27,8 @@ Wfarmer-service/src/main/java/com/datagreen/farmer/controller/ImageUploadControl
 Luser-service/src/main/java/com/datagreen/user/repository/UserRepository.java,1\3\13d099b16ba078fd0e0081ed13264a192d1c5346
 Š
 Zuser-service/src/main/java/com/datagreen/user/configuration/HeaderBasedConfigResolver.java,6\2\62134f4e8f6f67046253a63e609587cbace63045
+v
+Fuser-service/src/main/java/com/datagreen/user/service/UserService.java,f\e\fef90be29927e1cc64cd37ad3ae82ec3182e516d
 Ž
 ^master-service/src/main/java/com/sts/datagreen/master/master/service/impl/UserServiceImpl.java,5\b\5b473cc38b898fd0e039902f9fbfe72172829a68
 ‚
