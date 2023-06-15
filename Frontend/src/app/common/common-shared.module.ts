@@ -28,6 +28,10 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmCoreModule } from '@agm/core';
 import { CommonTableComponent } from './common-table/common-table.component';
+import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
+import { GenericDropdownComponent } from './generic-dropdown/generic-dropdown.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -35,7 +39,9 @@ import { CommonTableComponent } from './common-table/common-table.component';
   declarations: [TableGenericComponent, DetailGenericComponent, ResponseModalComponent, TitleCasePipe,
     PageHeaderComponent, FileUploadComponent, ObjStringPipe, ActionPopupComponent, SearchFilterComponent,
     DynamicFormsComponent, DynamicFormTemplateComponent, DropdownSearchComponent, MultiSelectComponent, MultiSelectDynamicComponent, MultiSelectDynamicTableComponent, MapDialouge,
-    CommonTableComponent
+    CommonTableComponent,
+    SelectDropdownComponent,
+    GenericDropdownComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +55,8 @@ import { CommonTableComponent } from './common-table/common-table.component';
     RxReactiveFormsModule,
     RxReactiveDynamicFormsModule,
     HighchartsChartModule,
-    AgmJsMarkerClustererModule,
+    AgmJsMarkerClustererModule,MatInputModule,
+    MatSelectModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA4F9JYoct7v7oGvirzAx7_oK6XkNyL1oM'
     }),
@@ -81,7 +88,7 @@ import { CommonTableComponent } from './common-table/common-table.component';
     HighchartsChartModule,
     MapDialouge,
     AgmJsMarkerClustererModule,
-    CommonTableComponent
+    CommonTableComponent,SelectDropdownComponent,GenericDropdownComponent
   ],
   entryComponents: [
     ActionPopupComponent

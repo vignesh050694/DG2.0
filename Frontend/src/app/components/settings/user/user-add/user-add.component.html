@@ -14,8 +14,10 @@
                 <div class="pr-dashed-table-wrap px-0 mb-0 row pr-dashed-div">
                   <div class="col-3">
                     <div class="form-group">
-                        <app-multi-select #subOrganizationMultiSelect isMultiSelect="false" [options]="subOrganizations" label="Sub Organization" [isSubmit]="isSubmit" isRequired="true" [(dropDownValue)]="selectedSubOrganization"></app-multi-select>
-                    </div>
+
+                      
+                      <app-select-dropdown    labelField="name"    valueField="id"     #subOrganizationMultiSelect isMultiSelect="false" [options]="subOrganizations" label="Organization" [isSubmit]="isSubmit"  [(dropDownValue)]="selectedSubOrganization"></app-select-dropdown>
+                     </div>
                   </div>
                   <div class="col-3">
                     <div class="form-group">
@@ -47,6 +49,15 @@
                       </mat-form-field>
                     </div>
                   </div>
+
+                  <div class="col-3">
+                    <div class="form-group">
+
+                        <app-select-dropdown 
+                        labelField="name"  formControlName="role" #roleMultiSelect isMultiSelect="false" [options]="roles" label="Role" [isSubmit]="isSubmit" [(dropDownValue)]="selectedRole"></app-select-dropdown>
+                    </div>
+                  </div>
+
                   <div class="col-3">
                     <div class="form-group">
                       <mat-form-field appearance="fill" class="full-width">
@@ -62,8 +73,9 @@
                     <div class="form-group">
                       <mat-label>Photo[.jpg .jpeg .png] <span class="text-danger">image should be less than 50kb</span></mat-label>
                       <div *ngIf="imageUrl==''">
-                        <app-file-upload (onUploadComplete)='onUploadComplete($event)' [allowedMimeType]="allowedMimeType"
-                                         [maxFileSize]="maxFileSize" [uploadtrigger]="uploadtrigger"></app-file-upload>
+                        <input id="imageUpload" type="file" ng2FileSelect [uploader]="uploader"
+                        (onFileSelected)="onUploadComplete($event)" accept="image/png,image/jpeg" />
+      
                       </div>
                       <div *ngIf="imageUrl!=''">
                         <img style="width:80px;height:80px;margin:10px;" [src]="imageUrl" />
@@ -119,9 +131,9 @@
                   <div class="form-group">
                     <mat-form-field appearance="fill" class="full-width">
                       <mat-label>Mobile Number</mat-label>
-                      <input matInput type="text" name="mobileNumber" formControlName="mobileNumber">
-                      <mat-error *ngIf="basic.mobileNumber.hasError('required')">Mobile Number is Required</mat-error>
-                      <mat-error *ngIf="basic.mobileNumber.hasError('pattern')">Invalid</mat-error>
+                      <input matInput type="text" name="mobileNo" formControlName="mobileNo">
+                      <mat-error *ngIf="basic.mobileNo.hasError('required')">Mobile Number is Required</mat-error>
+                      <mat-error *ngIf="basic.mobileNo.hasError('pattern')">Invalid</mat-error>
                     </mat-form-field>
                   </div>
                 </div>

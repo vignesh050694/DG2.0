@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.sts.datagreen</groupId>
 		<artifactId>datagreen</artifactId>
-		<version>0.0.7-SNAPSHOT</version>
-		<relativePath>../datagreen/pom.xml</relativePath> <!-- lookup parent from repository -->
+		<version>0.0.3-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 
 	<groupId>com.datagreen.aggregator</groupId>
@@ -19,37 +19,6 @@
 	</properties>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>com.keycloak</groupId>
-					<artifactId>connector</artifactId>
-					<version>0.0.5-SNAPSHOT</version>
-		</dependency>
-                <!-- Keycloak Dependenices -->
-<!--		<dependency>-->
-<!--			<groupId>com.keycloak</groupId>-->
-<!--			<artifactId>connector</artifactId>-->
-<!--			<version>0.0.2-SNAPSHOT</version>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>org.keycloak</groupId>-->
-<!--			<artifactId>keycloak-spring-boot-starter</artifactId>-->
-<!--			<version>18.0.2</version>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-security</artifactId>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>org.keycloak</groupId>-->
-<!--			<artifactId>keycloak-admin-client</artifactId>-->
-<!--			<version>18.0.2</version>-->
-<!--		</dependency>-->
-
-		<!-- Keycloak Dependenices -->
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-transport</artifactId>
@@ -70,6 +39,13 @@
 			<groupId>io.projectreactor.netty</groupId>
 			<artifactId>reactor-netty-http</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.keycloak</groupId>
+			<artifactId>connector</artifactId>
+			<version>0.0.5-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

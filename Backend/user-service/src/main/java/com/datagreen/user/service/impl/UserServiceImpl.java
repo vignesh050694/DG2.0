@@ -155,7 +155,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void validate(User user) throws CustomException {
-        User userExist = userRepository.findByUserName(user.getName());
+        User userExist = userRepository.findByUserName(user.getUserName());
         if (userExist != null && (!userExist.getId().equals(user.getId()))) {
             throw new CustomException("Duplicate User name");
         }

@@ -6,7 +6,7 @@
 		<groupId>com.sts.datagreen</groupId>
 		<artifactId>datagreen</artifactId>
 		<version>0.0.7-SNAPSHOT</version>
-		<relativePath>../datagreen/pom.xml</relativePath> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.datagreen</groupId>
 	<artifactId>report</artifactId>

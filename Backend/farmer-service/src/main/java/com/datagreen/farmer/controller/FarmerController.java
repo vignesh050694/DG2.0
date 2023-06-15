@@ -67,6 +67,7 @@ public class FarmerController {
 
     @RequestMapping(value = "/by-id", method = RequestMethod.GET)
     public ResponseEntity<FarmerBaseDTO> findById(@RequestParam("id") String id) {
+
         return new ResponseEntity<>(farmerService.findById(id), HttpStatus.OK);
     }
 

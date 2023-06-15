@@ -30,17 +30,16 @@ public class User extends AuditableBase {
 
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "role_id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonBackReference
     private Role role;
 
     @Column(unique = true)
     private String userName;
 
     private String password;
-
+    private String photo;
     @Transient
     private List<String> roles = new ArrayList<>();
 }

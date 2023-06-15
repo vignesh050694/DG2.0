@@ -21,7 +21,7 @@ export class UserService {
       data: data,
       token: token
     }
-    return this.commonHttpClientService.httpPost(this.appConfiguration.addUser, userData);
+    return this.commonHttpClientService.httpPost(this.appConfiguration.addUser, data);
   }
   getUser = (postPerPage: any, pageNumber: number, filter: any[]) => {
     let data = {

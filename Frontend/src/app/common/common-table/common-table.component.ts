@@ -105,7 +105,7 @@ export class CommonTableComponent implements OnInit {
     this.editRow.emit(row);
   }
 
-  delete = (template: TemplateRef<any>, row: any) => {
+  delete = (row: any) => {
     let data = {
       title: "Delete",
       description: "Are You Sure?"

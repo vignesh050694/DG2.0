@@ -13,10 +13,10 @@ export class UserListComponent implements OnInit {
   @Output() editRow = new EventEmitter();
   @Output() editFromList = new EventEmitter();
   public datatrigger: EventEmitter<any> = new EventEmitter();
-  displayedColumns: string[] = ['name', 'firstName', 'lastName', 'mobileNumber', 'role', 'isActive'];
-  definedColumns = ['name', 'firstName', 'lastName', 'mobileNumber', 'role', 'isActive'];
+  displayedColumns: string[] = ['userName', 'firstName', 'lastName', 'mobileNumber', 'role', 'isActive'];
+  definedColumns = ['userName', 'firstName', 'lastName', 'mobileNumber', 'role', 'isActive'];
   searchColumns: any[] = [
-    { name: 'name', canShow: true },
+    { name: 'userName', canShow: true },
     { name: 'firstName', canShow: true },
     { name: 'lastName', canShow: true },
     { name: 'mobileNumber', canShow: true },

@@ -14,7 +14,7 @@ import { StaticFarmerService } from '../../static-farmer.service';
 import { environment } from 'src/environments/environment';
 import { CatalogueService } from 'src/app/components/master/catalogue/catalogue.service';
 import { event, data } from 'jquery';
-
+import {map,has,set,get } from  'lodash';
 
 @Component({
   selector: 'app-static-farmer-detail',
@@ -117,17 +117,20 @@ export class StaticFarmerDetailComponent implements OnInit {
   }
 
   getCatalogueValues = (data) => {
-    let catalougeArr = ['icsUnitNo', 'icsTracenetRegNo', 'certificateType', 'department', 'loanTakenFrom', 'purpose', 'period', 'security', 'fpoGroup'];
+    let catalougeArr = ['icsUnitNo', 'icsTracenetRegNo', 'certificateType', 'department', 'loan.loanTakenFrom', 'loan.purpose', 'loan.period', 'loan.security', 'fpoGroup','enrollmentPlace'];
     catalougeArr.forEach((catalogue: any) => {
-      if (data[catalogue]) {
-        this.catalogueService.getCataloguesById(data[catalogue]).toPromise().then((value: any) => {
-          this.farmer[catalogue] = value;
+      if (has(data,catalogue)) {
+       
+        this.catalogueService.getCataloguesById(get(data,catalogue)).toPromise().then((value: any) => {
+          set(this.farmer, catalogue,(value==null ? "" : value.name));
+          console.log("crt"+catalogue +"value:"+  (value==null ? "" : value.name));
         })
-      } else if (data?.loan[catalogue]) {
-        this.catalogueService.getCataloguesById(data?.loan[catalogue]).toPromise().then((value: any) => {
-          this.farmer["loan"][catalogue] = value;
-        })
-      }
+      } 
+      //else if (data?.loan[catalogue]) {
+      //  this.catalogueService.getCataloguesById(data?.loan[catalogue]).toPromise().then((value: any) => {
+     //     this.farmer["loan"][catalogue] = value.name;
+       // })
+    //  }
     });
   }
 

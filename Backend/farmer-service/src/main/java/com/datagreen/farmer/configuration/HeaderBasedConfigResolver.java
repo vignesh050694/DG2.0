@@ -20,7 +20,7 @@ public class HeaderBasedConfigResolver implements KeycloakConfigResolver {
         if(!request.getMethod().equals("OPTIONS")) {
             String realm = request.getHeader("realm");
             if (realm == null) {
-                throw new RuntimeException("Unable to find realm key on request headers");
+                realm="datagreen";
             }
             if (!cache.containsKey(realm)) {
                 InputStream is = getClass().getResourceAsStream("/" + realm + "-keycloak.json");

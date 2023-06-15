@@ -10,6 +10,7 @@ import java.util.Map;
 
 @Data
 public class UserDTO {
+    private String id;
     private String name;
     private String subOrganization;
     private String firstName;
@@ -20,5 +21,6 @@ public class UserDTO {
     private Role role;
     private String userName;
     private String password;
+    private String photo;
     private List<String> roles;
 }

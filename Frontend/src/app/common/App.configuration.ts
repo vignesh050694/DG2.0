@@ -136,11 +136,11 @@ export class AppConfiguration {
   getBuyerById = "master/buyer/by-id?id="
 
   //User
-  getUser = "master/user/"
-  addUser = "master/user/save"
-  getAllUser = "master/user/users"
-  deleteUser = "master/user/delete?id="
-  getUserById = "master/user/by-id?id="
+  getUser = "user/"
+  addUser = "user/save"
+  getAllUser = "/users"
+  deleteUser = "user/delete?id="
+  getUserById = "user/by-id?id="
 
   //Devices
   getDevice = "master/device/"

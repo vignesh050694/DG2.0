@@ -1,10 +1,10 @@
 [
   {
     "tenantName" : "default",
-    "schema" : "calpyte"
+    "schema" : "datagreen"
   },
   {
     "tenantName" : "calpyte",
-    "schema" : "calpyte"
+    "schema" : "datagreen"
   }
 ]
