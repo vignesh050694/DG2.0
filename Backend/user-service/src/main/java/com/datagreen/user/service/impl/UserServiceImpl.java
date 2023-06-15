@@ -2,6 +2,7 @@ package com.datagreen.user.service.impl;
 
 import com.datagreen.user.domain.Menu;
 import com.datagreen.user.domain.User;
+import com.datagreen.user.dto.KeycloakConfig;
 import com.datagreen.user.dto.MenuResponseDTO;
 import com.datagreen.user.dto.UserDTO;
 import com.datagreen.user.dto.UserMenuDTO;
@@ -11,8 +12,10 @@ import com.datagreen.user.dto.pagination.TableResponse;
 import com.datagreen.user.exception.CustomException;
 import com.datagreen.user.repository.MenuRepository;
 import com.datagreen.user.repository.UserRepository;
+import com.datagreen.user.service.KeycloakUserService;
 import com.datagreen.user.service.UserService;
 import com.datagreen.user.specification.UserSpecification;
+import com.datagreen.user.util.KeycloakConfigProperties;
 import com.datagreen.user.util.Mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +35,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -43,9 +47,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     public static final String X_AUTH_TOKEN = "x-auth-token";
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final List<SearchCriteria> params = new ArrayList<>();
     @Autowired
     private UserRepository userRepository;
@@ -53,16 +56,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Autowired
+    private KeycloakUserService keycloakUserService;
+
+    @Autowired
+    HttpServletRequest request;
+
     @Override
-    public User createUser(UserDTO userDTO) throws CustomException, JsonProcessingException {
+    public User createUser(UserDTO userDTO) throws CustomException, IOException {
         LOGGER.info("User Creation Started");
         User user = Mapper.map(userDTO, User.class);
         validate(user);
         Mapper.setAuditable(user);
-            userRepository.save(user);
+        userRepository.save(user);
+
+        LOGGER.info("User creation in Keycloak Started");
+        String realm = request.getHeader("realm");
+        KeycloakConfigProperties keycloakConfigProperties = new KeycloakConfigProperties();
+        KeycloakConfig keycloakConfig =  keycloakConfigProperties.getKeycloakConfig(realm);
+        keycloakUserService.createUser(user,keycloakConfig);
+
+        LOGGER.info("User creation in Keycloak End");
         LOGGER.info("User Creation End");
         return user;
     }
+
     @Override
     public List<User> getUser() {
         List<User> userList = userRepository.findAll();
@@ -147,9 +165,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUser(String user) {
-       User eUser = userRepository.findByUserName(user);
-        if(eUser != null){
-           return eUser;
+        User eUser = userRepository.findByUserName(user);
+        if (eUser != null) {
+            return eUser;
         }
         return null;
     }
