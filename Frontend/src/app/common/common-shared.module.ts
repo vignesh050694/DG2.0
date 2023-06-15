@@ -39,8 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
     PageHeaderComponent, FileUploadComponent, ObjStringPipe, ActionPopupComponent, SearchFilterComponent,
     DynamicFormsComponent, DynamicFormTemplateComponent, DropdownSearchComponent, MultiSelectComponent, MultiSelectDynamicComponent, MultiSelectDynamicTableComponent, MapDialouge,
     CommonTableComponent,
-    SelectDropdownComponent,
-    GenericDropdownComponent
+    SelectDropdownComponent
   ],
   imports: [
     CommonModule,
