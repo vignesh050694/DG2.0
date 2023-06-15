@@ -1,0 +1,9 @@
+
+c
+java:S3824"HReplace this "Map.containsKey()" with a call to "Map.computeIfAbsent()".(ãŠêüÿÿÿÿ
+w
+java:S1450"\Remove the "adapterConfig" field and declare it as a local variable in the relevant methods.(ÅÉ„ªÿÿÿÿÿ
+b
+java:S3252"LUse static access with "org.keycloak.adapters.spi.HttpFacade" for "Request".(€Ô•
+L
+java:S1068"1Remove this unused "adapterConfig" private field.(ÅÉ„ªÿÿÿÿÿ

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Backend.iml" filepath="$PROJECT_DIR$/.idea/Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aggregator-service/aggregator.iml" filepath="$PROJECT_DIR$/aggregator-service/aggregator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connector/connector.iml" filepath="$PROJECT_DIR$/connector/connector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/datagreen/datagreen.iml" filepath="$PROJECT_DIR$/datagreen/datagreen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/farmer-service/farmer.iml" filepath="$PROJECT_DIR$/farmer-service/farmer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/inventory/inventory.iml" filepath="$PROJECT_DIR$/inventory/inventory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/master-service/master.iml" filepath="$PROJECT_DIR$/master-service/master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/procurement-service/procurement.iml" filepath="$PROJECT_DIR$/procurement-service/procurement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/report/report.iml" filepath="$PROJECT_DIR$/report/report.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service/user.iml" filepath="$PROJECT_DIR$/user-service/user.iml" />
+    </modules>
+  </component>
+</project>
