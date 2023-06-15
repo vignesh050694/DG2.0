@@ -29,7 +29,6 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmCoreModule } from '@agm/core';
 import { CommonTableComponent } from './common-table/common-table.component';
 import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
-import { GenericDropdownComponent } from './generic-dropdown/generic-dropdown.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -88,7 +87,7 @@ import { MatSelectModule } from '@angular/material/select';
     HighchartsChartModule,
     MapDialouge,
     AgmJsMarkerClustererModule,
-    CommonTableComponent,SelectDropdownComponent,GenericDropdownComponent
+    CommonTableComponent,SelectDropdownComponent
   ],
   entryComponents: [
     ActionPopupComponent
